@@ -1,121 +1,108 @@
 "use strict";
 
-const bcrypt  = require("bcrypt");
 const router = require("express").Router();
 const { User } = require("../../models");
 
-//find all
 router.get('/', async (req, res) => {
-	try {
-		const data = await User.findAll(
-      // { include: [Product] }
-    );
-		res.json(data);
-	} catch (err) {
-		console.log("err: ", err);
-		res.status(500).json({ msg: "an error occurred: ", err });
-	}
-});
-
-// find 1 by pk
-router.get('/:id', async (req, res) => {
-	try {
-		const data = await User.findByPk(req.params.id
-      // , { include: [Product] }
-    );
-		data === null ? res.status(204).json(data) : res.json(data);
-	} catch (err) {
-		console.log("err: ", err);
-		res.status(500).json({ msg: "an error occurred: ", err });
-	}
-});
-
-// log out
-router.get("/logout",(req,res)=>{
-  req.session.destroy();
-  res.redirect("/")
-})
-
-//find one
-router.get("/:id", (req, res) => {
-  User.findByPk(req.params.id,{})
-    .then(dbUser => {
-      res.json(dbUser);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ msg: "an error occured", err });
-    });
-});
-
-//create user
-router.post("/", (req, res) => {
-  User.create(req.body)
-    .then(newUser => {
-      req.session.user = {
-        id:newUser.id,
-        username:newUser.username
-      }
-      res.json(newUser);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ msg: "an error occured", err });
-    });
-});
-router.post("/login", (req, res) => {
-  User.findOne({
-    where:{
-    username:req.body.username
+  try {
+    const data = await User.findAll();
+    res.json(data);
+  } catch (err) {
+    console.log("err: ", err);
+    res.status(500).json({ msg: "an error occurred: ", err });
   }
-}).then(foundUser=>{
-    if(!foundUser){
-      return res.status(400).json({msg:"wrong login credentials"})
-    }
-    if(bcrypt.compareSync(req.body.password,foundUser.password)){
-      req.session.user = {
-        id:foundUser.id,
-        username:foundUser.username
-      }
-      return res.json(foundUser)
-    } else {
-      return res.status(400).json({msg:"wrong login credentials"})
-    }
-  }).catch(err => {
-      console.log(err);
-      res.status(500).json({ msg: "an error occured", err });
-    });
 });
 
-//update user
-router.put("/:id", (req, res) => {
-  User.update(req.body, {
-    where: {
-      id: req.params.id
+router.get('/:id', async (req, res) => {
+  try {
+    const data = await User.findByPk(req.params.id);
+    if (!data) {
+      res.status(404).json({ message: 'No user with this id!' });
+      return;
     }
-  }).then(updatedUser => {
-    res.json(updatedUser);
-  })
-  .catch(err => {
+    res.status(200).json(userData);
+  } catch (err) {
+    console.log("err: ", err);
+    res.status(500).json(err);
+  }
+});
+
+router.post('/', async (req, res) => {
+  try {
+    // to do: do we need individual hook true?
+    const data = await User.create(req.body, { individualHooks: true });
+    req.session.save(() => {
+      req.session.user_id = data.id;
+      req.session.logged_in = true;
+      res.status(200).json(data);
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.post("/login", async (req, res) => {
+  try {
+    const data = await User.findOne({ where: { email: req.body.email } })
+    if (!data) {
+      res.status(400).json({ msg: "'Incorrect email or password, please try again'" });
+      return;
+    }
+    const validPassword = await data.checkPassword(req.body.password);
+    if (validPassword) {
+      req.session.save(() => {
+        req.session.user_id = data.id;
+        req.session.logged_in = true;
+        res.json(data);
+      });
+    } else {
+      return res.status(400).json({ msg: "'Incorrect email or password, please try again'" })
+    }
+  } catch (err) {
     console.log(err);
     res.status(500).json({ msg: "an error occured", err });
-  });
+    // res.status(400).json(err);
+  }
+});
+
+router.post('/logout', (req, res) => {
+  // to do redirect???   res.redirect("/");
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  try {
+    const data = await User.update(req.body, { where: { id: req.params.id }, individualHooks: true });
+    if (!data[0]) {
+      res.status(404).json({ message: 'No user with this id!' });
+      return;
+    }
+    res.status(200).json(data);
+  } catch (err) {
+    console.log("err: ", err);
+    res.status(500).json(err);
+  }
 });
 
 //delete a user
-router.delete("/:id", (req, res) => {
-  User.destroy({
-    where: {
-      id: req.params.id
+router.delete("/:id", async (req, res) => {
+  try {
+    const data = await User.destroy({ where: { id: req.params.id } });
+    if (!data[0]) {
+      res.status(404).json({ message: 'No user with this id!' });
+      return;
     }
-  }).then(delUser => {
-    res.json(delUser);
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(500).json({ msg: "an error occured", err });
-  });
+    res.json(data);
+  } catch (err) {
+    console.log("err: ", err);
+    res.status(500).json(err);
+  }
 });
-
 
 module.exports = router;
