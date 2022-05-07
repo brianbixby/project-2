@@ -1,25 +1,41 @@
-const express = require("express");
-const router = express.Router();
-const {User,Blog} = require("../../models");
+"use strict";
+
 const bcrypt  = require("bcrypt");
+const router = require("express").Router();
+const { User } = require("../../models");
 
 //find all
-router.get("/", (req, res) => {
-  User.findAll({
-    include:[Blog]
-  })
-    .then(dbUsers => {
-      res.json(dbUsers);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ msg: "an error occured", err });
-    });
+router.get('/', async (req, res) => {
+	try {
+		const data = await User.findAll(
+      // { include: [Product] }
+    );
+		res.json(data);
+	} catch (err) {
+		console.log("err: ", err);
+		res.status(500).json({ msg: "an error occurred: ", err });
+	}
 });
+
+// find 1 by pk
+router.get('/:id', async (req, res) => {
+	try {
+		const data = await User.findByPk(req.params.id
+      // , { include: [Product] }
+    );
+		data === null ? res.status(204).json(data) : res.json(data);
+	} catch (err) {
+		console.log("err: ", err);
+		res.status(500).json({ msg: "an error occurred: ", err });
+	}
+});
+
+// log out
 router.get("/logout",(req,res)=>{
   req.session.destroy();
   res.redirect("/")
 })
+
 //find one
 router.get("/:id", (req, res) => {
   User.findByPk(req.params.id,{})
