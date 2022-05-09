@@ -55,13 +55,11 @@ User.init({
 }, {
     hooks: {
         beforeCreate: async data => {
-            // to do is await necessary  for to lowercase
             data.email = data.email.toLowerCase();
             data.password = await bcrypt.hash(data.password, 10);
             return data;
         },
         beforeUpdate: async data => {
-            // to do is await necessary  for to lowercase
             if (data.email) {
                 data.email = data.email.toLowerCase();
             }

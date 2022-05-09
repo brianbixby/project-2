@@ -36,8 +36,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    // to do: do we need individual hook true?
-    const data = await User.create(req.body, { individualHooks: true });
+    const data = await User.create(req.body);
     req.session.save(() => {
       req.session.user_id = data.id;
       req.session.logged_in = true;
@@ -73,11 +72,10 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post('/logout', (req, res) => {
-  // to do redirect???   res.redirect("/");
+router.get('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
-      res.status(204).end();
+      res.status(204).redirect('/');
     });
   } else {
     res.status(404).end();
@@ -86,7 +84,7 @@ router.post('/logout', (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const data = await User.update(req.body, { where: { id: req.params.id }, individualHooks: true });
+    const data = await User.update(req.body, { where: { id: req.params.id } });
     if (!data[0]) {
       res.status(404).json({ message: 'No user with this id!' });
       return;
