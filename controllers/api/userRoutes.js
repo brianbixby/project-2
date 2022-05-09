@@ -72,13 +72,13 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get('/logout', async (req, res) => {
+router.post('/logout', async (req, res) => {
   try {
     if (req.session && req.session.user && req.session.user.logged_in) {
       // updating userProfile to is_online false
       await User.update({ is_online: false }, { where: { id: req.session.user.user_id } });
       req.session.destroy(() => {
-        res.status(204).redirect('/');
+        res.status(204).end();
       });
     } else {
       res.status(404).end();
