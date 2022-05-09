@@ -24,7 +24,7 @@ User.init({
         primaryKey: true,
         autoIncrement: true,
     },
-    userName: {
+    user_name: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
@@ -44,15 +44,10 @@ User.init({
             len: [8]
         }
     },
-    isOnline: {
+    is_online: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
     },
-    // friends: {
-    //     type: DataTypes.ARRAY(DataTypes.INTEGER),
-    //     // "defaultValue": '{}',
-    //     // array of user Id's
-    // }
 }, {
     hooks: {
         beforeCreate: async data => {

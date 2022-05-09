@@ -1,5 +1,6 @@
 "use strict";
 
+const Friend = require("./Friend");
 const Game = require("./Game");
 const GameInstance = require("./GameInstance");
 const Ranking = require("./Ranking");
@@ -19,6 +20,6 @@ Ranking.belongsTo(Game);
 User.hasMany(Ranking, {foreignKey: 'user_id'});
 Ranking.belongsTo(User);
 
-User.belongsToMany(User, { as: 'Friends', through: 'friends' });
+User.belongsToMany(User, { as: 'Friend', through: 'friend' });
 
-module.exports = { Game, GameInstance, Ranking, User };
+module.exports = { Friend, Game, GameInstance, Ranking, User };
