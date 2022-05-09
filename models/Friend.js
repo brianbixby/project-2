@@ -3,24 +3,16 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class GameInstance extends Model { }
+class Friend extends Model { }
 
-GameInstance.init({
+Friend.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
-    // game_id: {
-    //     type: DataTypes.INTEGER,
-    //     references: {
-    //         model: 'game',
-    //         key: 'id',
-    //         allowNull: false
-    //     }
-    // },
-    player1_id: {
+    user_id: {
         type: DataTypes.INTEGER,
         references: {
             model: 'user',
@@ -28,7 +20,7 @@ GameInstance.init({
             defaultValue: null
         }
     },
-    player2_id: {
+    friend_id: {
         type: DataTypes.INTEGER,
         references: {
             model: 'user',
@@ -36,20 +28,12 @@ GameInstance.init({
             defaultValue: null
         }
     },
-    winner_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'user',
-            key: 'id',
-            defaultValue: null
-        }
-    }
 }, {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'gameInstance',
+    modelName: 'friend',
 });
 
-module.exports = GameInstance;
+module.exports = Friend;
