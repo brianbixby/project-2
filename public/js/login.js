@@ -1,10 +1,10 @@
 "use strict";
 
-console.log("login linked1")
 document.querySelector("#login").addEventListener("submit", e => {
     e.preventDefault();
+    console.log("successful")
     const userObj = {
-        username: document.querySelector("#loginUsername").value,
+        email: document.querySelector("#loginEmail").value,
         password: document.querySelector("#loginPassword").value,
     }
     console.log(userObj)
@@ -16,14 +16,13 @@ document.querySelector("#login").addEventListener("submit", e => {
         }
     }).then(res => {
         if (res.ok) {
-            location.href = "/profile"
+            document.location.replace("/games")
         } else {
             alert("trumpet sound")
         }
     })
 })
 
-// formEl.on('submit', handleFormSubmit);
 document.querySelector("#signup").addEventListener("submit", e => {
     e.preventDefault();
     console.log("hit");
@@ -40,7 +39,7 @@ document.querySelector("#signup").addEventListener("submit", e => {
         }
     }).then(res => {
         if (res.ok) {
-            location.href = "/profile"
+            document.location.replace("/gameselect")
         } else {
             alert("trumpet sound")
         }
