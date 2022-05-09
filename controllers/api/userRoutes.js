@@ -1,6 +1,7 @@
 "use strict";
 
 const router = require("express").Router();
+const { render } = require("express/lib/response");
 const { User, Game, Ranking } = require("../../models");
 
 router.get('/', async (req, res) => {
@@ -53,7 +54,7 @@ router.post('/', async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     req.body.email = req.body.email.toLowerCase();
-    const data = await User.findOne({ where: { email: req.body.email } })
+    const data = await User.findOne({ where: { email: req.body.email} })
     if (!data) {
       res.status(400).json({ msg: "'Incorrect email or password, please try again'" });
       return;
@@ -68,7 +69,6 @@ router.post("/login", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: "an error occured", err });
-    // res.status(400).json(err);
   }
 });
 

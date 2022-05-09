@@ -1,0 +1,61 @@
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: flex-start;
+}
+
+.title {
+    padding: 40px;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.homebtns {
+    border: 1px solid var(--dark2);
+    border-radius: 5px;
+    padding: 15px;
+    margin: 50px;
+    min-width: 200px;
+    width: auto;
+    box-shadow: 0px 0px 10px var(--shadow);
+    font-weight: 500;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5%;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 1500px;
+    height: auto;
+    animation: slide 1s backwards;
+    animation-delay: 0.5s;
+}
+
+#loginBtn {
+    margin: 5%;
+}
+#signupBtn {
+    margin: 5%;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
