@@ -2,7 +2,7 @@
 
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 
 class User extends Model {
     async checkPassword(password) {
@@ -24,7 +24,7 @@ User.init({
         primaryKey: true,
         autoIncrement: true,
     },
-    username: {
+    userName: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
@@ -44,28 +44,39 @@ User.init({
             len: [8]
         }
     },
-    highScore: {
-
+    isOnline: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     },
-    friends: {
-
-    }
+    // friends: {
+    //     type: DataTypes.ARRAY(DataTypes.INTEGER),
+    //     // "defaultValue": '{}',
+    //     // array of user Id's
+    // }
 }, {
     hooks: {
         beforeCreate: async data => {
-            // to do is await necessary  
+            // to do is await necessary  for to lowercase
             data.email = data.email.toLowerCase();
             data.password = await bcrypt.hash(data.password, 10);
             return data;
         },
         beforeUpdate: async data => {
-            // to do is await necessary  
-            data.email = data.email.toLowerCase();
-            data.password = await bcrypt.hash(data.password, 10);
+            // to do is await necessary  for to lowercase
+            if (data.email) {
+                data.email = data.email.toLowerCase();
+            }
+            if (data.password) {
+                data.password = await bcrypt.hash(data.password, 10);
+            }
             return data;
         }
     },
     sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'user',
 });
 
-module.exports = User
+module.exports = User;

@@ -15,6 +15,13 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
+    // Model.findAll({ attributes: ['foo', 'bar']});
+
+    // Post.findAll({
+    //   where: {
+    //     id: [1,2,3] // Same as using `id: { [Op.in]: [1,2,3] }`
+    //   }
+    // });
     const data = await User.findByPk(req.params.id);
     if (!data) {
       res.status(404).json({ message: 'No user with this id!' });
