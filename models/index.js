@@ -1,17 +1,24 @@
 "use strict";
 
+const Game = require("./Game");
+const GameInstance = require("./GameInstance");
+const Ranking = require("./Ranking");
 const User = require("./User");
-const FriendsList = require('./FriendsList');
-const HighScore = require('./HighScore');
-
-User.hasOne(HighScore, { foreignKey: 'highScore_id', constrains: false, onDelete: 'CASCADE', onUpdate: 'CASCADE' });
-
-User.hasOne(FriendsList, { foreignKey: 'friendsList_id', constrains: false, onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 
 
-HighScore.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+Game.hasMany(GameInstance, {foreignKey: 'game_id'});
+GameInstance.belongsTo(Game);
 
-FriendsList.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+GameInstance.belongsTo(User, { as: 'player1'});
+GameInstance.belongsTo(User, { as: 'player2'});
+GameInstance.belongsTo(User, { as: 'winner'});
 
+Game.hasMany(Ranking, {foreignKey: 'game_id'});
+Ranking.belongsTo(Game);
 
-module.exports = { User, FriendsList, HighScore };
+User.hasMany(Ranking, {foreignKey: 'user_id'});
+Ranking.belongsTo(User);
+
+User.belongsToMany(User, { as: 'Friends', through: 'friends' });
+
+module.exports = { Game, GameInstance, Ranking, User };

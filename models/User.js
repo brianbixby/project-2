@@ -44,22 +44,15 @@ User.init({
             len: [8]
         }
     },
-    highScore_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'highScore',
-            key: 'id',
-            unique: false
-        }
+    isOnline: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     },
-    friendsList_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'friendsList',
-            key: 'id',
-            unique: false
-        }
-    }
+    // friends: {
+    //     type: DataTypes.ARRAY(DataTypes.INTEGER),
+    //     // "defaultValue": '{}',
+    //     // array of user Id's
+    // }
 }, {
     hooks: {
         beforeCreate: async data => {

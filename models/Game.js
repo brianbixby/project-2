@@ -3,9 +3,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class FriendsList extends Model { }
+class Game extends Model { }
 
-FriendsList.init({
+Game.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -14,23 +14,15 @@ FriendsList.init({
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    user_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'user',
-            key: 'id',
-            unique: false,
-            allowNull: false
-        }
+        allowNull: false,
+        unique: true
     }
 }, {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'friendsList',
+    modelName: 'game',
 });
 
-module.exports = FriendsList;
+module.exports = Game;
