@@ -1,44 +1,46 @@
 "use strict";
 
 console.log("login linked1")
-document.querySelector("#login").addEventListener("submit",e=>{
+document.querySelector("#login").addEventListener("submit", e => {
     e.preventDefault();
     const userObj = {
-        username:document.querySelector("#loginUsername").value,
-        password:document.querySelector("#loginPassword").value,
+        username: document.querySelector("#loginUsername").value,
+        password: document.querySelector("#loginPassword").value,
     }
     console.log(userObj)
-    fetch("/api/users/login",{
-        method:"POST",
-        body:JSON.stringify(userObj),
-        headers:{
-            "Content-Type":"application/json"
+    fetch("/api/users/login", {
+        method: "POST",
+        body: JSON.stringify(userObj),
+        headers: {
+            "Content-Type": "application/json"
         }
-    }).then(res=>{
-        if(res.ok){
-            location.href="/profile"
+    }).then(res => {
+        if (res.ok) {
+            location.href = "/profile"
         } else {
             alert("trumpet sound")
         }
     })
 })
 
-document.querySelector("#signup").addEventListener("submit",e=>{
+// formEl.on('submit', handleFormSubmit);
+document.querySelector("#signup").addEventListener("submit", e => {
     e.preventDefault();
+    console.log("hit");
     const userObj = {
-        username:document.querySelector("#signupUsername").value,
-        password:document.querySelector("#signupPassword").value,
+        email: document.querySelector("#signupEmail").value,
+        password: document.querySelector("#signupPassword").value,
     }
     console.log(userObj)
-    fetch("/api/users/",{
-        method:"POST",
-        body:JSON.stringify(userObj),
-        headers:{
-            "Content-Type":"application/json"
+    fetch("/api/users/", {
+        method: "POST",
+        body: JSON.stringify(userObj),
+        headers: {
+            "Content-Type": "application/json"
         }
-    }).then(res=>{
-        if(res.ok){
-            location.href="/profile"
+    }).then(res => {
+        if (res.ok) {
+            location.href = "/profile"
         } else {
             alert("trumpet sound")
         }
