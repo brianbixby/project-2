@@ -1,10 +1,11 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
   Log In!
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -12,10 +13,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-            <form action="" id="login">
-            <input type="text" placeholder="username" id="loginUsername">
-            <input type="password" placeholder="password" id="loginPassword" >
-</form>
+        <form action="" id="login">
+          <input type="text" placeholder="username" id="loginUsername">
+          <input type="password" placeholder="password" id="loginPassword">
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -26,12 +27,13 @@
 </div>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">
   Sign Up!
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="signupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -39,17 +41,18 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-            <form action="" id="signup">
-            <input type="text" placeholder="username" id="signupUsername">
-            <input type="password" placeholder="password" id="signupPassword" >
-</form>
-</form>
+        <form action="" id="signup">
+          <input type="email" placeholder="email" id="signupEmail">
+          <input type="password" placeholder="password" id="signupPassword">
+          {{!-- <input type="submit" value="Submit"> --}}
+          <button type="submit" class="btn btn-primary" id="signupButton">Sign Up</button>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="signup">Sign Up</button>
+        {{!-- <button type="button" class="btn btn-primary" id="signup">Sign Up</button> --}}
       </div>
     </div>
   </div>
 </div>
-
+<script src="/js/login.js"></script>
