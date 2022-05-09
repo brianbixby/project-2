@@ -46,8 +46,12 @@ User.init({
     },
     is_online: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false
+        defaultValue: true
     },
+    image_url: {
+        type: DataTypes.STRING,
+        defaultValue: null
+    }
 }, {
     hooks: {
         beforeCreate: async data => {

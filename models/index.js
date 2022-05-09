@@ -10,9 +10,15 @@ const User = require("./User");
 Game.hasMany(GameInstance, {foreignKey: 'game_id'});
 GameInstance.belongsTo(Game);
 
-GameInstance.belongsTo(User, { as: 'player1'});
-GameInstance.belongsTo(User, { as: 'player2'});
-GameInstance.belongsTo(User, { as: 'winner'});
+// to do creates field user_id !!!important
+User.hasMany(GameInstance, {foreignKey: 'player1_id'});
+GameInstance.belongsTo(User);
+
+User.hasMany(GameInstance, {foreignKey: 'player2_id'});
+GameInstance.belongsTo(User);
+
+User.hasMany(GameInstance, {foreignKey: 'winner_id'});
+GameInstance.belongsTo(User);
 
 Game.hasMany(Ranking, {foreignKey: 'game_id'});
 Ranking.belongsTo(Game);

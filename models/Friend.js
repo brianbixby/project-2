@@ -12,22 +12,22 @@ Friend.init({
         primaryKey: true,
         autoIncrement: true
     },
-    // user_id: {
-    //     type: DataTypes.INTEGER,
-    //     references: {
-    //         model: 'user',
-    //         key: 'id',
-    //         defaultValue: null
-    //     }
-    // },
-    // friend_id: {
-    //     type: DataTypes.INTEGER,
-    //     references: {
-    //         model: 'user',
-    //         key: 'id',
-    //         defaultValue: null
-    //     }
-    // },
+    user_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'user',
+            key: 'id',
+            defaultValue: null
+        }
+    },
+    friend_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'user',
+            key: 'id',
+            defaultValue: null
+        }
+    },
 }, {
     sequelize,
     timestamps: false,

@@ -20,30 +20,30 @@ GameInstance.init({
     //         allowNull: false
     //     }
     // },
-    // player1_id: {
-    //     type: DataTypes.INTEGER,
-    //     references: {
-    //         model: 'user',
-    //         key: 'id',
-    //         defaultValue: null
-    //     }
-    // },
-    // player2_id: {
-    //     type: DataTypes.INTEGER,
-    //     references: {
-    //         model: 'user',
-    //         key: 'id',
-    //         defaultValue: null
-    //     }
-    // },
-    // winner_id: {
-    //     type: DataTypes.INTEGER,
-    //     references: {
-    //         model: 'user',
-    //         key: 'id',
-    //         defaultValue: null
-    //     }
-    // }
+    player1_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'user',
+            key: 'id',
+            defaultValue: null
+        }
+    },
+    player2_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'user',
+            key: 'id',
+            defaultValue: null
+        }
+    },
+    winner_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'user',
+            key: 'id',
+            defaultValue: null
+        }
+    }
 }, {
     sequelize,
     timestamps: false,
