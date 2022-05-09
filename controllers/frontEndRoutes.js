@@ -5,34 +5,41 @@ const router = express.Router();
 const { User } = require('../models');
 
 router.get("/",(req,res)=>{
-
     res.render("home");
-    // Blog.findAll().then(blogs=>{
-    //     console.log(blogs)
-    //     const hbsBlogs = blogs.map(blog=>blog.get({plain:true}))
-    //     console.log("==========")
-    //     console.log(hbsBlogs)
-    //     const loggedIn = req.session.user?true:false
-    //     res.render("home",{blogs:hbsBlogs,loggedIn,username:req.session.user?.username})
-    // })
 })
 
-router.get("/login",(req,res)=>{
-    if(req.session.user){
-        return res.redirect("/profile")
+router.get("/games", (req, res) =>{
+    if(!req.session.user){
+        res.redirect('/')
+        alert("Please log in or sign up!")
     }
-    res.render("login")
+    res.render("games")
 })
+
+router.get("/login", (req,res) =>{
+    res.redirect('/')
+    alert("Please log in or sign up!")
+})
+
+router.get('/gameplay', (req, res)=>{
+    if(!req.session.user){
+        res.redirect('/')
+        alert("Please log in or sign up!")
+    }
+    res.render("gameplay")
+})
+
 
 router.get("/profile",(req,res)=>{
     if(!req.session.user){
-        return res.redirect("/login")
+       res.redirect("/login")
+       alert("Please log in or sign up!")
     }
     User.findByPk(req.session.user.id,{
         include:[Blog]
     }).then(userData=>{
         console.log(userData);
-        const hbsData = userData.get({plain:true})
+        const hbsData = userData.get({plain:true}) 
         console.log("=======")
         console.log(hbsData);
         hbsData.loggedIn = req.session.user?true:false
