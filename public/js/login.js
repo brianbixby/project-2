@@ -39,7 +39,7 @@ document.querySelector("#signup").addEventListener("submit", e => {
         }
     }).then(res => {
         if (res.ok) {
-            document.location.replace("/gameselect")
+            document.location.replace("/games");
         } else {
             alert("trumpet sound")
         }
