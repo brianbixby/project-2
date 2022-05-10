@@ -1,14 +1,13 @@
 "use strict";
 
 const router = require("express").Router();
-const { render } = require("express/lib/response");
-const { User, Game, Ranking } = require("../../models");
+const { User, Game, Ranking, Friend } = require("../../models");
 
 router.get('/', async (req, res) => {
   try {
-    // to do get all friends
-    // to do get all rankings
-    const data = await User.findAll();
+    // to do question about how data comes back
+    // const data = await User.findAll({ include: [Ranking, { model: User, as: "Friend" }] });
+    const data = await User.findAll({ include: { all: true } });
     res.json(data);
   } catch (err) {
     console.log("err: ", err);
@@ -18,9 +17,9 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    // to do get all friends
-    // to do get all rankings
-    const data = await User.findByPk(req.params.id);
+    // to do question about how data comes back
+    // const data = await User.findByPk(req.params.id, { include: [Ranking, { model: User, as: "Friend" }] });
+    const data = await User.findByPk(req.params.id, { include: { all: true } });
     if (!data) {
       res.status(404).json({ message: 'No user with this id!' });
       return;
@@ -54,7 +53,7 @@ router.post('/', async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     req.body.email = req.body.email.toLowerCase();
-    const data = await User.findOne({ where: { email: req.body.email} })
+    const data = await User.findOne({ where: { email: req.body.email } })
     if (!data) {
       res.status(400).json({ msg: "'Incorrect email or password, please try again'" });
       return;

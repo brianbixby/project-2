@@ -6,7 +6,7 @@ const { Game } = require("../../models");
 // get all
 router.get('/', async (req, res) => {
     try {
-        const data = await Game.findAll();
+        const data = await Game.findAll({ include: { all: true } });
         res.json(data);
     } catch (err) {
         console.log("err: ", err);
@@ -17,12 +17,12 @@ router.get('/', async (req, res) => {
 // get by id
 router.get('/:id', async (req, res) => {
     try {
-        const data = await Game.findByPk(req.params.id);
+        const data = await Game.findByPk(req.params.id, { include: { all: true } });
         if (!data) {
             res.status(404).json({ message: 'No item with this id!' });
             return;
         }
-        res.status(200).json(userData);
+        res.status(200).json(data);
     } catch (err) {
         console.log("err: ", err);
         res.status(500).json(err);
