@@ -24,20 +24,39 @@ router.get("/login",(req,res)=>{
     res.render("login")
 })
 
-router.get("/profile",(req,res)=>{
-    if(!req.session.user){
-        return res.redirect("/login")
-    }
-    User.findByPk(req.session.user.id,{
-        include:[Blog]
-    }).then(userData=>{
-        console.log(userData);
-        const hbsData = userData.get({plain:true})
-        console.log("=======")
-        console.log(hbsData);
-        hbsData.loggedIn = req.session.user?true:false
-        res.render("profile",hbsData)
-    })
+router.get("/profile", (req, res) => {
+    // if (!req.session || !req.session.user || !req.session.user.logged_in) {
+    //     res.redirect(200, "/");
+    //     alert("Please log in or sign up!");
+    // } else {
+        User.findByPk(5, { include: { all: true } })
+            .then(userData => {
+                const hbsData = userData.get({ plain: true })
+                console.log(hbsData);
+                hbsData.loggedIn = true;
+                res.render("profile", hbsData);
+            })
+            .catch(err => {
+                console.log("err: ", err);
+            })
+    // }
 })
+
+
+// router.get("/profile",(req,res)=>{
+//     if(!req.session.user){
+//         return res.redirect("/login")
+//     }
+//     User.findByPk(req.session.user.id,{
+//         include:[Blog]
+//     }).then(userData=>{
+//         console.log(userData);
+//         const hbsData = userData.get({plain:true})
+//         console.log("=======")
+//         console.log(hbsData);
+//         hbsData.loggedIn = req.session.user?true:false
+//         res.render("profile",hbsData)
+//     })
+// })
 
 module.exports = router;
