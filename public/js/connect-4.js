@@ -1,3 +1,5 @@
+"use strict";
+
 let gameField = new Array();
 const board = document.getElementById("game-table");
 let currentCol;
