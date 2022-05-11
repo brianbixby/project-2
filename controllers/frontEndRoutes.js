@@ -1,7 +1,6 @@
 "use strict";
 
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const { User, Game } = require('../models');
 
 router.get("/", (req, res) => {

@@ -18,11 +18,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const data = await Game.findByPk(req.params.id, { include: { all: true } });
-        if (!data) {
-            res.status(404).json({ message: 'No item with this id!' });
-            return;
-        }
-        res.status(200).json(data);
+        data === null ? res.status(404).json({ message: 'No game with this id!' }) : res.status(200).json(data);
     } catch (err) {
         console.log("err: ", err);
         res.status(500).json(err);
@@ -43,11 +39,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const data = await Game.update(req.body, { where: { id: req.params.id } });
-        if (!data[0]) {
-            res.status(404).json({ message: 'No item with this id!' });
-            return;
-        }
-        res.status(200).json(data);
+        data[0] === 0 ? res.status(404).json({ message: 'No game with this id!' }) : res.status(200).json(data);
     } catch (err) {
         console.log("err: ", err);
         res.status(500).json(err);
@@ -58,11 +50,7 @@ router.put('/:id', async (req, res) => {
 router.delete("/:id", async (req, res) => {
     try {
         const data = await Game.destroy({ where: { id: req.params.id } });
-        if (!data[0]) {
-            res.status(404).json({ message: 'No item with this id!' });
-            return;
-        }
-        res.json(data);
+        data === 0 ? res.status(404).json({ message: 'No game with this id!' }) : res.json(data);
     } catch (err) {
         console.log("err: ", err);
         res.status(500).json(err);
