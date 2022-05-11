@@ -1,5 +1,7 @@
 body {
-    background-image: linear-gradient(to bottom, #333333, #333333, #333333, #333333, #333333, #3a3a3a, #414141, #484848, #595959, #6a6a6a, #7c7c7c, #8e8e8e);    font-family: 'Koulen', cursive, Georgia, 'Times New Roman', Times, serif;
+    background-image: url(../assets/d5vi8b0-9925c151-97d4-4318-8a23-af91c8f561d5.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
     font-family: 'Koulen', cursive;
     display: flex;
     flex-direction: column;
@@ -17,15 +19,14 @@ header h1 {
     align-items: center;
     justify-content: center;
     font-size: 75px;
+    background-color: rgba(101, 157, 189, .3);
     margin: 40px 200px 20px 200px;
     padding: 40px 15px;
     font-family: 'Koulen', cursive;
-    background-image: url("../assets/background.jpeg");
-    opacity: .7;
     color: white;
     border-radius: 10px;
-    box-shadow: inset 0 0 100px black, 0 0 100px black;
-    text-shadow: 0 2px 7px red;
+    box-shadow: inset 0 0 100px #659DBD, 0 0 100px #659DBD;
+    text-shadow: 0 2px 7px #8D8741;
 }
 
 header:hover{
@@ -33,12 +34,12 @@ header:hover{
 }
 
 .homebtns {
-    background-color: rgb(44, 44, 44);
+    background-color: rgb(141, 135, 65, .9);
     border: none;
     /* border: .1px solid rgba(255, 2, 2, 0.297); */
-    border-radius: 5px;
+    border-radius: 50px;
     font-size: 50px;
-    color: silver;
+    color: #fbeec1;
     text-shadow: 0 3px 10px black;
     margin: 50px 30px;
     padding: 70px;
@@ -48,8 +49,7 @@ header:hover{
 }
 
 .homebtns:hover {
-    background-color: rgba(255, 0, 0, 0.577);
-    border: .1px solid rgba(255, 2, 2, 0.482);
+    background-color: rgba(101, 157, 189, 0.577);
 }
 
 button:hover {
