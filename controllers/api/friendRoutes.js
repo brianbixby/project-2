@@ -74,11 +74,11 @@ router.delete("/:id", async (req, res) => {
 //delete friendship by user both users' ids
 router.delete("/:friendid/users/:userid", async (req, res) => {
     try {
-        const dataFirstTry = await Friend.destroy({ where: { user_id: req.params.userid, friend_id: req.params.friendid }});
+        const dataFirstTry = await Friend.destroy({ where: { user_id: req.params.userid, friend_id: req.params.friendid } });
         if (dataFirstTry) {
             return res.json(dataFirstTry);
         }
-        const dataSecondTry = await Friend.destroy({ where: { friend_id: req.params.userid, user_id: req.params.friendid }});
+        const dataSecondTry = await Friend.destroy({ where: { friend_id: req.params.userid, user_id: req.params.friendid } });
         dataSecondTry === 0 ? res.status(404).json({ message: 'No friend with this id!' }) : res.json(dataSecondTry);
     } catch (err) {
         console.log("err: ", err);
