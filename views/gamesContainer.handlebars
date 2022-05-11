@@ -13,7 +13,7 @@
     {{#each games as |game|}}
     <p>{{game.id}}</p>
     <p>{{game.name}}</p>
-    <button class="playButton" data-gameID={{game.id}} data-userID={{games.userId}}>PLAY</button>
+    <button class="playButton" data-gameID={{game.id}} data-userID={{game.userid}}>PLAY</button>
     {{/each}}
     {{!-- {{/unless}} --}}
 
@@ -27,12 +27,15 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-    var myPlayerId;
+    let myPlayerId;
     const socket = io();
     function joinGame(e) {
         myPlayerId = e.target.getAttribute('data-userID');
-        socket.emit('joinGame', { gameID: e.target.getAttribute('data-gameID'), userID: e.target.getAttribute('data-userID') });
-    }
+          console.log("myPlayerId: ", myPlayerId);
+        const data = { gameID: e.target.getAttribute('data-gameID'), userID: e.target.getAttribute('data-userID') };
+        console.log("client join game: data ", data);
+        socket.emit('joinGame', data);
+        }
 
     const connect4GameEl = document.querySelector("#connect4Game");
     const playButtons = document.querySelectorAll(".playButton");
@@ -48,7 +51,7 @@
     socket.on('joinedGame', (game) => {
         console.log("here", game);
         if (game.players == 2) {
-            {{!-- start game --}}0
+            {{!-- start game --}}
             connect4GameEl.classList.remove("hide");
             let player1 = game.player1;
             let player2 = game.player2;
@@ -65,3 +68,11 @@
 {{!-- when the board is bout to be updates we call socket.emit to the server, which will then call, pass server game
 object with player --}}
 {{!-- socket.on(""), which revieves the board update from the server and draws it --}}
+
+{{!-- { { !--on player move-- } } --}}
+{{!-- { { !--socket.emit c4move, pass it the move, pass it theplayer-- } } --}}
+{{!-- {
+{
+!--make it so only the player whos move it is can move
+and if its your move then we'll call the sock.emit(move) on the server that will call a function on the client for both
+sockets to update the board back to both sockets --}}

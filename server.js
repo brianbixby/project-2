@@ -63,7 +63,7 @@ io.on('connection', (socket) => {
   //   socket.join(room);
   // })
   socket.on('joinGame', data => {
-    console.log('server join game');
+    console.log('server join game: ', data);
     let game;
     console.log(data)
     if (data.gameID == 1) {
@@ -91,6 +91,7 @@ io.on('connection', (socket) => {
         openGamesC4.push(game);
       }
     }
+    console.log("game server: ", game);
     socket.join(game.id);
     io.to(game.id).emit('joinedGame', game);
   })
