@@ -65,15 +65,17 @@ io.on('connection', (socket) => {
   socket.on('joinGame', data => {
     console.log('server join game');
     let game;
+    console.log(data)
     if (data.gameID == 1) {
       if (openGamesTTC.length) {
         game = openGamesTTC.pop();
         game.players = 2;
-        game.player2 = sessionStorage.userID;
+        game.player2 = data.userID;
         inUseTTC.push(game);
       } else {
         game = { id: uuidv4(), players: 1 };
         game.player1 = data.userID;
+        console.log(game.player1)
         openGamesTTC.push(game);
       }
     } else if (data.gameID == 2) {
@@ -85,6 +87,7 @@ io.on('connection', (socket) => {
       } else {
         game = { id: uuidv4(), players: 1 };
         game.player1 = data.userID;
+        console.log(game.player1)
         openGamesC4.push(game);
       }
     }

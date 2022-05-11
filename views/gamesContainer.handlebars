@@ -46,7 +46,7 @@
     and if its your move then we will call the sockit .emit(move) on the server that will call a function on the client for both sockets to update the board back to both sockets  --}}
 
     socket.on('joinedGame', (game) => {
-        console.log("here", document.cookie);
+        console.log("here", game);
         if (game.players == 2) {
             {{!-- start game --}}0
             connect4GameEl.classList.remove("hide");
