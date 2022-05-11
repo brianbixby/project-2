@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { User } = require('../models');
+const { User, Game } = require('../models');
 
 router.get("/", (req, res) => {
     res.render("home");
@@ -49,5 +49,22 @@ router.get("/profile", (req, res) => {
             })
     }
 })
+
+router.get('/gamescontainer', async (req, res) => {
+    try {
+        if (!req.session || !req.session.user || !req.session.user.logged_in) {
+            res.redirect(200, "/");
+        } else {
+            const data = await Game.findAll({ include: { all: true } });
+            const games = data.map(game => game.get({ plain: true }));
+            games.readyToPlay = false
+            games.userId = req.session.user.id;
+            res.render('gamesContainer', { games });
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
 
 module.exports = router;
