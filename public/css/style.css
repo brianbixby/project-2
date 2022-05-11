@@ -39,7 +39,7 @@ header h1 {
     text-shadow: 0 2px 7px #8D8741;
 }
 
-header:hover{
+header:hover {
     cursor: pointer;
 }
 
@@ -68,7 +68,7 @@ button:hover {
 
 .modal-backdrop {
     background-color: #bc986a;
- }
+}
 
 .modal-body {
     display: flex;
@@ -120,12 +120,12 @@ button:hover {
     text-decoration: none;
 }
 
-.gameBtns:hover{
+.gameBtns:hover {
     background-color: rgba(101, 157, 189, 0.477);
     color: #fbeec1;
 }
 
-.gameBtns a:visited{
+.gameBtns a:visited {
     color: #fbeec1;
 }
 
@@ -146,8 +146,8 @@ button:hover {
     margin: 10px;
 }
 
-.gamesPageBtns:hover{
-    color:white;
+.gamesPageBtns:hover {
+    color: white;
     background-color: rgba(101, 157, 189, 0.477);
     box-shadow: none;
 }

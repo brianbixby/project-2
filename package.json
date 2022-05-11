@@ -1,7 +1,7 @@
 {
   "name": "project-2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Play games online with friends for free.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,8 +14,8 @@
     "type": "git",
     "url": "git+https://github.com/brianbixby/project-2.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["socket.io", "node", "bcrypt", "user-auth", "full stack app", "live games", "online", "games", "free", "friends"],
+  "author": "Brian Bixby, Hannah Callison, James Harding, minh khoi nguyen",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/brianbixby/project-2/issues"
