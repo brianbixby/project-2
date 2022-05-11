@@ -55,9 +55,11 @@ router.get('/gamescontainer', async (req, res) => {
             res.redirect(200, "/");
         } else {
             const data = await Game.findAll({ include: { all: true } });
-            const games = data.map(game => game.get({ plain: true }));
-            games.readyToPlay = false
-            games.userId = req.session.user.id;
+            const games = data.map(game => {
+                const plainGame = game.get({ plain: true });
+                plainGame.userid = req.session.user.user_id;
+                return plainGame;
+            });
             res.render('gamesContainer', { games });
         }
     } catch (err) {
