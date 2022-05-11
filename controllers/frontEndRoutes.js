@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
 router.get("/games", (req, res) => {
     if (!req.session || !req.session.user || !req.session.user.logged_in) {
         res.redirect(200, '/');
-        alert("Please log in or sign up!");
+        console.log("Please log in or sign up!");
     } else {
         res.render("games");
     }
@@ -19,13 +19,13 @@ router.get("/games", (req, res) => {
 
 router.get("/login", (req, res) => {
     res.redirect(200, '/');
-    alert("Please log in or sign up!");
+    console.log("Please log in or sign up!");
 });
 
 router.get('/gameplay', (req, res) => {
     if (!req.session || !req.session.user || !req.session.user.logged_in) {
         res.redirect(200, '/');
-        alert("Please log in or sign up!");
+        console.log("Please log in or sign up!");
     } else {
         res.render("gameplay");
     }
@@ -35,7 +35,7 @@ router.get('/gameplay', (req, res) => {
 router.get("/profile", (req, res) => {
     if (!req.session || !req.session.user || !req.session.user.logged_in) {
         res.redirect(200, "/");
-        alert("Please log in or sign up!");
+        console.log("Please log in or sign up!");
     } else {
         User.findByPk(req.session.user.id, { include: { all: true } })
             .then(userData => {
