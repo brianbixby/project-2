@@ -1,7 +1,8 @@
 "use strict";
 
 const router = require("express").Router();
-const { GameInstance } = require("../../models");
+const { Op } = require("sequelize");
+const { GameInstance, Ranking } = require("../../models");
 
 // get all
 router.get('/', async (req, res) => {
@@ -18,11 +19,29 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const data = await GameInstance.findByPk(req.params.id, { include: { all: true } });
-        if (!data) {
-            res.status(404).json({ message: 'No item with this id!' });
-            return;
-        }
-        res.status(200).json(data);
+        data === null ? res.status(404).json({ message: 'No gameInstance with this id!' }) : res.status(200).json(data);
+    } catch (err) {
+        console.log("err: ", err);
+        res.status(500).json(err);
+    }
+});
+
+// get all gameinstance for a game by game id
+router.get('/game/:gameid', async (req, res) => {
+    try {
+        const data = await GameInstance.findAll({ where: { game_id: req.params.gameid }, include: { all: true } });
+        data === null ? res.status(404).json({ message: 'No gameInstance with this game id!' }) : res.status(200).json(data);
+    } catch (err) {
+        console.log("err: ", err);
+        res.status(500).json(err);
+    }
+});
+
+// get all gameinstances for a user by userid
+router.get('/user/:userid', async (req, res) => {
+    try {
+        const data = await GameInstance.findAll({ where: { [Op.or]: [{ player1_id: req.params.userid }, { player2_id: req.params.userid }] }, include: { all: true } });
+        data === null ? res.status(404).json({ message: 'No gameInstance with this user id!' }) : res.status(200).json(data);
     } catch (err) {
         console.log("err: ", err);
         res.status(500).json(err);
@@ -39,15 +58,17 @@ router.post('/', async (req, res) => {
     }
 });
 
-// put by id
+// put by id - updates winning and losing players' ranks
 router.put('/:id', async (req, res) => {
     try {
         const data = await GameInstance.update(req.body, { where: { id: req.params.id } });
-        if (!data[0]) {
-            res.status(404).json({ message: 'No item with this id!' });
-            return;
+        if (req.body.winner_id) {
+            await Ranking.increment({ rank: 10 }, { where: { user_id: req.body.winner_id } });
         }
-        res.status(200).json(data);
+        if (req.body.loser_id) {
+            await Ranking.increment({ rank: -10 }, { where: { user_id: req.body.loser_id } });
+        }
+        data[0] === 0 ? res.status(404).json({ message: 'No gameInstance with this id!' }) : res.status(200).json(data);
     } catch (err) {
         console.log("err: ", err);
         res.status(500).json(err);
@@ -58,11 +79,7 @@ router.put('/:id', async (req, res) => {
 router.delete("/:id", async (req, res) => {
     try {
         const data = await GameInstance.destroy({ where: { id: req.params.id } });
-        if (!data[0]) {
-            res.status(404).json({ message: 'No item with this id!' });
-            return;
-        }
-        res.json(data);
+        data === 0 ? res.status(404).json({ message: 'No gameInstance with this id!' }) : res.json(data);
     } catch (err) {
         console.log("err: ", err);
         res.status(500).json(err);

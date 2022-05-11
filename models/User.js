@@ -7,12 +7,9 @@ const bcrypt = require("bcrypt");
 class User extends Model {
     async checkPassword(password) {
         try {
-            console.log('Check here')
             const data = await bcrypt.compare(password, this.password);
-            console.log("checkPassword result: ", data);
             return data;
         } catch (err) {
-            console.log("check password err: ", err);
             return null;
         }
     }
@@ -72,7 +69,6 @@ User.init({
         }
     },
     sequelize,
-    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: 'user',
