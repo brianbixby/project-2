@@ -6,6 +6,16 @@ let currentCol;
 let currentRow;
 let currentPlayer;
 let id = 1;
+let player2;
+let player1;
+let players;
+// TODO: MAKE THESE LINK TO THE GAMES USERS
+// socket.on('joinedGame', (game)=>{
+//   player1 = game.player1;
+//   player2 = game.player2;
+//   players = [player1, player2];
+// });
+
 
 newgame();
 
@@ -72,7 +82,7 @@ function possibleColumns() {
 
 function Disc(player) {
   this.player = player;
-  this.color = player == 1 ? "red" : "yellow";
+  this.color = player == player1 ? "red" : "yellow";
   this.id = id.toString();
   id++;
 
@@ -84,8 +94,10 @@ function Disc(player) {
   var $this = this;
 
   document.onmousemove = function (evt) {
-    // to do:
-    // if (currentPlayer = myPlayerId) {
+    // TODO: make it only work if its the current players turn
+    if (currentPlayer !== myPlayerId) {
+      return;
+    }else{
       currentCol = Math.floor((evt.clientX - board.offsetLeft) / 60);
       if (currentCol < 0) {
         currentCol = 0;
@@ -93,11 +105,10 @@ function Disc(player) {
       if (currentCol > 6) {
         currentCol = 6;
       }
-
       document.getElementById("d" + $this.id).style.left =
         14 + 60 * currentCol + "px";
       document.getElementById("d" + $this.id).style.top = "-55px";
-    // }
+    }
   };
 
   document.onload = function (evt) {
@@ -114,7 +125,7 @@ function Disc(player) {
   };
 
   document.onclick = function (evt) {
-    //  to do: 
+    //  TODO: 
     // if (currentPlayer = myPlayerId) {
       // emit to server
 
@@ -127,10 +138,6 @@ function Disc(player) {
       // }
     }
   };
-
-
-
-
 }
 
 function dropDisc(cid, player) {
@@ -142,10 +149,13 @@ function dropDisc(cid, player) {
 
 function checkForMoveVictory() {
   if (!checkForVictory(currentRow, currentCol)) {
-    placeDisc(3 - currentPlayer);
+    if(player !== player1){
+      placeDisc(player1);
+    } else{
+      placeDisc(player2);
+    }
   } else {
-    var ww = currentPlayer == 2 ? "Player 2" : "Player 1";
-    placeDisc(3 - currentPlayer);
+    var ww = currentPlayer == player2 ? "Player 2" : "Player 1";
     alert(ww + " win!");
     board.innerHTML = "";
     newgame();

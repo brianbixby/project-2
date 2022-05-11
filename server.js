@@ -25,6 +25,7 @@ const sess = {
   cookie: { maxAge: 2 * 60 * 60 * 1000 },
   resave: false,
   saveUninitialized: true,
+  sameSite: 'strict',
   store: new SequelizeStore({ db: sequelize })
 };
 app.use(session(sess));
@@ -63,7 +64,7 @@ io.on('connection', (socket) => {
       if (openGamesTTC.length) {
         game = openGamesTTC.pop();
         game.players = 2;
-        game.player2 = data.userID;
+        game.player2 = sessionStorage.userID;
         inUseTTC.push(game);
       } else {
         game = {id: uuidv4(), players: 1};
@@ -85,7 +86,7 @@ io.on('connection', (socket) => {
     socket.join(game.id);
     io.to(game.id).emit('joinedGame', game);
   })
-  // to do:
+  // TODO:
   // have function that handles move then emits back to both clients
   // socket.on("playerMadeMove", data => {
   //   io.to(game.id).emit('playerMadeMove', game);
