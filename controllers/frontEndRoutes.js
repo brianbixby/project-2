@@ -31,12 +31,12 @@ router.get('/gameplay', (req, res) => {
 });
 
 
-router.get("/profile", (req, res) => {
+router.get("/profile/:id" , (req, res) => {
     if (!req.session || !req.session.user || !req.session.user.logged_in) {
         res.redirect(200, "/");
         console.log("Please log in or sign up!");
     } else {
-        User.findByPk(req.session.user.id, { include: { all: true } })
+        User.findByPk(req.params.id, { include: { all: true } })
             .then(userData => {
                 const hbsData = userData.get({ plain: true })
                 console.log(hbsData);

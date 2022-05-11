@@ -1,0 +1,23 @@
+<div class="profilePage">
+  <div class="profileTitle">
+    <h1>Welcome {{user_name}}</h1>
+    <h2>All your info:</h2>
+  </div>
+  <div class="profileEdit">
+    <form action="" id="newProfile" data-userID={{id}}>
+      <input type="text" id="user_name" placeholder="user_name">
+      <img id="image_url" src={{image_url}} alt="avatar">
+      <input type='file' id="uploadfile" />
+      <button class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <form>
+    <h3>{{user_name}}</h3>
+    <img src={{image_url}} alt="avatar">
+    <button "btn btn-primary">delete</button>
+    <hr>
+  </form>
+</div>
+<script src="/js/profile.js"></script>
+<script  src = " https://upload-widget.cloudinary.com/global/all.js "  type = " text / javascript " >   
+</script>

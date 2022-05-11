@@ -36,6 +36,13 @@ const userData = [
     'is_online': false,
     image_url: 'https://avatars.githubusercontent.com/u/23647013?s=40&v=4',
   },
+  {
+    user_name: 'MKN',
+    email: 'mkn@mail.com',
+    password: '123456789',
+    'is_online': false,
+    image_url: 'https://avatars.githubusercontent.com/u/23647013?s=40&v=4',
+  },
 ];
 
 const seedUsers = () => User.bulkCreate(userData, { individualHooks: true });

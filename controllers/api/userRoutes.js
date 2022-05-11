@@ -29,6 +29,7 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+  console.log(req.body)
   try {
     if (!req.body.user_name) {
       req.body.user_name = req.body.email;
@@ -86,6 +87,7 @@ router.post('/logout', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
+  console.log(req.body)
   try {
     const data = await User.update(req.body, { where: { id: req.params.id } });
     data[0] === 0 ? res.status(404).json({ message: 'No user with this id!' }) : res.status(200).json(data);
