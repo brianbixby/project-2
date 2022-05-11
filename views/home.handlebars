@@ -1,5 +1,5 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+<button type="button" class="btn btn-primary homebtns" data-bs-toggle="modal" data-bs-target="#loginModal">
   Log In!
 </button>
 
@@ -14,23 +14,22 @@
       </div>
       <div class="modal-body">
         <form action="" id="login">
-          <input type="text" placeholder="username" id="loginUsername">
-          <input type="password" placeholder="password" id="loginPassword">
+          <input type="email" placeholder="Email" id="loginEmail">
+          <input type="password" placeholder="Password" id="loginPassword">
+          <button type="submit" class="btn btn-primary" id="loginBtn">Log In</button>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="login">Log In</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">
+<button type="button" class="btn btn-primary homebtns" data-bs-toggle="modal" data-bs-target="#signupModal">
   Sign Up!
 </button>
-
 <!-- Modal -->
 <div class="modal fade" id="signupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -42,10 +41,10 @@
       </div>
       <div class="modal-body">
         <form action="" id="signup">
-          <input type="email" placeholder="email" id="signupEmail">
-          <input type="password" placeholder="password" id="signupPassword">
+          <input type="email" placeholder="Email" id="signupEmail">
+          <input type="password" placeholder="Password" id="signupPassword">
           {{!-- <input type="submit" value="Submit"> --}}
-          <button type="submit" class="btn btn-primary" id="signupButton">Sign Up</button>
+          <button type="submit" class="btn btn-primary" id="signupBtn">Sign Up</button>
         </form>
       </div>
       <div class="modal-footer">
