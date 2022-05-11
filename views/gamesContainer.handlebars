@@ -2,25 +2,26 @@
     .hide {
         display: none;
     }
+
     .show {
         display: block;
     }
 </style>
 <section id="gamesContainer" class="container">
-    {{!-- {{log  this}} --}}
+    {{!-- {{log this}} --}}
     {{!-- {{#unless games.readyToPlay}} --}}
-        {{#each games as |game|}}
-        <p>{{game.id}}</p>
-        <p>{{game.name}}</p>
-        <button class="playButton" data-gameID={{game.id}} data-userID={{games.userId}}>PLAY</button>
-        {{/each}}
+    {{#each games as |game|}}
+    <p>{{game.id}}</p>
+    <p>{{game.name}}</p>
+    <button class="playButton" data-gameID={{game.id}} data-userID={{games.userId}}>PLAY</button>
+    {{/each}}
     {{!-- {{/unless}} --}}
 
     {{!-- {{#if games.readyToPlay}} --}}
     <div id="connect4Game" class="hide">
-        {{>connect-four}}    
+        {{>connect-four}}
     </div>
-       
+
     {{!-- {{/if}} --}}
 </section>
 
@@ -30,7 +31,7 @@
     const socket = io();
     function joinGame(e) {
         myPlayerId = e.target.getAttribute('data-userID');
-        socket.emit('joinGame', {gameID: e.target.getAttribute('data-gameID'), userID: e.target.getAttribute('data-userID')});
+        socket.emit('joinGame', { gameID: e.target.getAttribute('data-gameID'), userID: e.target.getAttribute('data-userID') });
     }
 
     const connect4GameEl = document.querySelector("#connect4Game");
@@ -60,6 +61,7 @@
     });
 </script>
 
-{{!-- all logic before board is updated stays the same except  --}}
-{{!-- when the board is bout to be updates we call socket.emit to the server, which will then call, pass server game object with player --}}
+{{!-- all logic before board is updated stays the same except --}}
+{{!-- when the board is bout to be updates we call socket.emit to the server, which will then call, pass server game
+object with player --}}
 {{!-- socket.on(""), which revieves the board update from the server and draws it --}}

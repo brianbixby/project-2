@@ -43,10 +43,25 @@ GameInstance.init({
             key: 'id',
             defaultValue: null
         }
+    },
+    loser_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'user',
+            key: 'id',
+            defaultValue: null
+        }
+    },
+    tie: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    },
+    complete: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
     }
 }, {
     sequelize,
-    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: 'gameInstance',

@@ -1,12 +1,13 @@
 "use strict";
 
 const router = require("express").Router();
-const { User, Game, Ranking, Friend } = require("../../models");
+const { User, Game, Ranking, Friend, GameInstance } = require("../../models");
 
 router.get('/', async (req, res) => {
   try {
     // to do question about how data comes back
-    // const data = await User.findAll({ include: [Ranking, { model: User, as: "Friend" }] });
+    // const data = await User.findAll({ include: [Ranking, GameInstance, { model: User, as: "Friend", attributes: ["id", "user_name", "email", "password", "is_online", "image_url", "createdAt", "updatedAt"] }] });
+    // const data = await User.findAll({ exclude: [ {model: User, as: "Friend", through: { attributes: ["friend"] }}], include: { all: true }});
     const data = await User.findAll({ include: { all: true } });
     res.json(data);
   } catch (err) {
@@ -20,11 +21,7 @@ router.get('/:id', async (req, res) => {
     // to do question about how data comes back
     // const data = await User.findByPk(req.params.id, { include: [Ranking, { model: User, as: "Friend" }] });
     const data = await User.findByPk(req.params.id, { include: { all: true } });
-    if (!data) {
-      res.status(404).json({ message: 'No user with this id!' });
-      return;
-    }
-    res.status(200).json(data);
+    data === null ? res.status(404).json({ message: 'No user with this id!' }) : res.status(200).json(data);
   } catch (err) {
     console.log("err: ", err);
     res.status(500).json(err);
@@ -77,7 +74,6 @@ router.post("/login", async (req, res) => {
 router.post('/logout', async (req, res) => {
   try {
     if (req.session && req.session.user && req.session.user.logged_in) {
-      // updating userProfile to is_online false
       await User.update({ is_online: false }, { where: { id: req.session.user.user_id } });
       req.session.destroy(() => {
         res.status(204).end();
@@ -94,11 +90,7 @@ router.post('/logout', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const data = await User.update(req.body, { where: { id: req.params.id } });
-    if (!data[0]) {
-      res.status(404).json({ message: 'No user with this id!' });
-      return;
-    }
-    res.status(200).json(data);
+    data[0] === 0 ? res.status(404).json({ message: 'No user with this id!' }) : res.status(200).json(data);
   } catch (err) {
     console.log("err: ", err);
     res.status(500).json(err);
@@ -109,11 +101,7 @@ router.put('/:id', async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const data = await User.destroy({ where: { id: req.params.id } });
-    if (!data[0]) {
-      res.status(404).json({ message: 'No user with this id!' });
-      return;
-    }
-    res.json(data);
+    data === 0 ? res.status(404).json({ message: 'No user with this id!' }) : res.json(data);
   } catch (err) {
     console.log("err: ", err);
     res.status(500).json(err);
