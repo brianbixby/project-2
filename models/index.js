@@ -6,8 +6,6 @@ const GameInstance = require("./GameInstance");
 const Ranking = require("./Ranking");
 const User = require("./User");
 
-// to do: CASCADE onupdate and delete?
-// when a user is deleted we should remove all friends and rankings for that user, but not game instances
 Game.hasMany(GameInstance, { foreignKey: 'game_id', onDelete: 'CASCADE' });
 GameInstance.belongsTo(Game, { foreignKey: 'game_id' });
 
