@@ -6,16 +6,6 @@ let currentCol;
 let currentRow;
 let currentPlayer;
 let id = 1;
-let player2;
-let player1;
-let players;
-// TODO: MAKE THESE LINK TO THE GAMES USERS
-// socket.on('joinedGame', (game)=>{
-//   player1 = game.player1;
-//   player2 = game.player2;
-//   players = [player1, player2];
-// });
-
 
 newgame();
 
@@ -87,8 +77,9 @@ function Disc(player) {
   id++;
 
   this.addToScene = function () {
-    board.innerHTML +=
-      '<div id="d' + this.id + '" class="disc ' + this.color + '"></div>';
+    const madeMove = '<div id="d' + this.id + '" class="disc ' + this.color + '"></div>';
+    board.innerHTML += madeMove;
+    socket.to(game.id).emit('playerMadeMove', )
   };
 
   var $this = this;
@@ -126,16 +117,17 @@ function Disc(player) {
 
   document.onclick = function (evt) {
     //  TODO: 
-    // if (currentPlayer = myPlayerId) {
+     if (currentPlayer = myPlayerId) {
     // emit to server
 
-    // socket.on("playerMadeMove", data => {
+     socket.on("playerMadeMove", data => {
 
-    // })
+     })
 
     if (possibleColumns().indexOf(currentCol) != -1) {
       dropDisc($this.id, $this.player);
-      // }
+
+      }
     }
   };
 }
