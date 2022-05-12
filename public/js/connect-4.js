@@ -8,8 +8,6 @@ let currentPlayer;
 let id = 1;
 let player1;
 let player2;
-
-
 newgame();
 
 function newgame() {

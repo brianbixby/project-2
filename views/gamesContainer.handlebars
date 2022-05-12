@@ -36,7 +36,20 @@
 
 <script>
     var myPlayerId;
+    const socket = io();
+    function joinGame(e) {
+        myPlayerId = e.target.getAttribute('data-userID');
+        console.log("myPlayerId: ", myPlayerId);
+        const data = { gameID: e.target.getAttribute('data-gameID'), userID: e.target.getAttribute('data-userID') };
+        console.log("client join game: data ", data);
+        socket.emit('joinGame', data);
+    }
+
     const connect4GameEl = document.querySelector("#connect4Game");
+    const playButtons = document.querySelectorAll(".playButton");
+    for (let i = 0; i < playButtons.length; i++) {
+        playButtons[i].addEventListener("click", joinGame());
+    }
 
     socket.on('joinedGame', data => {
         console.log("joinedGame: ", data);
