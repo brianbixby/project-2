@@ -7,6 +7,9 @@
         display: block;
     }
 </style>
+<script>
+
+</script>
 <section id="gamesContainer" class="container">
     {{!-- {{log this}} --}}
     {{!-- {{#unless games.readyToPlay}} --}}
@@ -24,15 +27,11 @@
 
     {{!-- {{/if}} --}}
 </section>
-
-<script src="/socket.io/socket.io.js"></script>
 <script>
     var myPlayerId;
-    const socket = io();
     function joinGame(e) {
-        myPlayerId = e.target.getAttribute('data-userID');
-        console.log("myPlayerId: ", myPlayerId);
         const data = { gameID: e.target.getAttribute('data-gameID'), userID: e.target.getAttribute('data-userID') };
+        currentState.user.userID = data.userID;
         console.log("client join game: data ", data);
         socket.emit('joinGame', data);
     }
@@ -44,10 +43,20 @@
     }
 
     socket.on('joinedGame', data => {
+        currentState.game = data;
+
+        currentState.game.player1;
+        currentState.game.player2;
         console.log("joinedGame: ", data);
         if (data.players == 2) {
-            connect4GameEl.classList.remove("hide");
-            alert("starting game")
+            if (data.game.id == 2) {
+                { { !--CONECT 4 -- } }
+                connect4GameEl.classList.remove("hide");
+                alert("starting game")
+                newC4Game();
+            } else if (data.game.id == 1) {
+                { { !--TIC TAC TOE-- } }
+            }
         } else {
             alert("waiting for another player");
         }

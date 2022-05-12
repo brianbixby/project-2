@@ -36,6 +36,7 @@ router.get("/profile/:id" , (req, res) => {
                 const hbsData = userData.get({ plain: true })
                 console.log(hbsData);
                 hbsData.loggedIn = true;
+    
                 res.render("profile", hbsData);
             })
             .catch(err => {
@@ -48,6 +49,7 @@ router.get('/gamescontainer', async (req, res) => {
     try {
         if (!req.session || !req.session.user || !req.session.user.logged_in) {
             console.log("Please log in or sign up!");
+
             res.redirect('/');
         } else {
             const data = await Game.findAll({ include: { all: true } });
@@ -56,6 +58,7 @@ router.get('/gamescontainer', async (req, res) => {
                 plainGame.userid = req.session.user.user_id;
                 return plainGame;
             });
+
             res.render('gamesContainer', { games });
         }
     } catch (err) {

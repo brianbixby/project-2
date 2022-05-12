@@ -1,20 +1,29 @@
 "use strict";
 
-let gameField = new Array();
+let gameField;
 const board = document.getElementById("game-table");
 let currentCol;
 let currentRow;
 let currentPlayer;
+let player1;
+let player2;
+let instanceID;
 let id = 1;
 
-newgame();
 
-function newgame() {
+
+function newC4Game() {
+  console.log("newC4Game");
+  player1 = currentState.game.player1;
+  player2 = currentState.game.player2;
+  instanceID = currentState.game.instanceID;
+  currentPlayer = Math.floor(Math.random() * 2) ? player1 : player2;
   prepareField();
-  placeDisc(Math.floor(Math.random() * 2) + 1);
+  placeDisc();
 }
 
 function checkForVictory(row, col) {
+  console.log("checkForVictory")
   if (getAdj(row, col, 0, 1) + getAdj(row, col, 0, -1) > 2) {
     return true;
   } else {
@@ -35,6 +44,7 @@ function checkForVictory(row, col) {
 }
 
 function getAdj(row, col, row_inc, col_inc) {
+  console.log("getadj")
   if (cellVal(row, col) == cellVal(row + row_inc, col + col_inc)) {
     return 1 + getAdj(row + row_inc, col + col_inc, row_inc, col_inc);
   } else {
@@ -43,6 +53,7 @@ function getAdj(row, col, row_inc, col_inc) {
 }
 
 function cellVal(row, col) {
+  console.log("cellval")
   if (gameField[row] == undefined || gameField[row][col] == undefined) {
     return -1;
   } else {
@@ -51,6 +62,7 @@ function cellVal(row, col) {
 }
 
 function firstFreeRow(col, player) {
+  console.log("firstfreerow")
   for (var i = 0; i < 6; i++) {
     if (gameField[i][col] != 0) {
       break;
@@ -61,6 +73,7 @@ function firstFreeRow(col, player) {
 }
 
 function possibleColumns() {
+  console.log("possiblecolumns")
   var moves_array = new Array();
   for (var i = 0; i < 7; i++) {
     if (gameField[0][i] == 0) {
@@ -70,24 +83,24 @@ function possibleColumns() {
   return moves_array;
 }
 
-function Disc(player) {
-  this.player = player;
-  this.color = player == player1 ? "red" : "yellow";
+function Disc() {
+  console.log("Disc constructor");
+  this.player = currentPlayer;
+  this.color = currentPlayer == currentState.user.userID ? "red" : "yellow";
   this.id = id.toString();
   id++;
 
   this.addToScene = function () {
+    console.log("DISC: addtoscene")
     const madeMove = '<div id="d' + this.id + '" class="disc ' + this.color + '"></div>';
     board.innerHTML += madeMove;
   };
 
-  var $this = this;
-
   document.onmousemove = function (evt) {
     // TODO: make it only work if its the current players turn
-    if (currentPlayer !== myPlayerId) {
+    if (currentPlayer !== currentState.user.userID) {
       return;
-    }else{
+    } else {
       currentCol = Math.floor((evt.clientX - board.offsetLeft) / 60);
       if (currentCol < 0) {
         currentCol = 0;
@@ -95,9 +108,9 @@ function Disc(player) {
       if (currentCol > 6) {
         currentCol = 6;
       }
-      document.getElementById("d" + $this.id).style.left =
+      document.getElementById("d" + this.id).style.left =
         14 + 60 * currentCol + "px";
-      document.getElementById("d" + $this.id).style.top = "-55px";
+      document.getElementById("d" + this.id).style.top = "-55px";
     }
   };
 
@@ -109,28 +122,28 @@ function Disc(player) {
     if (currentCol > 6) {
       currentCol = 6;
     }
-    document.getElementById("d" + $this.id).style.left =
+    document.getElementById("d" + this.id).style.left =
       14 + 60 * currentCol + "px";
-    document.getElementById("d" + $this.id).style.top = "-55px";
+    document.getElementById("d" + this.id).style.top = "-55px";
   };
 
   document.onclick = function (evt) {
-    //  TODO: 
-    console.log(player1)
-     if (currentPlayer = myPlayerId) {
-    // emit to server
-    if (possibleColumns().indexOf(currentCol) != -1) {
-      dropDisc($this.id, $this.player);
-
+    if (currentPlayer !== currentState.user.userID) {
+      return;
+    } else {
+      if (possibleColumns().indexOf(currentCol) != -1) {
+        //  TODO: emit to server
+        dropDisc(this.id, this.player);
       }
     }
   };
 }
 
-function dropDisc(cid, player) {
+function dropDisc(diskID, player) {
+  console.log("dropDisc")
   currentRow = firstFreeRow(currentCol, player);
   let playerChoice = {
-    who: cid,
+    who: diskID,
     where: 14 + currentRow * 60
   }
   moveit(playerChoice.who, playerChoice.where);
@@ -139,27 +152,29 @@ function dropDisc(cid, player) {
 }
 
 function checkForMoveVictory() {
+  console.log("checkForMoveVictor");
   if (!checkForVictory(currentRow, currentCol)) {
-    if(player !== player1){
-      placeDisc(player1);
-    } else{
-      placeDisc(player2);
+    if (currentPlayer == currentState.user.userID) {
+      placeDisc();
+    } else {
+      return;
     }
   } else {
-    var ww = currentPlayer == player2 ? "Player 2" : "Player 1";
+    var ww = currentPlayer == currentState.user.userID ? "Player 2" : "Player 1";
     alert(ww + " win!");
     board.innerHTML = "";
-    newgame();
+    newC4Game();
   }
 }
 
-function placeDisc(player) {
-  currentPlayer = player;
-  var disc = new Disc(player);
+function placeDisc() {
+  console.log("placeDisc")
+  var disc = new Disc();
   disc.addToScene();
 }
 
 function prepareField() {
+  console.log("prepareField")
   gameField = new Array();
   for (var i = 0; i < 6; i++) {
     gameField[i] = new Array();
@@ -170,5 +185,6 @@ function prepareField() {
 }
 
 function moveit(who, where) {
+  console.log("moveit")
   document.getElementById("d" + who).style.top = where + "px";
 }

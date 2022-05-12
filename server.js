@@ -73,8 +73,7 @@ io.on("connection", (socket) => {
         game.player2 = data.userID;
         inUseTTC.push(game);
       } else {
-        game = { id: uuidv4(), players: 1, player1: null, player2: null };
-        game.player1 = data.userID;
+        game = { id: data.gameID, instanceID: uuidv4(), players: 1, player1: data.userID, player2: null };
         console.log(game.player1);
         openGamesTTC.push(game);
       }
@@ -85,24 +84,18 @@ io.on("connection", (socket) => {
         game.player2 = data.userID;
         inUseC4.push(game);
       } else {
-        game = { id: uuidv4(), players: 1, player1: null, player2: null };
-        game.player1 = data.userID;
+        game = { id: data.gameID, instanceID: uuidv4(), players: 1, player1: data.userID, player2: null };
         console.log(game.player1);
         openGamesC4.push(game);
       }
     }
     console.log("game server: ", game);
-    socket.join(game.id);
-    io.to(game.id).emit("joinedGame", game);
-
+    socket.join(game.instanceID);
+    io.to(game.instanceID).emit("joinedGame", game);
+    // to do: on game end : give them a option for rematch if no close the socket!!! 
   });
   // TODO:
   // have function that handles move then emits back to both clients
-  socket.on("joinedGame", (game) => {
-    let player1 = game.player1;
-    let player2 = game.player2;
-    let gameID = game.id;
-  });
 
   socket.on("playerMadeMove", (data) => {
     io.to(data.game.id).emit("playerMadeMove", data);

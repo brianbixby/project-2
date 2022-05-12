@@ -94,13 +94,16 @@
 </head>
 
 <body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var currentState = {user: {}, game: {}};
+        var socket = io();
+    </script>
     <header class="header">
         <h1 class="title">Landing Page Title</h1>
     </header>
     <main>
-        <script>
-            let currentState;
-        </script>
+
         {{{body}}}
 
         {{!-- <ul id="messages"></ul>
@@ -108,7 +111,6 @@
             <input id="input" autocomplete="off" /><button>Send</button>
         </form> --}}
     </main>
-    <script src="/socket.io/socket.io.js"></script>
     {{!--
     <script>
         var socket = io();
