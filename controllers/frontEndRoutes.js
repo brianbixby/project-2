@@ -67,4 +67,13 @@ router.get('/gamescontainer', async (req, res) => {
     }
 });
 
+router.get("/profile", (req, res) => {
+    if (!req.session || !req.session.user || !req.session.user.logged_in) {
+        console.log("Please log in or sign up!");
+        res.redirect('/');
+    } else {
+        res.render("profile");
+    }
+});
+
 module.exports = router;

@@ -18,6 +18,13 @@ if (newProfileEl) {
                 console.log("user id: ", e.target.getAttribute("data-userID"));
                 return fetch(`/api/users/${e.target.getAttribute("data-userID")}`, { method: "PUT", body: JSON.stringify(updatedUserObj), headers: { "Content-Type": "application/json" } })
             })
+            .then(res=>{
+                if(res.ok){
+                   location.reload()
+                } else {
+                    alert("trumpet sound")
+                }
+            })
             .then(res => {
                 if (res.status === 200) {
                     console.log("success");

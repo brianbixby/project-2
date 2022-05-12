@@ -1,22 +1,45 @@
+<header class="header">
+    <h1 class="title">Landing Page Title</h1>
+</header>
 <div class="profilePage">
   <div class="profileTitle">
-    <h1>Welcome {{user_name}}</h1>
-    <h2>All your info:</h2>
+    <h1 class="text-center display-2">Welcome {{user_name}}</h1>
+    <div class="profileInfo">
+      <h1 class="h1">All your info:</h1>
+      <div class="allInfo">
+        <p>Your email: {{email}}</p>
+        <p>Your ID: {{id}}</p>
+        <ul>Your Rank:
+        {{#each rankings as |rankings|}}
+            <li>{{rankings.rank}}</li>
+        {{/each}}
+        </ul>
+        <ul>Friends:
+        {{#each Friend as |friend|}}
+            <li>{{friend.user_name}}</li>
+        {{/each}}
+        </ul>
+        <br>
+      </div>
+    </div>
   </div>
   <div class="profileEdit">
+    <p>Change your username and Avatar below</p>
     <form action="" id="newProfile" data-userID={{id}}>
-      <input type="text" id="user_name" placeholder="user_name">
-      <img id="image_url" src={{image_url}} alt="avatar">
+      <input type="text" id="user_name" placeholder="New username">
+      <img id="image_url" src={{image_url}} alt="avatar" style="max-width: 150px; max-height: 150px; min-width: 150px; min-height: 150px" class="border border-info rounded-circle">
       <input type='file' id="uploadfile" />
       <button class="btn btn-primary">Submit</button>
+      <h5>Updated at:{{updatedAt}}</h5>
     </form>
   </div>
-  <form>
+  {{!-- <form>
+    <h5>Updated at:{{updatedAt}}</h5>
     <h3>{{user_name}}</h3>
-    <img src={{image_url}} alt="avatar">
+    <img src={{image_url}} alt="avatar" style="max-width: 80px; max-height: 80px; min-width: 80px; min-height: 80px" class="border border-info rounded">
     <button "btn btn-primary">delete</button>
     <hr>
-  </form>
+  </form> --}}
 </div>
 <script src="/js/profile.js"></script>
 {{!-- <script  src = " https://upload-widget.cloudinary.com/global/all.js "  type = " text / javascript " >   
