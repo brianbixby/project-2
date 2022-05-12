@@ -1,26 +1,49 @@
+/* Global styling */
 body {
-    background-image: url(../assets/d5vi8b0-9925c151-97d4-4318-8a23-af91c8f561d5.jpeg);
-    background-color: rgb(1, 22, 1);
+    background: url(../assets/d5vi8b0-9925c151-97d4-4318-8a23-af91c8f561d5.jpeg), #002508;
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Koulen', cursive;
-    display: flex;
-    flex-direction: column;
     height: 100%;
     width: 100%;
-    overflow: scroll;
 }
 
 main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
-header {
+.homePage{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* header styling for main page and gameplay */
+header {
+    text-align: center;
+    position: absolute;
+    top: 0;
+}
+
+#gamesTitle {
+    display: flex;
+    justify-content: flex-start;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#gamesTitleH1 {
+    margin: 25px;
+}
+
+.container{
+    margin-top: 55px;
+    width: 75%;
 }
 
 header h1 {
@@ -29,13 +52,13 @@ header h1 {
     justify-content: center;
     font-size: 75px;
     width: 700px;
-    background-color: rgba(101, 157, 189, .3);
+    background-color: rgba(101, 157, 189, .4);
     margin: 40px 200px 20px 200px;
     padding: 40px 15px;
     font-family: 'Koulen', cursive;
     color: white;
     border-radius: 10px;
-    box-shadow: inset 0 0 100px #659DBD, 0 0 100px #659DBD;
+    box-shadow: inset 0 0 100px #659DBD, 0 0 25px #659DBD;
     text-shadow: 0 2px 7px #8D8741;
 }
 
@@ -46,7 +69,6 @@ header:hover{
 .homebtns {
     background-color: rgb(141, 135, 65, .9);
     border: none;
-    /* border: .1px solid rgba(255, 2, 2, 0.297); */
     border-radius: 50px;
     font-size: 50px;
     color: #fbeec1;
@@ -103,20 +125,18 @@ button:hover {
     border-color: #6c757d;
 }
 
+/* /games styling */
 .gameBtns {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 70px 0;
+    margin: 50px;
+    text-align: center;
     background-color: rgb(141, 135, 65, .9);
     border: none;
     border-radius: 50px;
     font-size: 50px;
     color: #fbeec1;
     text-shadow: 0 3px 10px black;
-    margin: 50px 30px;
-    padding: 70px;
     box-shadow: 0px 0px 10px var(--shadow);
-    font-weight: 500;
     text-decoration: none;
 }
 
@@ -129,12 +149,8 @@ button:hover {
     color: #fbeec1;
 }
 
-.row {
-    margin-top: 20px;
-}
-
 .gamesPageBtns {
-    max-width: 300px;
+    max-width: 200px;
     text-align: center;
     background-color: rgb(141, 135, 65, .9);
     border: none;
@@ -146,6 +162,18 @@ button:hover {
     margin: 10px;
 }
 
+#ranks{
+    position: absolute;
+    top: 80px;
+    right: 400px;
+}
+
+#logoutButton{
+    position: absolute;
+    top: 80px;
+    right: 150px;
+}
+
 .gamesPageBtns:hover{
     color:white;
     background-color: rgba(101, 157, 189, 0.477);
@@ -153,6 +181,10 @@ button:hover {
 }
 
 .friends {
+    position: relative;
+    bottom: 15vh;
+    right: 25px;
+    height: min-content;
     text-align: center;
     padding: 20px 15px;
     width: 300px;
@@ -166,6 +198,23 @@ button:hover {
     font-size: 40px;
 }
 
+.gamePlayContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.gamesContainer {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mar {
+    margin-top: 250px;
+}
+
 footer {
     text-align: center;
     position: absolute;
@@ -173,3 +222,64 @@ footer {
     width: 100%;
     height: 2.5rem;
 }
+
+@media screen and (max-width: 954px) {
+    .homePage{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    header h1{
+        margin: 40px 0px;
+        font-size: 40px;
+        width: 300px;
+    }
+    .homebtns {
+        font-size: 40px;
+        padding: 5px;
+    }
+    #ranks{
+        top: 200px;
+        right: 245px;
+    }
+    #logoutButton{
+        top: 200px;
+        right: 15px;
+    }
+    .row{
+        flex-direction: column;
+    }
+    .container{
+        margin-top: 0px;
+
+    }
+    #gamesTitleH1{
+        position: relative;
+        padding: 25px;
+        margin: 25px 0px;
+        font-size: 40px;
+        width: 300px;
+        margin-left: calc((50vw - 150px));
+    }
+    .gameBtns{
+        font-size: 40px;
+        padding: 5px;
+        margin: 20px 0px;
+    }
+    .friends{
+        position: absolute;
+        align-self: flex-end;
+        right: 85px;
+    }
+    .mar {
+        margin-top: 0px;
+    }
+    .gamePlayContainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+  }
