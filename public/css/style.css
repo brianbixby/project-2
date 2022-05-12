@@ -150,7 +150,7 @@ button:hover {
 }
 
 .gamesPageBtns {
-    max-width: 200px;
+    max-width: 150px;
     text-align: center;
     background-color: rgb(141, 135, 65, .9);
     border: none;
@@ -159,19 +159,25 @@ button:hover {
     color: #fbeec1;
     text-shadow: 0 3px 10px black;
     box-shadow: 0px 0px 5px #8D8741;
-    margin: 10px;
+    margin: 5px;
 }
 
 #ranks{
     position: absolute;
     top: 80px;
-    right: 400px;
+    right: 500px;
 }
 
 #logoutButton{
     position: absolute;
     top: 80px;
-    right: 150px;
+    right: 100px;
+}
+
+#profileBtn{
+    position: absolute;
+    top: 80px;
+    right: 300px;
 }
 
 .gamesPageBtns:hover{
@@ -348,12 +354,19 @@ footer {
         padding: 5px;
     }
     #ranks{
+        width: 100px;
         top: 200px;
-        right: 245px;
+        left: 50px;
     }
     #logoutButton{
+        width: 100px;
         top: 200px;
-        right: 15px;
+        right: 50px;
+    }
+    #profileBtn{
+        width: 100px;
+        top: 200px;
+        left: 200px;
     }
     .row{
         flex-direction: column;
@@ -391,7 +404,7 @@ footer {
         align-items: center;
     }
     .gamesPageMQ{
-        width: 200px;
+        width: 100px;
     }
     #row{
         display: flex;
