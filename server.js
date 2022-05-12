@@ -73,7 +73,7 @@ io.on('connection', (socket) => {
         game.player2 = data.userID;
         inUseTTC.push(game);
       } else {
-        game = { id: uuidv4(), players: 1 };
+        game = { id: uuidv4(), players: 1, player1: null, player2: null  };
         game.player1 = data.userID;
         console.log(game.player1)
         openGamesTTC.push(game);
@@ -85,7 +85,7 @@ io.on('connection', (socket) => {
         game.player2 = data.userID;
         inUseC4.push(game);
       } else {
-        game = { id: uuidv4(), players: 1 };
+        game = { id: uuidv4(), players: 1, player1: null, player2: null };
         game.player1 = data.userID;
         console.log(game.player1)
         openGamesC4.push(game);
