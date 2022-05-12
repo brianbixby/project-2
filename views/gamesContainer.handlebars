@@ -1,4 +1,3 @@
-
 <style>
     .hide {
         display: none;
@@ -9,31 +8,24 @@
     }
 </style>
 <section id="gamesContainer" class="container">
+    {{!-- {{log this}} --}}
+    {{!-- {{#unless games.readyToPlay}} --}}
     {{#each games as |game|}}
     <p>{{game.id}}</p>
     <p>{{game.name}}</p>
     <button class="playButton" data-gameID={{game.id}} data-userID={{game.userid}}>PLAY</button>
     {{/each}}
+    {{!-- {{/unless}} --}}
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        const socket = io();
-        function joinGame(e) {
-            const data = { gameID: e.target.getAttribute('data-gameID'), userID: e.target.getAttribute('data-userID') };
-            socket.emit('joinGame', data);
-        }
-        const playButtons = document.querySelectorAll(".playButton");
-        for (let i = 0; i < playButtons.length; i++) {
-            playButtons[i].addEventListener("click", joinGame);
-        }
-    </script>
-    
+    {{!-- {{#if games.readyToPlay}} --}}
     <div id="connect4Game" class="hide">
         {{>connect-four}}
     </div>
+
+    {{!-- {{/if}} --}}
 </section>
 
-
+<script src="/socket.io/socket.io.js"></script>
 <script>
     var myPlayerId;
     const socket = io();
@@ -48,7 +40,7 @@
     const connect4GameEl = document.querySelector("#connect4Game");
     const playButtons = document.querySelectorAll(".playButton");
     for (let i = 0; i < playButtons.length; i++) {
-        playButtons[i].addEventListener("click", joinGame());
+        playButtons[i].addEventListener("click", joinGame);
     }
 
     socket.on('joinedGame', data => {
@@ -61,3 +53,16 @@
         }
     });
 </script>
+
+{{!-- all logic before board is updated stays the same except --}}
+{{!-- when the board is bout to be updates we call socket.emit to the server, which will then call, pass server game
+object with player --}}
+{{!-- socket.on(""), which revieves the board update from the server and draws it --}}
+
+{{!-- { { !--on player move-- } } --}}
+{{!-- { { !--socket.emit c4move, pass it the move, pass it theplayer-- } } --}}
+{{!-- {
+{
+!--make it so only the player whos move it is can move
+and if its your move then we'll call the sock.emit(move) on the server that will call a function on the client for both
+sockets to update the board back to both sockets --}}

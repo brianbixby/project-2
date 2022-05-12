@@ -6,8 +6,7 @@ let currentCol;
 let currentRow;
 let currentPlayer;
 let id = 1;
-let player1;
-let player2;
+
 newgame();
 
 function newgame() {
@@ -80,7 +79,6 @@ function Disc(player) {
   this.addToScene = function () {
     const madeMove = '<div id="d' + this.id + '" class="disc ' + this.color + '"></div>';
     board.innerHTML += madeMove;
-    socket.to(game.id).emit('playerMadeMove', )
   };
 
   var $this = this;
@@ -118,6 +116,7 @@ function Disc(player) {
 
   document.onclick = function (evt) {
     //  TODO: 
+    console.log(player1)
      if (currentPlayer = myPlayerId) {
     // emit to server
     if (possibleColumns().indexOf(currentCol) != -1) {
@@ -135,7 +134,6 @@ function dropDisc(cid, player) {
     where: 14 + currentRow * 60
   }
   moveit(playerChoice.who, playerChoice.where);
-  socket.to(game.id).emit('playerMadeMove', playerChoice);
   currentPlayer = player;
   checkForMoveVictory();
 }
@@ -174,9 +172,3 @@ function prepareField() {
 function moveit(who, where) {
   document.getElementById("d" + who).style.top = where + "px";
 }
-
-
-socket.on('joinedGame', (game)=>{
-  player1 = game.player1;
-  player2 = game.player2;
-})
