@@ -71,6 +71,7 @@ io.on("connection", (socket) => {
         game = openGamesTTC.pop();
         game.players = 2;
         game.player2 = data.userID;
+        game.currentPlayer = Math.floor(Math.random() * 2) ? game.player1 : data.userID;
         inUseTTC.push(game);
       } else {
         game = { id: data.gameID, instanceID: uuidv4(), players: 1, player1: data.userID, player2: null };
@@ -82,6 +83,7 @@ io.on("connection", (socket) => {
         game = openGamesC4.pop();
         game.players = 2;
         game.player2 = data.userID;
+        game.currentPlayer = Math.floor(Math.random() * 2) ? game.player1 : data.userID;
         inUseC4.push(game);
       } else {
         game = { id: data.gameID, instanceID: uuidv4(), players: 1, player1: data.userID, player2: null };
@@ -94,13 +96,24 @@ io.on("connection", (socket) => {
     io.to(game.instanceID).emit("joinedGame", game);
     // to do: on game end : give them a option for rematch if no close the socket!!! 
   });
+
+  socket.on("startGame", data => {
+    console.log("server startGame: ", data);
+    io.to(data.instanceID).emit("startGame", data);
+  });
+
+  socket.on("playerMadeMove", data => {
+    console.log("server playerMadeMove: ", data);
+    io.to(data.instanceID).emit("playerMadeMove", data);
+  });
+
+  socket.on("endGame", data => {
+    console.log("server endGame: ", data);
+    io.to(data.instanceID).emit("endGame", data);
+  });
   // TODO:
   // have function that handles move then emits back to both clients
 
-  socket.on("playerMadeMove", (data) => {
-    io.to(data.game.id).emit("playerMadeMove", data);
-  });
-  
   // socket.on('c4move', data => {
   // io.to(data.game.id).emit('joinGame', data);
   // passes the back the data to a function on client that will update the board for both players

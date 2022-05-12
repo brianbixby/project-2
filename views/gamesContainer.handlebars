@@ -34,6 +34,7 @@
         currentState.user.userID = data.userID;
         console.log("client join game: data ", data);
         socket.emit('joinGame', data);
+        console.log(currentState.user.userID)
     }
 
     const connect4GameEl = document.querySelector("#connect4Game");
@@ -44,18 +45,13 @@
 
     socket.on('joinedGame', data => {
         currentState.game = data;
-
-        currentState.game.player1;
-        currentState.game.player2;
         console.log("joinedGame: ", data);
         if (data.players == 2) {
-            if (data.game.id == 2) {
-                { { !--CONECT 4 -- } }
+            if (data.id == 2) {
                 connect4GameEl.classList.remove("hide");
                 alert("starting game")
                 newC4Game();
-            } else if (data.game.id == 1) {
-                { { !--TIC TAC TOE-- } }
+            } else if (data.id == 1) {
             }
         } else {
             alert("waiting for another player");
