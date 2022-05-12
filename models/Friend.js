@@ -17,20 +17,18 @@ Friend.init({
         references: {
             model: 'user',
             key: 'id',
-            defaultValue: null
         }
     },
     friend_id: {
         type: DataTypes.INTEGER,
+        // allowNull: false,
         references: {
             model: 'user',
             key: 'id',
-            defaultValue: null
         }
     },
 }, {
     sequelize,
-    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: 'friend',

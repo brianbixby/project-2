@@ -86,17 +86,17 @@ function Disc(player) {
   document.onmousemove = function (evt) {
     // to do:
     // if (currentPlayer = myPlayerId) {
-      currentCol = Math.floor((evt.clientX - board.offsetLeft) / 60);
-      if (currentCol < 0) {
-        currentCol = 0;
-      }
-      if (currentCol > 6) {
-        currentCol = 6;
-      }
+    currentCol = Math.floor((evt.clientX - board.offsetLeft) / 60);
+    if (currentCol < 0) {
+      currentCol = 0;
+    }
+    if (currentCol > 6) {
+      currentCol = 6;
+    }
 
-      document.getElementById("d" + $this.id).style.left =
-        14 + 60 * currentCol + "px";
-      document.getElementById("d" + $this.id).style.top = "-55px";
+    document.getElementById("d" + $this.id).style.left =
+      14 + 60 * currentCol + "px";
+    document.getElementById("d" + $this.id).style.top = "-55px";
     // }
   };
 
@@ -116,14 +116,14 @@ function Disc(player) {
   document.onclick = function (evt) {
     //  to do: 
     // if (currentPlayer = myPlayerId) {
-      // emit to server
+    // emit to server
 
-      // socket.on("playerMadeMove", data => {
+    // socket.on("playerMadeMove", data => {
 
-      // })
-      
-      if (possibleColumns().indexOf(currentCol) != -1) {
-        dropDisc($this.id, $this.player);
+    // })
+
+    if (possibleColumns().indexOf(currentCol) != -1) {
+      dropDisc($this.id, $this.player);
       // }
     }
   };

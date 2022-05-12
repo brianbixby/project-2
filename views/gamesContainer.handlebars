@@ -2,25 +2,26 @@
     .hide {
         display: none;
     }
+
     .show {
         display: block;
     }
 </style>
 <section id="gamesContainer" class="container">
-    {{!-- {{log  this}} --}}
+    {{!-- {{log this}} --}}
     {{!-- {{#unless games.readyToPlay}} --}}
-        {{#each games as |game|}}
-        <p>{{game.id}}</p>
-        <p>{{game.name}}</p>
-        <button class="playButton" data-gameID={{game.id}} data-userID={{games.userId}}>PLAY</button>
-        {{/each}}
+    {{#each games as |game|}}
+    <p>{{game.id}}</p>
+    <p>{{game.name}}</p>
+    <button class="playButton" data-gameID={{game.id}} data-userID={{game.userid}}>PLAY</button>
+    {{/each}}
     {{!-- {{/unless}} --}}
 
     {{!-- {{#if games.readyToPlay}} --}}
     <div id="connect4Game" class="hide">
-        {{>connect-four}}    
+        {{>connect-four}}
     </div>
-       
+
     {{!-- {{/if}} --}}
 </section>
 
@@ -30,7 +31,10 @@
     const socket = io();
     function joinGame(e) {
         myPlayerId = e.target.getAttribute('data-userID');
-        socket.emit('joinGame', {gameID: e.target.getAttribute('data-gameID'), userID: e.target.getAttribute('data-userID')});
+        console.log("myPlayerId: ", myPlayerId);
+        const data = { gameID: e.target.getAttribute('data-gameID'), userID: e.target.getAttribute('data-userID') };
+        console.log("client join game: data ", data);
+        socket.emit('joinGame', data);
     }
 
     const connect4GameEl = document.querySelector("#connect4Game");
@@ -39,24 +43,26 @@
         playButtons[i].addEventListener("click", joinGame);
     }
 
-    {{!-- on player move --}}
-    {{!-- socket.emit c4move, pass it the move, pass it theplayer --}}
-    {{!-- make it so only the player whos move it is can move
-    and if its your move then we'll call the sock.emit(move) on the server that will call a function on the client for both sockets to update the board back to both sockets  --}}
-
     socket.on('joinedGame', data => {
-        console.log("here", data);
+        console.log("joinedGame: ", data);
         if (data.players == 2) {
-            {{!-- start game --}}
             connect4GameEl.classList.remove("hide");
             alert("starting game")
         } else {
-             alert("waiting for another player");
-            {{!-- waiting room --}}
+            alert("waiting for another player");
         }
     });
 </script>
 
-{{!-- all logic before board is updated stays the same except  --}}
-{{!-- when the board is bout to be updates we call socket.emit to the server, which will then call, pass server game object with player --}}
+{{!-- all logic before board is updated stays the same except --}}
+{{!-- when the board is bout to be updates we call socket.emit to the server, which will then call, pass server game
+object with player --}}
 {{!-- socket.on(""), which revieves the board update from the server and draws it --}}
+
+{{!-- { { !--on player move-- } } --}}
+{{!-- { { !--socket.emit c4move, pass it the move, pass it theplayer-- } } --}}
+{{!-- {
+{
+!--make it so only the player whos move it is can move
+and if its your move then we'll call the sock.emit(move) on the server that will call a function on the client for both
+sockets to update the board back to both sockets --}}
