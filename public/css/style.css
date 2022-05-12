@@ -215,6 +215,109 @@ button:hover {
     margin-top: 250px;
 }
 
+.profilePage {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 90px 100px 0px 100px;
+}
+
+
+.profileTitle {
+    font-size: 40px;
+    background-color: rgb(141, 135, 65, .7);
+    color: #FBEEC1;
+    text-shadow: 0 3px 10px black;
+    padding: 15px 30px;
+    border-radius: 5px;
+    width: 50%;
+    margin: 5px 0px;
+}
+
+.profileEdit{
+    font-size: 30px;
+    background-color: rgb(141, 135, 65, .7);
+    padding: 10px;
+    border-radius: 5px;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileEdit input {
+    display:block;
+    width:100%;
+    padding:10px;
+    margin: 10px 0px;
+}
+
+#newProfile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#user_name {
+    width: max-content;
+    border-radius:10px;
+    background-color: rgba(251, 238, 193, .7);
+    border: 1px solid #eee;
+    transition: .3s #eee;
+}
+
+#user_name:hover {
+    border: 1px solid #aaa
+}
+
+.profileBtns {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    box-shadow: inset -1.5px -1.5px black;
+}
+
+.profileBtns:hover{
+    background-color: rgba(101, 157, 189, 0.577);
+    box-shadow: none;
+    cursor: pointer;
+}
+
+
+img[src=""] {
+    display: none;
+}
+
+#uploadfile {
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+input::-webkit-file-upload-button{
+    padding: 12px 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: rgba(251, 238, 193, .7);
+    color: #FBEEC1;
+    text-shadow: 0 3px 10px black;
+}
+
+#uploadfile::placeholder{
+    color: #FBEEC1;
+    text-shadow: 0 3px 10px black;
+}
+
+
 footer {
     text-align: center;
     position: absolute;
