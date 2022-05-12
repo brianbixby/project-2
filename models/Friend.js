@@ -14,8 +14,6 @@ Friend.init({
     },
     user_id: {
         type: DataTypes.INTEGER,
-        // allowNull: false,
-        // to do make sure that its deleted on user delete
         references: {
             model: 'user',
             key: 'id',

@@ -1,47 +1,32 @@
 "use strict";
 
-document.querySelector("#login").addEventListener("submit", e => {
-    e.preventDefault();
-    console.log("successful")
-    const userObj = {
-        email: document.querySelector("#loginEmail").value,
-        password: document.querySelector("#loginPassword").value,
-    }
-    console.log(userObj)
-    fetch("/api/users/login", {
-        method: "POST",
-        body: JSON.stringify(userObj),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).then(res => {
-        if (res.ok) {
-            document.location.replace("/games")
-        } else {
-            alert("trumpet sound")
-        }
-    })
-})
+const loginEl = document.querySelector("#login");
 
-document.querySelector("#signup").addEventListener("submit", e => {
-    e.preventDefault();
-    console.log("hit");
-    const userObj = {
-        email: document.querySelector("#signupEmail").value,
-        password: document.querySelector("#signupPassword").value,
-    }
-    console.log(userObj)
-    fetch("/api/users/", {
-        method: "POST",
-        body: JSON.stringify(userObj),
-        headers: {
-            "Content-Type": "application/json"
+if (loginEl) {
+    loginEl.addEventListener("submit", async (e) => {
+        try {
+            e.preventDefault();
+            const userObj = { email: document.querySelector("#loginEmail").value, password: document.querySelector("#loginPassword").value };
+            const data = await fetch("/api/users/login", { method: "POST", body: JSON.stringify(userObj), headers: { "Content-Type": "application/json" } });
+            if (data.ok) document.location.replace("/games");
         }
-    }).then(res => {
-        if (res.ok) {
-            document.location.replace("/games");
-        } else {
-            alert("trumpet sound")
+        catch (err) {
+            console.log("error: ", err);
         }
-    })
-})
+    });
+}
+
+const signupEl = document.querySelector("#signup");
+
+if (signupEl) {
+    signupEl.addEventListener("submit", async (e) => {
+        try {
+            e.preventDefault();
+            const userObj = { email: document.querySelector("#signupEmail").value, password: document.querySelector("#signupPassword").value };
+            const data = await fetch("/api/users/", { method: "POST", body: JSON.stringify(userObj), headers: { "Content-Type": "application/json" }});
+            if (data.ok) document.location.replace("/games");
+        } catch (err) {
+            console.log("error: ", err);
+        }
+    });
+}
