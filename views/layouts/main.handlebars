@@ -35,39 +35,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Koulen&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/tic-tac-toe.css">
 </head>
 
 <body>
-    <main>
-        {{{body}}}
-    </main>
     <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var currentState = { user: {}, game: {} };
+        var socket = io();
+    </script>
+    <main>
+        <div class="homePage">
+            {{{body}}}
+            <footer>This footer is on every page!</footer>
+        </div>
+    </main>
 </body>
 
 </html>
-
-
-
-{{!-- <script>
-    var socket = io();
-    var messages = document.getElementById('messages');
-    var form = document.getElementById('form');
-    var input = document.getElementById('input'); --}}
-{{!-- {form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (input.value) {
-        socket.emit('chat message', input.value);
-        input.value = '';
-    }
-})}; --}}
-{{!-- {socket.on('chat message', function (msg) {
-var item = document.createElement('li');
-item.textContent = msg;
-messages.appendChild(item);
-window.scrollTo(0, document.body.scrollHeight);})};
-</script> --}}
-
-{{!-- <ul id="messages"></ul>
-<form id="form" action="">
-    <input id="input" autocomplete="off" /><button>Send</button>
-</form> --}}
