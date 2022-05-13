@@ -107,8 +107,24 @@ io.on("connection", (socket) => {
     io.to(data.instanceID).emit("endGame", data);
   });
 
-  // TIC TAC TOE
+  // CONNECT 4
+  socket.on("c4-startGameServer", data => {
+    console.log("c4-startGameServer: ", data);
+    io.to(data.instanceID).emit("c4-startGame", data);
+  });
 
+  socket.on("c4-playerMadeMoveServer", data => {
+    console.log("c4-playerMadeMoveServer: ", data);
+    io.to(data.instanceID).emit("c4-playerMadeMove", data);
+  });
+
+  socket.on("c4-endGameServer", data => {
+    console.log("c4-endGameServer: ", data);
+    // to do: put game on db
+    io.to(data.instanceID).emit("c4-endGame", data);
+  });
+
+  // TIC TAC TOE
   socket.on("t3-startGameServer", data => {
     console.log("t3-startGameServer: ", data);
     io.to(data.instanceID).emit("t3-startGame", data);
@@ -121,7 +137,7 @@ io.on("connection", (socket) => {
 
   socket.on("t3-endGameServer", data => {
     console.log("t3-endGameServer: ", data);
-    // put game on db
+    // to do: put game on db
     io.to(data.instanceID).emit("t3-endGame", data);
   });
 });
