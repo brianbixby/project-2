@@ -1,0 +1,94 @@
+#t3board {
+    width: 90vw;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    flex-wrap: wrap;
+    background-color: red;
+}
+
+#t3board .t3-tile {
+    width: 33.33%;
+    width: calc(100% / 3);
+    aspect-ratio: 1 / 1;
+}
+
+#t3board #t3-1 {
+    background-color: rosybrown;
+}
+
+#t3board #t3-2 {
+    background-color: aqua;
+}
+
+#t3board #t3-3 {
+    background-color: blueviolet;
+}
+
+#t3board #t3-4 {
+    background-color: chocolate;
+}
+
+#t3board #t3-5 {
+    background-color: darkgoldenrod;
+}
+
+#t3board #t3-6 {
+    background-color: tan;
+}
+
+#t3board #t3-7 {
+    background-color: sandybrown;
+}
+
+#t3board #t3-8 {
+    background-color: black;
+}
+
+#t3board #t3-9 {
+    background-color: aqua;
+}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
+
+#t3board {}
