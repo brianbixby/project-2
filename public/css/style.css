@@ -13,7 +13,7 @@ main {
     margin-top: 3vh;
 }
 
-.homeDiv{
+.homeDiv {
     display: flex;
     flex-direction: row;
 }
@@ -130,8 +130,8 @@ button:hover {
     margin: 10px;
 }
 
-.gamesPageBtns:hover{
-    color:white;
+.gamesPageBtns:hover {
+    color: white;
     background-color: rgba(101, 157, 189, 0.477);
     box-shadow: none;
 }
@@ -141,7 +141,7 @@ button:hover {
     flex-direction: row;
 }
 
-.games{
+.games {
     margin-top: 5vh;
     display: flex;
     flex-direction: row;
@@ -168,7 +168,7 @@ aside{
     height: fit-content;
 }
 
-.gamesContainer{
+.gamesContainer {
     margin-top: 5vh;
 }
 
@@ -250,7 +250,7 @@ img{
     cursor: pointer;
 }
 
-input::-webkit-file-upload-button{
+input::-webkit-file-upload-button {
     padding: 12px 18px;
     cursor: pointer;
     border-radius: 5px;
@@ -261,7 +261,7 @@ input::-webkit-file-upload-button{
     text-shadow: 0 3px 10px black;
 }
 
-#uploadfile::placeholder{
+#uploadfile::placeholder {
     color: #FBEEC1;
     text-shadow: 0 3px 10px black;
 }
@@ -274,6 +274,15 @@ footer {
     width: 100%;
     height: 2.5rem;
 }
+
+.hide {
+    display: none !important;
+}
+
+.show {
+    display: block !important;
+}
+
 
 @media screen and (max-width: 954px) {
     header h1{

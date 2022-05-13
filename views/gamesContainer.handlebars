@@ -1,12 +1,3 @@
-<style>
-    .hide {
-        display: none;
-    }
-
-    .show {
-        display: block;
-    }
-</style>
 <section id="gamesContainer" class="container-fluid">
     <div id="playGamesButtonContainer">
         {{#each games as |game|}}
@@ -15,8 +6,8 @@
         <button class="playButton" data-gameID={{game.id}} data-userID={{game.userid}}>PLAY</button>
         {{/each}}
     </div>
-    <div id="connect4Game" class="hide">
-        {{>connect-four}}
+    <div id="c4Game" class="hide">
+        {{>cfour}}
     </div>
     <div id="ticTacToeGame" class="hide">
         {{>tic-tac-toe}}
@@ -29,7 +20,7 @@
         socket.emit('joinGame', data);
     }
     const playGamesButtonContainerEl = document.querySelector("#playGamesButtonContainer");
-    const connect4GameEl = document.querySelector("#connect4Game");
+    const c4GameEl = document.querySelector("#c4Game");
     const ticTacToeGameEl = document.querySelector("#ticTacToeGame");
     const playButtons = document.querySelectorAll(".playButton");
 
@@ -42,8 +33,8 @@
         if (data.players == 2) {
             if (data.id == 2) {
                 playGamesButtonContainerEl.classList.add("hide");
-                connect4GameEl.classList.remove("hide");
-                socket.emit('startGameServer', data);
+                c4GameEl.classList.remove("hide");
+                socket.emit('c4-startGameServer', data);
             } else if (data.id == 1) {
                 playGamesButtonContainerEl.classList.add("hide");
                 ticTacToeGameEl.classList.remove("hide");
