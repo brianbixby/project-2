@@ -1,4 +1,3 @@
-/* Global styling */
 body {
     background: url(../assets/d5vi8b0-9925c151-97d4-4318-8a23-af91c8f561d5.jpeg), rgb(12, 18, 4);
     background-repeat: no-repeat;
@@ -17,6 +16,10 @@ main {
 .homeDiv{
     display: flex;
     flex-direction: row;
+}
+
+header a{
+    text-decoration: none;
 }
 
 header h1 {
@@ -161,8 +164,24 @@ button:hover {
     font-size: 40px;
 }
 
+aside{
+    height: fit-content;
+}
+
 .gamesContainer{
     margin-top: 5vh;
+}
+
+.rankBoard{
+    font-size: 50px;
+    text-align: center;
+    background-color: rgb(141, 135, 65, .7);
+    color: #FBEEC1;
+    text-shadow: 0 3px 10px black;
+    padding: 15px 30px;
+    border-radius: 5px;
+    width: 50%;
+    margin: 5px 0px;
 }
 
 .profile{
@@ -255,83 +274,53 @@ footer {
     width: 100%;
     height: 2.5rem;
 }
-/* 
+
 @media screen and (max-width: 954px) {
-    .homePage{
-        height: 100%;
+    header h1{
+        width: 400px;
+        font-size: 60px;
         display: flex;
-        justify-content: center;
-        flex-direction: column;
+        flex-direction: center;
+        text-align: center;
+    }
+    .homeDiv{
+        display: flex;
         flex-wrap: wrap;
+        justify-content: center;
         align-items: center;
     }
-    header h1{
-        margin: 40px 0px;
+    .homeBtns{
         font-size: 40px;
-        width: 300px;
+        padding: 30px;
+        margin: 20px;
     }
-    .homebtns {
-        font-size: 40px;
-        padding: 5px;
+    .nav{
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
-    #ranks{
-        width: 100px;
-        top: 200px;
-        left: 50px;
-    }
-    #logoutButton{
-        width: 100px;
-        top: 200px;
-        right: 50px;
-    }
-    #profileBtn{
-        width: 100px;
-        top: 200px;
-        left: 200px;
-    }
-    .row{
+    .games{
+        display: flex;
         flex-direction: column;
-    }
-    .container{
-        margin-top: 0px;
-
-    }
-    #gamesTitleH1{
-        position: relative;
-        padding: 25px;
-        margin: 25px 0px;
-        font-size: 40px;
-        width: 300px;
-        margin-left: calc((50vw - 150px));
-    }
-    .gameBtns{
-        font-size: 40px;
-        padding: 5px;
-        margin: 20px 0px;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        margin-top: 2vh;
     }
     .friends{
-        position: absolute;
-        align-self: flex-end;
-        right: 85px;
+        margin-top: 3vh;
     }
-    .mar {
-        margin-top: 0px;
+    .profile{
+        width: 90%;
     }
-    .gamePlayContainer{
-        margin-top: 150px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    .editProfile{
+        width: 90%;
     }
-    .gamesPageMQ{
-        width: 100px;
+    .editProfile input{
+        width: 80%;
     }
-    #row{
-        display: flex;
-        flex-direction: row;
+    .editProfile h5{
+        margin-top: 1vh;
+        font-size: 15px;
     }
-    .profilePage{
-        margin: 150px 0px 0px 0px;
-    }
-  } */
+}

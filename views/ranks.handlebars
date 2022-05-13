@@ -1,0 +1,16 @@
+<header class="header" id="gamesTitle">
+    <a href='/games'><h1 class="title" id="gamesTitleH1">Landing Page Title</h1></a>
+</header>
+<div class="nav">
+    <a href='/profile/{{user_id}}'><button id="profileBtn" class="btn gamesPageBtns">Profile</button></a>
+    <button id="logoutButton" class="btn gamesPageBtns">Log Out</button>
+</div>
+<div class="rankBoard">
+<ul>Your Rank:
+    {{#each rankings as |rankings|}}
+    <li>{{rankings.rank}}</li>
+    {{/each}}
+</ul>
+</div>
+<script src="/js/logout.js"></script>
+<script src="/js/profile.js"></script>
