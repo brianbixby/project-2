@@ -28,7 +28,7 @@
         currentState.user.userID = data.userID;
         socket.emit('joinGame', data);
     }
-    const playGamesButtonContainerEl = document.querySelector("playGamesButtonContainer");
+    const playGamesButtonContainerEl = document.querySelector("#playGamesButtonContainer");
     const connect4GameEl = document.querySelector("#connect4Game");
     const ticTacToeGameEl = document.querySelector("#ticTacToeGame");
     const playButtons = document.querySelectorAll(".playButton");

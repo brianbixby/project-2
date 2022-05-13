@@ -121,6 +121,7 @@ io.on("connection", (socket) => {
 
   socket.on("t3-endGameServer", data => {
     console.log("t3-endGameServer: ", data);
+    // put game on db
     io.to(data.instanceID).emit("t3-endGame", data);
   });
 });
