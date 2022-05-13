@@ -4,7 +4,12 @@ const router = require('express').Router();
 const { User, Game } = require('../models');
 
 router.get("/", (req, res) => {
-    res.render("home");
+    console.log(req.session)
+    if (req.session && req.session.user && req.session.user.logged_in) {
+        res.redirect('/games');
+    } else {
+        res.render("home");
+    }
 });
 
 router.get("/games", (req, res) => {
@@ -15,7 +20,17 @@ router.get("/games", (req, res) => {
     } else {
         const user_id = req.session.user.user_id;
         // console.log(user_id);
-        res.render("games", {user_id});
+
+        User.findByPk(req.session.user.user_id, { include: { all: true } })
+        .then(userData => {
+            const hbsData = userData.get({ plain: true })
+            hbsData.loggedIn = true;
+            console.log("hsbData", hbsData);
+            res.render("games", hbsData);
+        })
+        .catch(err => {
+            console.log("err: ", err);
+        })
     }
 });
 
@@ -76,8 +91,7 @@ router.get("/ranks", (req, res) => {
         res.redirect('/');
     } else {
         const user_id = req.session.user.user_id;
-        // console.log(user_id);
-        res.render("ranks");
+        res.render("ranks", {user_id});
     }
 });
 
