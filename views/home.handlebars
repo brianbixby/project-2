@@ -1,58 +1,61 @@
 <header class="header">
-    <h1 class="title">Landing Page Title</h1>
+  <h1 class="title">Landing Page Title</h1>
 </header>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary homebtns" data-bs-toggle="modal" data-bs-target="#loginModal">
-  Log In!
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content" id="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Log In</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="" id="login">
-          <input type="email" placeholder="Email" id="loginEmail">
-          <input type="password" placeholder="Password" id="loginPassword">
-          <button type="submit" class="btn btn-primary" id="loginBtn">Log In</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+<div class="homeDiv">
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary homeBtns" data-bs-toggle="modal" data-bs-target="#loginModal">
+    Log In!
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" id="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Log In</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" id="login">
+            <input type="email" placeholder="Email" id="loginEmail">
+            <input type="password" placeholder="Password" id="loginPassword">
+            <button type="submit" class="btn btn-primary" id="loginBtn">Log In</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary homebtns" data-bs-toggle="modal" data-bs-target="#signupModal">
-  Sign Up!
-</button>
-<!-- Modal -->
-<div class="modal fade" id="signupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Sign Up</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="" id="signup">
-          <input type="email" placeholder="Email" id="signupEmail">
-          <input type="password" placeholder="Password" id="signupPassword">
-          {{!-- <input type="submit" value="Submit"> --}}
-          <button type="submit" class="btn btn-primary" id="signupBtn">Sign Up</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        {{!-- <button type="button" class="btn btn-primary" id="signup">Sign Up</button> --}}
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary homeBtns" data-bs-toggle="modal" data-bs-target="#signupModal">
+    Sign Up!
+  </button>
+  <!-- Modal -->
+  <div class="modal fade" id="signupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Sign Up</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" id="signup">
+            <input type="email" placeholder="Email" id="signupEmail">
+            <input type="password" placeholder="Password" id="signupPassword">
+            {{!-- <input type="submit" value="Submit"> --}}
+            <button type="submit" class="btn btn-primary" id="signupBtn">Sign Up</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          {{!-- <button type="button" class="btn btn-primary" id="signup">Sign Up</button> --}}
+        </div>
       </div>
     </div>
   </div>

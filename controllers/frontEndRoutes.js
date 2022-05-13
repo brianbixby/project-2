@@ -8,11 +8,14 @@ router.get("/", (req, res) => {
 });
 
 router.get("/games", (req, res) => {
+    console.log(req.session)
     if (!req.session || !req.session.user || !req.session.user.logged_in) {
         console.log("Please log in or sign up!");
         res.redirect('/');
     } else {
-        res.render("games");
+        const user_id = req.session.user.user_id;
+        // console.log(user_id);
+        res.render("games", {user_id});
     }
 });
 
@@ -21,7 +24,9 @@ router.get('/gameplay', (req, res) => {
         console.log("Please log in or sign up!");
         res.redirect('/');
     } else {
-        res.render("gameplay");
+        const user_id = req.session.user.user_id;
+        // console.log(user_id);
+        res.render("gameplay", {user_id});
     }
 });
 
@@ -64,13 +69,5 @@ router.get('/gamescontainer', async (req, res) => {
     }
 });
 
-router.get("/profile", (req, res) => {
-    if (!req.session || !req.session.user || !req.session.user.logged_in) {
-        console.log("Please log in or sign up!");
-        res.redirect('/');
-    } else {
-        res.render("profile");
-    }
-});
 
 module.exports = router;

@@ -28,6 +28,8 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
+// TOUCH NOTHING PLEASE!!//
 router.post('/', async (req, res) => {
   console.log(req.body)
   try {
@@ -42,12 +44,15 @@ router.post('/', async (req, res) => {
     });
     await Ranking.bulkCreate(rankingData);
     req.session.user = { user_id: data.id, logged_in: true };
-    res.status(200).json(data);
+    req.session.save(() => {
+      return res.json(data);
+    })
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
+// TOUCH NOTHING PLEASE!!//
 router.post("/login", async (req, res) => {
   try {
     req.body.email = req.body.email.toLowerCase();
@@ -58,9 +63,12 @@ router.post("/login", async (req, res) => {
     }
     const validPassword = await data.checkPassword(req.body.password);
     if (validPassword) {
+      console.log(data)
       req.session.user = { user_id: data.id, logged_in: true };
       await User.update({ is_online: true }, { where: { id: data.id } });
-      res.json(data);
+      req.session.save(() => {
+        return res.json(data);
+      })
     } else {
       return res.status(400).json({ msg: "'Incorrect email or password, please try again'" })
     }
@@ -72,7 +80,7 @@ router.post("/login", async (req, res) => {
 
 router.post('/logout', async (req, res) => {
   try {
-    if (req.session && req.session.user && req.session.user.logged_in) {
+    if (req.session.user.logged_in) {
       await User.update({ is_online: false }, { where: { id: req.session.user.user_id } });
       req.session.destroy(() => {
         res.status(204).end();
