@@ -64,25 +64,6 @@ router.get("/profile/:id" , (req, res) => {
     }
 })
 
-router.get('/gamescontainer', async (req, res) => {
-    try {
-        if (!req.session || !req.session.user || !req.session.user.logged_in) {
-            console.log("Please log in or sign up!");
-            res.redirect('/');
-        } else {
-            const data = await Game.findAll({ include: { all: true } });
-            const games = data.map(game => {
-                const plainGame = game.get({ plain: true });
-                plainGame.userid = req.session.user.user_id;
-                return plainGame;
-            });
-            res.render('gamesContainer', { games });
-        }
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
-});
 
 router.get("/ranks", (req, res) => {
     console.log(req.session)
@@ -129,13 +110,32 @@ router.get('/t3', async (req, res) => {
                 plainGame.userid = req.session.user.user_id;
                 return plainGame;
             });
-            res.render('gamesContainer', { games });
+            res.render('t3', { games });
         }
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
     }
 });
+// router.get('/gamescontainer', async (req, res) => {
+//     try {
+//         if (!req.session || !req.session.user || !req.session.user.logged_in) {
+//             console.log("Please log in or sign up!");
+//             res.redirect('/');
+//         } else {
+//             const data = await Game.findAll({ include: { all: true } });
+//             const games = data.map(game => {
+//                 const plainGame = game.get({ plain: true });
+//                 plainGame.userid = req.session.user.user_id;
+//                 return plainGame;
+//             });
+//             res.render('gamesContainer', { games });
+//         }
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).json(err);
+//     }
+// });
 
 
 module.exports = router;

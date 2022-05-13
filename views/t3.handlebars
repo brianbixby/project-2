@@ -1,29 +1,28 @@
 
 <section>
+    <div id="while-waiting" class="show">
+        <h5>
+            While you wait for another player...
+        </h5>
+        <p>
+            Games played on three-in-a-row boards can be traced back to ancient Egypt, where such game boards have been found on roofing tiles dating from around 1300 BC.
+An early variation of tic-tac-toe was played in the Roman Empire, around the first century BC.
+        </p>
+    </div>
     <div id="ticTacToeGame" class="hide">
         {{>tic-tac-toe}}
     </div>
 </section>
 
 <script>
-    function joinGame(e) {
-        const data = { gameID: e.target.getAttribute('data-gameID'), userID: e.target.getAttribute('data-userID') };
-        currentState.user.userID = data.userID;
-        socket.emit('joinGame', data);
-    }
-    const playGamesButtonContainerEl = document.querySelector("#playGamesButtonContainer");
-    const c4GameEl = document.querySelector("#c4Game");
     const ticTacToeGameEl = document.querySelector("#ticTacToeGame");
-    const playButtons = document.querySelectorAll(".playButton");
+    const whileWaitingEl = document.querySelector("#while-waiting");
 
-    for (let i = 0; i < playButtons.length; i++) {
-        playButtons[i].addEventListener("click", joinGame);
-    }
     socket.on('joinedGame', data => {
         currentState.game = data;
         console.log("joinedGame: ", data);
         if (data.players == 2) {
-                playGamesButtonContainerEl.classList.add("hide");
+                whileWaitingEl.classList.add("hide");
                 ticTacToeGameEl.classList.remove("hide");
                 socket.emit('t3-startGameServer', data);
         } else {

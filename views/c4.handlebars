@@ -1,36 +1,37 @@
-<section id="gamesContainer" class="container-fluid"></section>
+
+<section>
+    <div id="while-waiting">
+        <h5>
+            While you wait for another player...
+        </h5>
+        <p>
+            Connect 4 or Four-in-a-Row has its roots in Tic-Tac-Toe, a simple three in a row pencil and paper game. The object of the game is to get four pieces in a row. Four-In-A-Row, also, adds the element of restricted placement by requiring the players to "drop" the pieces vertically down the board. In America, this game was popularized under the name Connect Four. The name “Connect Four” was first coined by Milton Bradley Company in 1974. The company was founded by Milton Bradley in Springfield, Massachusetts in 1860. The company is known for its contributions in the board game and video game industries.
+        </p>
+    </div>
     <div id="c4Game" class="hide">
         {{>cfour}}
     </div>
-
 </section>
-<script>
-    function joinGame(e) {
-        const data = { gameID: e.target.getAttribute('data-gameID'), userID: e.target.getAttribute('data-userID') };
-        currentState.user.userID = data.userID;
-        socket.emit('joinGame', data);
-    }
-    const playGamesButtonContainerEl = document.querySelector("#playGamesButtonContainer");
-    const c4GameEl = document.querySelector("#c4Game");
-    const ticTacToeGameEl = document.querySelector("#ticTacToeGame");
-    const playButtons = document.querySelectorAll(".playButton");
 
-    for (let i = 0; i < playButtons.length; i++) {
-        playButtons[i].addEventListener("click", joinGame);
-    }
-    socket.on('joinedGame', data => {
-        currentState.game = data;
-        console.log("joinedGame: ", data);
+<script>
+    const ticTacToeGameEl = document.querySelector("#ticTacToeGame");
+    const whileWaitingEl = document.querySelector("#while-waiting");
+
+
+  const joinGame =function() {
+    const data = { gameID: 1,userID: id };
+    currentState.user.userID = data.userID; socket.emit('joinGame', data);
+    console.log('joining')
+   };
+window.onload = joinGame();
+
+    socket.on('joinedGame', game => {
+        currentState.game = game;
+        console.log("joinedGame: ", game);
         if (data.players == 2) {
-            if (data.id == 2) {
-                playGamesButtonContainerEl.classList.add("hide");
-                c4GameEl.classList.remove("hide");
-                socket.emit('c4-startGameServer', data);
-            } else if (data.id == 1) {
-                playGamesButtonContainerEl.classList.add("hide");
+                whileWaitingEl.classList.add("hide");
                 ticTacToeGameEl.classList.remove("hide");
-                socket.emit('t3-startGameServer', data);
-            }
+                socket.emit('t3-startGameServer', game);
         } else {
             alert("waiting for another player");
         }

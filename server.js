@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 const { v4: uuidv4 } = require("uuid");
 const http = require("http");
 const server = http.createServer(app);
-const { Server } = require("socket.io");
+const { Server, Socket } = require("socket.io");
 const io = new Server(server);
 
 // Requiring our models for syncing
@@ -47,10 +47,11 @@ const inUseTTC = [];
 const openGamesC4 = [];
 const inUseC4 = [];
 
+
 io.on("connection", (socket) => {
   console.log("a user connected");
-  socket.on("disconnect", () => {
-    console.log("user disconnected");
+  socket.on('disconnect', (reason) => {
+    console.log(reason)
   });
   socket.on("chat message", (msg) => {
     io.emit("chat message", msg);
@@ -69,7 +70,11 @@ io.on("connection", (socket) => {
       } else {
         game = { id: data.gameID, instanceID: uuidv4(), players: 1, player1: data.userID, player2: null };
         console.log(game.player1);
+        console.log('before ================================')
+        console.log(game)
         openGamesTTC.push(game);
+        console.log('after =========================================')
+        console.log(game)
       }
     } else if (data.gameID == 2) {
       if (openGamesC4.length) {
@@ -90,8 +95,9 @@ io.on("connection", (socket) => {
     // to do: on game end : give them a option for rematch if no close the socket!!! 
   });
 
+  
+  
   // CONNECT 4
-
   socket.on("startGameServer", data => {
     console.log("startGameServer: ", data);
     io.to(data.instanceID).emit("startGame", data);
