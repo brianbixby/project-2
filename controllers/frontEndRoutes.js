@@ -44,6 +44,7 @@ router.get("/profile/:id" , (req, res) => {
     }
 })
 
+
 router.get('/gamescontainer', async (req, res) => {
     try {
         if (!req.session || !req.session.user || !req.session.user.logged_in) {
@@ -73,4 +74,29 @@ router.get("/profile", (req, res) => {
     }
 });
 
+router.get("/ranks", (req, res) => {
+    if (!req.session || !req.session.user || !req.session.user.logged_in) {
+        console.log("Please log in or sign up!");
+        res.redirect('/');
+    } else {
+        res.render("ranks");
+    }
+});
+router.get("/ranks/:id" , (req, res) => {
+    if (!req.session || !req.session.user || !req.session.user.logged_in) {
+        console.log("Please log in or sign up!");
+        res.redirect('/');
+    } else {
+        User.findByPk(req.params.id, { include: { all: true } })
+            .then(userData => {
+                const hbsData = userData.get({ plain: true })
+                console.log(hbsData);
+                hbsData.loggedIn = true;
+                res.render("ranks", hbsData);
+            })
+            .catch(err => {
+                console.log("err: ", err);
+            })
+    }
+})
 module.exports = router;

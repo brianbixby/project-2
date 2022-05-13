@@ -1,0 +1,14 @@
+<header class="header">
+    <h1 class="title">Landing Page Title</h1>
+</header>
+<div class="rankPage">
+    <div class="yourRank">
+        <h2>PLAYER: {{user_name}}</h2>
+        <h2>Rank: 
+            {{#each rankings as |rankings|}}
+                <h2>Game: {{rankings.game_id}}</h2>
+                <h2>Score: {{rankings.rank}}</h2>
+            {{/each}}
+        </h2>
+    </div>
+</div>
