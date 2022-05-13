@@ -1,19 +1,17 @@
 <header class="header" id="gamesTitle">
     <h1 class="title" id="gamesTitleH1">Landing Page Title</h1>
 </header>
-<div class="container">
-    <div class="row justify-content-right">
-        <button id="ranks" class="col btn gamesPageBtns">Ranks</button>
-        <button id="profileBtn" class="col btn gamesPageBtns">Profile</button>
-        <button id="logoutButton" class="col btn gamesPageBtns">Log Out</button>
-    </div>
-    <div class="row gameSelect">
-        <a href="#" class="col gameBtns">Game 1</a>
-        <a href="#" class="col gameBtns">Game 2</a>
-    </div>
+<div class="nav">
+    <button id="ranks" class="btn gamesPageBtns">Ranks</button>
+    <a href='/profile/{{user_id}}'><button id="profileBtn" class="btn gamesPageBtns">Profile</button></a>
+    <button id="logoutButton" class="btn gamesPageBtns">Log Out</button>
 </div>
-<aside class="friends">
-    <h3 class="friends-title">Friends list</h3>
-    <ul class="list" id="friends-list"></ul>
-</aside>
+<div class="games">
+        <a href="#" class="gameBtns">Game 1</a>
+        <a href="#" class="gameBtns">Game 2</a>
+    <aside class="friends">
+        <h3 class="friends-title">Friends list</h3>
+        <ul class="list" id="friends-list"></ul>
+    </aside>
+</div>
 <script src="/js/logout.js"></script>
