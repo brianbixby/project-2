@@ -15,7 +15,10 @@
         <h3 class="friends-title">Friends list</h3>
         <ul>
             {{#each Friend as |friend|}}
-            <li>{{friend.user_name}}</li>
+            <li>
+                <img src={{friend.image_url}} style="max-width: 50px; max-height: 50px; min-width: 50px; min-height: 50px" class="rounded">
+                {{friend.user_name}}
+            </li>
             {{/each}}
         </ul>
     </aside>
