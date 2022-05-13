@@ -1,0 +1,41 @@
+#c4Game {
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #e4e3e3;
+}
+
+#c4board {
+    width: 90vw;
+    max-width: 90vh;
+    aspect-ratio: 7 / 6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: auto;
+    background: red;
+}
+
+#c4board .c4-tile,
+#c4board .c4-boardTile {
+    width: 14.28%;
+    width: calc(100% / 7);
+    aspect-ratio: 6 / 7;
+    object-fit: cover;
+}
+
+#c4board .c4-clickedTileImage {
+    width: 100%;
+    height: 100%;
+}
+
+#c4board .c4-boardTile:hover {
+    background-color: rgba(0, 0, 0, 0.17);
+    cursor: pointer;
+}

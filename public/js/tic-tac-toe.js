@@ -12,7 +12,8 @@ function handleTileClick(e) {
 
 function newT3Game() {
     const tiles = document.querySelectorAll(".t3-tile");
-    tiles.forEach(tile => tile.addEventListener("click", handleTileClick));
+    const tilesArray = Array.from(tiles);
+    tilesArray.forEach(tile => tile.addEventListener("click", handleTileClick));
     currentState.game.moveNumber = 0;
 }
 
@@ -33,7 +34,6 @@ function checkForWin() {
         }
     }
     if (currentState.game.winner) {
-
         console.log("winner: ", currentState.game.winner)
         socket.emit("t3-endGameServer", currentState.game);
     } else if (currentState.game.moveNumber == 9) {
@@ -88,8 +88,8 @@ if (socket) {
             clickedTileEl.removeAttribute("data-player");
             clickedTileEl.removeChild(clickedTileEl.children[0]);
         });
+        const listeningTiles = document.querySelectorAll(".boardTile");
+        listeningTiles.forEach(tile => tile.removeEventListener("click", handleTileClick));
         // to do end the game ask for rematch, posts to db
     });
 }
-
-// currentState.user.userID
