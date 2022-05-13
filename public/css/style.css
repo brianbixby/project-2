@@ -168,7 +168,7 @@ aside{
     height: fit-content;
 }
 
-.gamesContainer {
+.gamesContainer{
     margin-top: 5vh;
 }
 
@@ -227,6 +227,7 @@ aside{
     border-color: #6c757d;
     box-shadow: inset -1.5px -1.5px black;
 }
+
 
 .editProfile button:hover{
     background-color: rgba(101, 157, 189, 0.577);
