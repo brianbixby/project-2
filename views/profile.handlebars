@@ -2,6 +2,8 @@
 <a href='/games'><h1 class="title">Landing Page Title</h1></a>
 </header>
 <div class="nav">
+  <a href='/games'><button id="backBtn" class="btn gamesPageBtns">Home</button></a>
+  <a href='/ranks/{{id}}'><button id="ranks" class="btn gamesPageBtns">Ranks</button></a>
   <button id="logoutButton" class="btn gamesPageBtns">Log Out</button>
 </div>
 <div class="profile">
@@ -9,16 +11,11 @@
   <div class="allInfo">
     <p>Your email: {{email}}</p>
     <p>Your ID: {{id}}</p>
-    <ul>Your Rank:
-      {{#each rankings as |rankings|}}
-      <li>{{rankings.rank}}</li>
-      {{/each}}
-    </ul>
-    <ul>Friends:
+    <p>Friends:
       {{#each Friend as |friend|}}
-      <li>{{friend.user_name}}</li>
+          {{friend.user_name}}
       {{/each}}
-    </ul>
+    </p>
   </div>
 </div>
 

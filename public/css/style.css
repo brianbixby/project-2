@@ -1,5 +1,5 @@
 body {
-    background: url(../assets/d5vi8b0-9925c151-97d4-4318-8a23-af91c8f561d5.jpeg), rgb(12, 18, 4);
+    background: url(../assets/bgimg.png), rgb(12, 18, 4);
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Koulen', cursive;
@@ -88,6 +88,14 @@ button:hover {
     border-color: #6c757d;
 }
 
+.modal button:hover{
+    opacity: 0.7;
+}
+
+.modal .btn-close:hover{
+    opacity: 0.3;
+}
+
 #signupBtn {
     color: #fff;
     background-color: #6c757d;
@@ -139,6 +147,11 @@ button:hover {
     box-shadow: none;
 }
 
+.gameBtnRow {
+    display: flex;
+    flex-direction: row;
+}
+
 .nav {
     display: flex;
     flex-direction: row;
@@ -149,8 +162,8 @@ button:hover {
 .games {
     width: 100%;
     margin-top: 5vh;
-    margin-left: 10vw;
     display: flex;
+    margin: 10vh;
     justify-content: center;
     flex-direction: row;
 }
@@ -176,6 +189,7 @@ button:hover {
 }
 
 .friends ul {
+    padding: 0;
     font-size: 30px;
 }
 
@@ -298,13 +312,16 @@ footer {
 }
 
 
-@media screen and (max-width: 954px) {
+@media screen and (max-width: 954px) and (min-width: 530px) {
     header h1{
-        width: 400px;
-        font-size: 60px;
         display: flex;
         flex-direction: center;
         text-align: center;
+        margin-top: 3vh;
+        min-width: 400px;
+        width: calc((90vw));
+        max-width: 700px;
+        font-size: 60px;
     }
     .homeDiv{
         display: flex;
@@ -317,6 +334,17 @@ footer {
         padding: 30px;
         margin: 20px;
     }
+    .modal-dialog{
+        position: relative;
+        top:30%;
+        transform: translateY(-70%);
+    }
+    #login button{
+        float: right;
+    }
+    #signup button{
+        float: right;
+    }
     .nav{
         display: flex;
         justify-content: center;
@@ -324,14 +352,25 @@ footer {
     }
     .games{
         display: flex;
-        flex-direction: column;
         justify-content: center;
+        flex-direction: column;
         align-items: center;
         margin: 0;
         margin-top: 2vh;
     }
+    .gameBtns{
+        margin-top: 5vh;
+        font-size: 30px;
+        padding: 30px 70px;
+    }
     .friends{
-        margin-top: 3vh;
+        margin-top: 10vh;
+    }
+    .friends-title{
+        font-size: 30px;
+    }
+    .friends ul{
+        font-size: 20px;
     }
     .profile{
         width: 90%;

@@ -9,11 +9,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url("/assets/pan.jpg"); /*  image source: https://github.com/ryneschillinger/tic-tac-toe/blob/master/img/pan.jpg  */
+    background: url("/assets/pan.png"); /*  image source: https://github.com/ryneschillinger/tic-tac-toe/blob/master/img/pan.jpg  */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #e4e3e3;
+    background-color: rgb(141, 135, 65, .9);
+    border-radius: 10px;
 }
 
 #t3board {

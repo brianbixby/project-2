@@ -84,14 +84,22 @@ router.get('/gamescontainer', async (req, res) => {
     }
 });
 
-router.get("/ranks", (req, res) => {
+router.get("/ranks/:id", (req, res) => {
     console.log(req.session)
     if (!req.session || !req.session.user || !req.session.user.logged_in) {
         console.log("Please log in or sign up!");
         res.redirect('/');
     } else {
-        const user_id = req.session.user.user_id;
-        res.render("ranks", {user_id});
+        User.findByPk(req.params.id, { include: { all: true } })
+        .then(userData => {
+            const hbsData = userData.get({ plain: true })
+            console.log(hbsData);
+            hbsData.loggedIn = true;
+            res.render("ranks", hbsData);
+        })
+        .catch(err => {
+            console.log("err: ", err);
+        })
     }
 });
 
