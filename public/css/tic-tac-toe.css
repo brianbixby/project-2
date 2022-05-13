@@ -1,0 +1,71 @@
+#gamesContainer {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+#ticTacToeGame {
+    background-color: #e4e3e3;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+#t3board {
+    width: 90vw;
+    max-width: 90vh;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+#t3board .t3-tile, #t3board .clickedTile {
+    width: 33.33%;
+    width: calc(100% / 3);
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+#t3board .clickedTileImage {
+    width: 100%;
+    height: 100%;
+}
+
+#t3board .t3-tile:hover {
+	background-color: rgba(0, 0, 0, 0.17);
+	cursor: pointer;
+}
+
+#t3board #t3-1 {
+    background-color: rosybrown;
+}
+
+#t3board #t3-2 {
+    background-color: aqua;
+}
+
+#t3board #t3-3 {
+    background-color: blueviolet;
+}
+
+#t3board #t3-4 {
+    background-color: chocolate;
+}
+
+#t3board #t3-5 {
+    background-color: darkgoldenrod;
+}
+
+#t3board #t3-6 {
+    background-color: tan;
+}
+
+#t3board #t3-7 {
+    background-color: sandybrown;
+}
+
+#t3board #t3-8 {
+    background-color: black;
+}
+
+#t3board #t3-9 {
+    background-color: aqua;
+}

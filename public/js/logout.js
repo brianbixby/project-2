@@ -16,9 +16,6 @@ if (logoutButtonEl) {
     })
 }
 
-
-"use strict";
-
 const gameLogOutButtonEl = document.querySelector("#gamePlayLogout");
 
 if (gameLogOutButtonEl) {
