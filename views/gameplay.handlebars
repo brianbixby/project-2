@@ -1,18 +1,14 @@
 <header class="header">
     <h1 class="title">Landing Page Title</h1>
 </header>
-
-<div class="gamePlayContainer">
-    <div id="row" class="row justify-content-center">
-        <button class="col btn gamesPageBtns gamesPageMQ mar">Ranks</button>
-        <button class="col btn gamesPageBtns gamesPageMQ mar">Log Out</button>
-    </div>
-    <div class="gamesContainer">
-        <div class="row">
-            <section class="col game">
-                <a href="/gamescontainer">Games Container</a>
-            </section>
-            <div id="chat"></div>
-        </div>
-    </div>
+<div class="nav">
+    <button id="ranks" class="btn gamesPageBtns">Ranks</button>
+    <a href='/profile/{{user_id}}'><button id="profileBtn" class="btn gamesPageBtns">Profile</button></a>
+    <button id="logoutButton" class="btn gamesPageBtns">Log Out</button>
 </div>
+<div class="gamesContainer">
+    <a href="/gamescontainer">Games Container</a>
+    <div id="chat"></div>
+</div>
+
+<script src="/js/logout.js"></script>
