@@ -69,6 +69,18 @@ router.get('/gamescontainer', async (req, res) => {
     }
 });
 
+router.get("/ranks", (req, res) => {
+    console.log(req.session)
+    if (!req.session || !req.session.user || !req.session.user.logged_in) {
+        console.log("Please log in or sign up!");
+        res.redirect('/');
+    } else {
+        const user_id = req.session.user.user_id;
+        // console.log(user_id);
+        res.render("ranks");
+    }
+});
+
 
 router.get('/c4', async (req, res) => {
     try {
