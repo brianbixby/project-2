@@ -2,6 +2,7 @@
 
 function c4handleTileClick(e) {
     console.log("c4handletileclick")
+    console.log(e)
     if (currentState.game.currentPlayer === currentState.user.userID) {
         let mod = Number(this.getAttribute("data-cellnumber")) % 7;
         mod = mod !== 0 ? mod + 34 : 41;
@@ -33,6 +34,12 @@ function chkLine(a, b, c, d) {
 
 function checkForWin() {
     console.log("checkForWin");
+    console.log("=================================================");
+    console.log("=================================================");
+    console.log("=================================================");
+    console.log("=================================================");
+    console.log("=================================================");
+    console.log("=================================================");
     const tiles = document.querySelectorAll(".c4-boardTile");
     const tilesArray = Array.from(tiles);
     const tilesData = tilesArray.reduce((acc, curr) => {
@@ -84,10 +91,11 @@ function checkForWin() {
         }
     }
 
-    if (currentState.game.moveNumber == 42) {
+    if (currentState.game.moveNumber === 42) {
         if (!currentState.game.winner) {
             currentState.game.winner = "tie";
         }
+        currentState.game.winner = "tie";
         socket.emit("c4-endGameServer", currentState.game);
     }
 }
@@ -113,10 +121,11 @@ if (socket) {
             imgEl.setAttribute("src", "https://placedog.net/300/300");
         }
         clickedTileEl.appendChild(imgEl);
-        currentState.game.moveNumber++;
-        if (currentState.game.moveNumber >= 7) {
+        currentState.game.moveNumber++
+        console.log(currentState.game.moveNumber);
+        // if (currentState.game.moveNumber >= 7) {
             checkForWin();
-        }
+        // }
         currentState.game.currentPlayer = currentState.game.currentPlayer == currentState.game.player1 ? currentState.game.player2 : currentState.game.player1;
     });
 

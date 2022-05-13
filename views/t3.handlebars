@@ -1,0 +1,33 @@
+
+<section>
+    <div id="ticTacToeGame" class="hide">
+        {{>tic-tac-toe}}
+    </div>
+</section>
+
+<script>
+    function joinGame(e) {
+        const data = { gameID: e.target.getAttribute('data-gameID'), userID: e.target.getAttribute('data-userID') };
+        currentState.user.userID = data.userID;
+        socket.emit('joinGame', data);
+    }
+    const playGamesButtonContainerEl = document.querySelector("#playGamesButtonContainer");
+    const c4GameEl = document.querySelector("#c4Game");
+    const ticTacToeGameEl = document.querySelector("#ticTacToeGame");
+    const playButtons = document.querySelectorAll(".playButton");
+
+    for (let i = 0; i < playButtons.length; i++) {
+        playButtons[i].addEventListener("click", joinGame);
+    }
+    socket.on('joinedGame', data => {
+        currentState.game = data;
+        console.log("joinedGame: ", data);
+        if (data.players == 2) {
+                playGamesButtonContainerEl.classList.add("hide");
+                ticTacToeGameEl.classList.remove("hide");
+                socket.emit('t3-startGameServer', data);
+        } else {
+            alert("waiting for another player");
+        }
+    });
+</script>
