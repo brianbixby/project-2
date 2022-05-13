@@ -1,4 +1,3 @@
-/* Global styling */
 body {
     background: url(../assets/d5vi8b0-9925c151-97d4-4318-8a23-af91c8f561d5.jpeg), rgb(12, 18, 4);
     background-repeat: no-repeat;
@@ -19,29 +18,9 @@ main {
     flex-direction: row;
 }
 
-/* header styling for main page and gameplay
-header {
-    /* text-align: center;
-    position: absolute;
-    top: 0; */
-
-
-/* #gamesTitle {
-    /* display: flex;
-    justify-content: flex-start;
-    text-align: center;
-    position: absolute;
-    top: 0;
-    left: 0; */
-
-
-/* #gamesTitleH1 {
-    /* margin: 25px; */
-
-/* .container{
-    /* margin-top: 55px;
-    width: 75%; */
-
+header a{
+    text-decoration: none;
+}
 
 header h1 {
     display: flex;
@@ -88,21 +67,12 @@ button:hover {
     background-color: #bc986a;
 }
 
-/* .modal-body {
-    /* display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    border-radius: 5px;
-    height: 150px; */
-
-
 .modal-header {
     background-color: rgb(141, 135, 65, .7);
     font-size: 30px;
     color: #FBEEC1;
     text-shadow: 0 3px 10px black;
 }
-
 
 .modal-body input {
     font-size: 20px;
@@ -121,7 +91,6 @@ button:hover {
     border-color: #6c757d;
 }
 
-/* /games styling */
 .gameBtns {
     display: flex;
     justify-content: center;
@@ -195,80 +164,54 @@ button:hover {
     font-size: 40px;
 }
 
-.gamesContainer {
+aside{
+    height: fit-content;
+}
+
+.gamesContainer{
     margin-top: 5vh;
 }
 
-
-/* Game Play Page */
-/* .gamePlayContainer {
-    /* width: 100%;
-    height: 100%; */
-
-
-/* .gamesContainer {
-    /* width: 100%;
-    height: 60%;
-    display: flex;
-    justify-content: center;
-    align-items: center; */
-
-
-/* .mar {
-    /* margin-top: 250px; */
-
-
-/* Profile page styling */
-/* .profilePage {
-    /* width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; */
-
-
-
-/* .profileTitle {
-    /* height: 100%;
-    font-size: 40px;
+.rankBoard{
+    font-size: 50px;
+    text-align: center;
     background-color: rgb(141, 135, 65, .7);
     color: #FBEEC1;
     text-shadow: 0 3px 10px black;
     padding: 15px 30px;
     border-radius: 5px;
     width: 50%;
-    margin: 5px 0px; */
+    margin: 5px 0px;
+}
 
+.profile{
+    font-size: 25px;
+    background-color: rgb(141, 135, 65, .7);
+    color: #FBEEC1;
+    text-shadow: 0 3px 10px black;
+    padding: 15px 30px;
+    border-radius: 5px;
+    width: 50%;
+    margin: 5px 0px;
+}
 
-/* .profileEdit{
-    /* height: 100%;
+.editProfile{
     font-size: 30px;
     background-color: rgb(141, 135, 65, .7);
+    color: #FBEEC1;
+    text-shadow: 0 3px 10px black;
+    text-align: center;
     padding: 10px;
     border-radius: 5px;
-    width: 70%;
     display: flex;
     justify-content: center;
-    align-items: center; */
-
-
-/* .profileEdit input {
-    /* display:block;
-    width:100%;
-    padding:10px;
-    margin: 10px 0px; */
-
-
-/* #newProfile{
-    /* display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center; */
-
+    align-items: center;
+}
 
 #user_name {
-    border-radius: 10px;
+    text-align: center;
+    border-radius:10px;
     background-color: rgba(251, 238, 193, .7);
     border: 1px solid #eee;
     transition: .3s #eee;
@@ -278,22 +221,26 @@ button:hover {
     border: 1px solid #aaa
 }
 
-.profileBtns {
+.editProfile button{
     color: #fff;
     background-color: #6c757d;
     border-color: #6c757d;
     box-shadow: inset -1.5px -1.5px black;
 }
 
-.profileBtns:hover {
+
+.editProfile button:hover{
     background-color: rgba(101, 157, 189, 0.577);
     box-shadow: none;
     cursor: pointer;
 }
 
-
 img[src=""] {
     display: none;
+}
+
+img{
+    margin: 2vh;
 }
 
 #uploadfile {
@@ -337,83 +284,53 @@ footer {
     display: block !important;
 }
 
-/* 
+
 @media screen and (max-width: 954px) {
-    .homePage{
-        height: 100%;
+    header h1{
+        width: 400px;
+        font-size: 60px;
         display: flex;
-        justify-content: center;
-        flex-direction: column;
+        flex-direction: center;
+        text-align: center;
+    }
+    .homeDiv{
+        display: flex;
         flex-wrap: wrap;
+        justify-content: center;
         align-items: center;
     }
-    header h1{
-        margin: 40px 0px;
+    .homeBtns{
         font-size: 40px;
-        width: 300px;
+        padding: 30px;
+        margin: 20px;
     }
-    .homebtns {
-        font-size: 40px;
-        padding: 5px;
+    .nav{
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
-    #ranks{
-        width: 100px;
-        top: 200px;
-        left: 50px;
-    }
-    #logoutButton{
-        width: 100px;
-        top: 200px;
-        right: 50px;
-    }
-    #profileBtn{
-        width: 100px;
-        top: 200px;
-        left: 200px;
-    }
-    .row{
+    .games{
+        display: flex;
         flex-direction: column;
-    }
-    .container{
-        margin-top: 0px;
-
-    }
-    #gamesTitleH1{
-        position: relative;
-        padding: 25px;
-        margin: 25px 0px;
-        font-size: 40px;
-        width: 300px;
-        margin-left: calc((50vw - 150px));
-    }
-    .gameBtns{
-        font-size: 40px;
-        padding: 5px;
-        margin: 20px 0px;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        margin-top: 2vh;
     }
     .friends{
-        position: absolute;
-        align-self: flex-end;
-        right: 85px;
+        margin-top: 3vh;
     }
-    .mar {
-        margin-top: 0px;
+    .profile{
+        width: 90%;
     }
-    .gamePlayContainer{
-        margin-top: 150px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    .editProfile{
+        width: 90%;
     }
-    .gamesPageMQ{
-        width: 100px;
+    .editProfile input{
+        width: 80%;
     }
-    #row{
-        display: flex;
-        flex-direction: row;
+    .editProfile h5{
+        margin-top: 1vh;
+        font-size: 15px;
     }
-    .profilePage{
-        margin: 150px 0px 0px 0px;
-    }
-  } */
+}
