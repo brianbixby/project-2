@@ -4,7 +4,7 @@
     </a>
 </header>
 <div class="nav">
-    <a href='/ranks'><button id="ranks" class="btn gamesPageBtns">Ranks</button></a>
+    <a href='/ranks/{{id}}'><button id="ranks" class="btn gamesPageBtns">Ranks</button></a>
     <a href='/profile/{{id}}'><button id="profileBtn" class="btn gamesPageBtns">Profile</button></a>
     <button id="logoutButton" class="btn gamesPageBtns">Log Out</button>
 </div>
@@ -17,7 +17,10 @@
         <h3 class="friends-title">Friends list</h3>
         <ul>
             {{#each Friend as |friend|}}
-            <li>{{friend.user_name}}</li>
+            <li>
+                <img src={{friend.image_url}} style="max-width: 50px; max-height: 50px; min-width: 50px; min-height: 50px" class="rounded">
+                {{friend.user_name}}
+            </li>
             {{/each}}
         </ul>
     </aside>
