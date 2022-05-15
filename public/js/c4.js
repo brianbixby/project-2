@@ -1,15 +1,13 @@
 "use strict";
 
 function c4handleTileClick(e) {
-    console.log("c4handletileclick")
     if (currentState.game.currentPlayer === currentState.user.userID) {
         let mod = Number(this.getAttribute("data-cellnumber")) % 7;
-        mod = mod !== 0 ? mod + 34 : 41;
+        mod = mod !== 0 ? mod + 35 : 42;
         while (mod >= 0) {
             const el = document.querySelector(`#c4-${mod}`);
             if (!el.getAttribute("data-player")) {
                 currentState.game.clickedTile = `c4-${mod}`;
-                console.log("currentState.game: ", currentState.game);
                 socket.emit("c4-playerMadeMoveServer", currentState.game);
                 return;
             }
@@ -19,66 +17,71 @@ function c4handleTileClick(e) {
 }
 
 function newC4Game() {
-    console.log("new c4 game");
     const tiles = document.querySelectorAll(".c4-tile");
     const tilesArray = Array.from(tiles);
     tilesArray.forEach(tile => tile.addEventListener("click", c4handleTileClick));
     currentState.game.moveNumber = 0;
-    console.log("tilesArray: ", tilesArray);
 }
 
-function chkLine(a, b, c, d) {
+function c4ChkLine(a, b, c, d) {
     return ((a) && (a == b) && (a == c) && (a == d));
 }
 
-function checkForWin() {
-    console.log("checkForWin");
+function c4CheckForWin() {
     const tiles = document.querySelectorAll(".c4-boardTile");
     const tilesArray = Array.from(tiles);
     const tilesData = tilesArray.reduce((acc, curr) => {
         acc.push(curr.getAttribute("data-player"));
         return acc;
     }, []);
-
-    for (let i = 0; i < 3; i++) {
+    var board2D = new Array();
+    let k = 0;
+    for (let i = 0; i < 6; i++) {
+        board2D[i] = new Array();
         for (let j = 0; j < 7; j++) {
-            if (chkLine(tilesData[j * 6 + i], tilesData[j * 6 + i + 1], tilesData[j * 6 + i + 2], tilesData[j * 6 + i + 3])) {
+            board2D[i].push(tilesData[k]);
+            k++;
+        }
+    }
+    // check for winner code: https://stackoverflow.com/questions/33181356/connect-four-game-checking-for-wins-js
+    for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 7; c++) {
+            if (c4ChkLine(board2D[r][c], board2D[r + 1][c], board2D[r + 2][c], board2D[r + 3][c])) {
                 currentState.game.winner = currentState.game.currentPlayer;
                 socket.emit("c4-endGameServer", currentState.game);
-                console.log("winner 1")
                 return;
             }
         }
     }
 
-    for (let i = 0; i < 6; i++) {
-        for (let j = 0; j < 4; j++) {
-            if (chkLine(tilesData[i * 7 + j], tilesData[i * 7 + j + 1], tilesData[i * 7 + j + 2], tilesData[i * 7 + j + 3])) {
+    // Check right
+    for (let r = 0; r < 6; r++) {
+        for (let c = 0; c < 4; c++) {
+            if (c4ChkLine(board2D[r][c], board2D[r][c + 1], board2D[r][c + 2], board2D[r][c + 3])) {
                 currentState.game.winner = currentState.game.currentPlayer
                 socket.emit("c4-endGameServer", currentState.game);
-                console.log("winner 2")
                 return;
             }
         }
     }
 
-    for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 4; j++) {
-            if (chkLine(tilesData[i * 7 + j], tilesData[(i + 1) * 7 + j + 1], tilesData[(i + 2) * 7 + j + 2], tilesData[(i + 3) * 7 + j + 3])) {
+    // Check down-right
+    for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 4; c++) {
+            if (c4ChkLine(board2D[r][c], board2D[r + 1][c + 1], board2D[r + 2][c + 2], board2D[r + 3][c + 3])) {
                 currentState.game.winner = currentState.game.currentPlayer
                 socket.emit("c4-endGameServer", currentState.game);
-                console.log("winner 3")
                 return;
             }
         }
     }
 
-    for (let i = 3; i < 6; i++) {
-        for (let j = 0; j < 4; j++) {
-            if (chkLine(tilesData[i * 7 + j], tilesData[(i - 1) * 7 + j + 1], tilesData[(i - 2) * 7 + j + 2], tilesData[(i - 3) * 7 + j + 3])) {
+    // Check down-left
+    for (let r = 3; r < 6; r++) {
+        for (let c = 0; c < 4; c++) {
+            if (c4ChkLine(board2D[r][c], board2D[r - 1][c + 1], board2D[r - 2][c + 2], board2D[r - 3][c + 3])) {
                 currentState.game.winner = currentState.game.currentPlayer
                 socket.emit("c4-endGameServer", currentState.game);
-                console.log("winner 4")
                 return;
             }
         }
@@ -94,13 +97,11 @@ function checkForWin() {
 
 if (socket) {
     socket.on("c4-startGame", data => {
-        console.log("c4-startGame: ", data);
         currentState.game = data;
         newC4Game();
     });
 
     socket.on("c4-playerMadeMove", data => {
-        console.log("c4-playerMadeMove: ", data);
         currentState.game = data;
         let clickedTileEl = document.querySelector(`#${currentState.game.clickedTile}`);
         let imgEl = document.createElement("img");
@@ -115,13 +116,12 @@ if (socket) {
         clickedTileEl.appendChild(imgEl);
         currentState.game.moveNumber++;
         if (currentState.game.moveNumber >= 7) {
-            checkForWin();
+            c4CheckForWin();
         }
         currentState.game.currentPlayer = currentState.game.currentPlayer == currentState.game.player1 ? currentState.game.player2 : currentState.game.player1;
     });
 
     socket.on("c4-endGame", data => {
-        console.log("c4-endGame client: ", data);
         currentState.game = data;
         if (data.winner === "tie") {
             alert("congrats on the tie!");
