@@ -1,7 +1,6 @@
 "use strict";
 
-function handleTileClick(e) {
-    console.log(e.target);
+function t3HandleTileClick(e) {
     if (currentState.game.currentPlayer === currentState.user.userID) {
         if (e.target.classList.contains("t3-tile")) {
             currentState.game.clickedTile = e.target.id
@@ -13,11 +12,11 @@ function handleTileClick(e) {
 function newT3Game() {
     const tiles = document.querySelectorAll(".t3-tile");
     const tilesArray = Array.from(tiles);
-    tilesArray.forEach(tile => tile.addEventListener("click", handleTileClick));
+    tilesArray.forEach(tile => tile.addEventListener("click", t3HandleTileClick));
     currentState.game.moveNumber = 0;
 }
 
-function checkForWin() {
+function t3CheckForWin() {
     const tiles = document.querySelectorAll(".boardTile");
     const tilesArray = Array.from(tiles);
     const tilesData = tilesArray.reduce((acc, curr) => {
@@ -34,7 +33,6 @@ function checkForWin() {
         }
     }
     if (currentState.game.winner) {
-        console.log("winner: ", currentState.game.winner)
         socket.emit("t3-endGameServer", currentState.game);
     } else if (currentState.game.moveNumber == 9) {
         currentState.game.winner = null;
@@ -64,13 +62,12 @@ if (socket) {
         clickedTileEl.appendChild(imgEl);
         currentState.game.moveNumber++;
         if (currentState.game.moveNumber >= 5) {
-            checkForWin();
+            t3CheckForWin();
         }
         currentState.game.currentPlayer = currentState.game.currentPlayer == currentState.game.player1 ? currentState.game.player2 : currentState.game.player1
     });
 
     socket.on("t3-endGame", data => {
-        console.log("t3-endGame client: ", data);
         currentState.game = data;
         if (!data.winner) {
             alert("congrats on the tie!");
@@ -87,7 +84,7 @@ if (socket) {
             clickedTileEl.removeChild(clickedTileEl.children[0]);
         });
         const listeningTiles = document.querySelectorAll(".boardTile");
-        listeningTiles.forEach(tile => tile.removeEventListener("click", handleTileClick));
+        listeningTiles.forEach(tile => tile.removeEventListener("click", t3HandleTileClick));
         // to do end the game ask for rematch, posts to db
     });
 }
