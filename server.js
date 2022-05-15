@@ -91,23 +91,6 @@ io.on("connection", (socket) => {
   });
 
   // CONNECT 4
-
-  socket.on("startGameServer", data => {
-    console.log("startGameServer: ", data);
-    io.to(data.instanceID).emit("startGame", data);
-  });
-
-  socket.on("playerMadeMoveServer", data => {
-    console.log("playerMadeMoveServer: ", data);
-    io.to(data.instanceID).emit("playerMadeMove", data);
-  });
-
-  socket.on("endGameServer", data => {
-    console.log("endGameServer: ", data);
-    io.to(data.instanceID).emit("endGame", data);
-  });
-
-  // CONNECT 4
   socket.on("c4-startGameServer", data => {
     console.log("c4-startGameServer: ", data);
     io.to(data.instanceID).emit("c4-startGame", data);
