@@ -1,0 +1,29 @@
+<header class="header" id="gamesTitle">
+    <a href='/games'>
+        <h1 class="title" id="gamesTitleH1">Landing Page Title</h1>
+    </a>
+</header>
+<div class="nav">
+    <a href='/ranks/{{id}}'><button id="ranks" class="btn gamesPageBtns">Ranks</button></a>
+    <a href='/profile/{{id}}'><button id="profileBtn" class="btn gamesPageBtns">Profile</button></a>
+    <button id="logoutButton" class="btn gamesPageBtns">Log Out</button>
+</div>
+<div class="games">
+    <div class="gameBtnRow">
+        <a href="#" class="gameBtns">Game 1</a>
+        <a href="#" class="gameBtns">Game 2</a>
+    </div>
+    <aside class="friends">
+        <h3 class="friends-title">Friends list</h3>
+        <ul>
+            {{#each Friend as |friend|}}
+            <li>
+                <img src={{friend.image_url}} style="max-width: 50px; max-height: 50px; min-width: 50px; min-height: 50px" class="rounded">
+                {{friend.user_name}}
+            </li>
+            {{/each}}
+        </ul>
+    </aside>
+</div>
+<script src="/js/logout.js"></script>
+<script src="/js/profile.js"></script>

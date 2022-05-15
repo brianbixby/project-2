@@ -1,0 +1,38 @@
+<header class="header">
+<a href='/games'><h1 class="title">Welcome {{user_name}}</h1></a>
+</header>
+<div class="nav">
+  <a href='/games'><button id="backBtn" class="btn gamesPageBtns">Home</button></a>
+  <a href='/ranks/{{id}}'><button id="ranks" class="btn gamesPageBtns">Ranks</button></a>
+  <button id="logoutButton" class="btn gamesPageBtns">Log Out</button>
+</div>
+<div class="profile d-flex justify-content-around">
+  <div class="allInfo">
+    <p>Your email: {{email}}</p>
+    <p>Your ID: {{id}}</p>
+    <p>Friends:
+      {{#each Friend as |friend|}}
+          {{friend.user_name}}
+      {{/each}}
+    </p>
+  </div>
+  <div class="avatar">
+    <img id="image_url" src={{image_url}} alt="avatar"
+    style="max-width: 150px; max-height: 150px; min-width: 150px; min-height: 150px"
+    class="border border-info rounded-circle">
+  </div>
+</div>
+
+<div class="editProfile">
+  <p>Change your Username and Avatar below</p>
+  <form action="" id="newProfile" data-userID={{id}}>
+    <div>
+      <input type="text" id="user_name" placeholder="New username">
+    </div>
+    <button class="btn btn-primary">Submit</button>
+    <h5>Updated at:{{updatedAt}}</h5>
+  </form>
+</div>
+</div>
+<script src="/js/profile.js"></script>
+<script src="/js/logout.js"></script>

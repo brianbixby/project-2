@@ -1,0 +1,27 @@
+{{!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+
+<header class="header d-flex justify-content-center" id="gamesTitle">
+    <a href='/games'>
+        <h1 class="title" id="gamesTitleH1">Landing Page</h1>
+    </a>
+</header>
+<div class="nav">
+    <a href='/profile/{{id}}'><button id="profileBtn" class="btn gamesPageBtns">Profile</button></a>
+    <button id="logoutButton" class="btn gamesPageBtns">Log Out</button>
+</div>
+<div class="rankBoard">
+<ul>
+    <h2>PLAYER: {{user_name}}</h2>
+    <h2>Rank: 
+        {{#each rankings as |rankings|}}
+            <h2 class="ranksPage-rank">Game: {{rankings.game_id}}</h2>
+            <h2 class="ranksPage-rank">Score: {{rankings.rank}}</h2>
+        {{/each}}
+    </h2>
+</ul>
+</div>
+<script src="/js/logout.js"></script>
+<script src="/js/profile.js"></script>

@@ -1,0 +1,389 @@
+body {
+    background: url(../assets/bgimg.png), rgb(12, 18, 4);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Koulen', cursive;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3vh;
+}
+
+.homeDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+header a{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 75px;
+    width: 700px;
+    background-color: rgba(101, 157, 189, .4);
+    padding: 40px 15px;
+    font-family: 'Koulen', cursive;
+    color: white;
+    border-radius: 10px;
+    box-shadow: inset 0 0 100px #659DBD, 0 0 25px #659DBD;
+    text-shadow: 0 2px 7px #8D8741;
+}
+
+header:hover {
+    cursor: pointer;
+}
+
+.homeBtns {
+    background-color: rgb(141, 135, 65, .9);
+    border: none;
+    border-radius: 50px;
+    font-size: 50px;
+    color: #fbeec1;
+    text-shadow: 0 3px 10px black;
+    margin: 50px 30px;
+    padding: 70px;
+    width: 300px;
+    box-shadow: 0px 0px 10px var(--shadow);
+    font-weight: 500;
+}
+
+.homeBtns:hover {
+    background-color: rgba(101, 157, 189, 0.577);
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.modal-backdrop {
+    background-color: #bc986a;
+}
+
+.modal-header {
+    background-color: rgb(141, 135, 65, .7);
+    font-size: 30px;
+    color: #FBEEC1;
+    text-shadow: 0 3px 10px black;
+}
+
+.modal-body input {
+    font-size: 20px;
+    padding: 0 5px;
+}
+
+#loginBtn {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.modal button:hover{
+    opacity: 0.7;
+}
+
+.modal .btn-close:hover{
+    opacity: 0.3;
+}
+
+#signupBtn {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.gameBtns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 70px 80px;
+    text-align: center;
+    background-color: rgb(141, 135, 65, .9);
+    border: none;
+    border-radius: 50px;
+    font-size: 50px;
+    color: #fbeec1;
+    text-shadow: 0 3px 10px black;
+    box-shadow: 0px 0px 10px var(--shadow);
+    text-decoration: none;
+    margin: 20px;
+}
+
+.gameBtns:hover {
+    background-color: rgba(101, 157, 189, 0.477);
+    color: #fbeec1;
+}
+
+.gameBtns a:visited {
+    color: #fbeec1;
+}
+
+.gamesPageBtns {
+    width: 200px;
+    text-align: center;
+    background-color: rgb(141, 135, 65, .9);
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #fbeec1;
+    text-shadow: 0 3px 10px black;
+    box-shadow: 0px 0px 5px #8D8741;
+    margin: 10px;
+}
+
+.gamesPageBtns:hover {
+    color: white;
+    background-color: rgba(101, 157, 189, 0.477);
+    box-shadow: none;
+}
+
+.gameBtnRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.games {
+    width: 100%;
+    margin-top: 5vh;
+    display: flex;
+    margin: 10vh;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.friends {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: fit-content;
+    text-align: center;
+    padding: 20px 15px;
+    width: 300px;
+    color: #FBEEC1;
+    border-radius: 10px;
+    box-shadow: inset 0 0 700px #659DBD;
+    text-shadow: 0 3px 10px black;
+    margin: 0 50px;
+}
+
+.friends-title {
+    font-size: 40px;
+}
+
+.friends ul {
+    padding: 0;
+    font-size: 30px;
+}
+
+aside{
+    height: fit-content;
+}
+
+.gamesContainer{
+    margin-top: 5vh;
+}
+
+.rankBoard{
+    font-size: 50px;
+    text-align: center;
+    background-color: rgb(141, 135, 65, .7);
+    color: #FBEEC1;
+    text-shadow: 0 3px 10px black;
+    padding: 15px 30px;
+    border-radius: 5px;
+    width: 50%;
+    margin: 5px 0px;
+}
+
+.profile{
+    font-size: 25px;
+    background-color: rgb(141, 135, 65, .7);
+    color: #FBEEC1;
+    text-shadow: 0 3px 10px black;
+    padding: 15px 30px;
+    border-radius: 5px;
+    width: 50%;
+    margin: 5px 0px;
+}
+
+.editProfile{
+    font-size: 30px;
+    background-color: rgb(141, 135, 65, .7);
+    color: #FBEEC1;
+    text-shadow: 0 3px 10px black;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#user_name {
+    text-align: center;
+    border-radius:10px;
+    background-color: rgba(251, 238, 193, .7);
+    border: 1px solid #eee;
+    transition: .3s #eee;
+}
+
+#user_name:hover {
+    border: 1px solid #aaa
+}
+
+.editProfile button{
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    box-shadow: inset -1.5px -1.5px black;
+}
+
+
+.editProfile button:hover{
+    background-color: rgba(101, 157, 189, 0.577);
+    box-shadow: none;
+    cursor: pointer;
+}
+
+img[src=""] {
+    display: none;
+}
+
+img{
+    margin: 2vh;
+}
+
+#uploadfile {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+input::-webkit-file-upload-button {
+    padding: 12px 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: rgba(251, 238, 193, .7);
+    color: #FBEEC1;
+    text-shadow: 0 3px 10px black;
+}
+
+#uploadfile::placeholder {
+    color: #FBEEC1;
+    text-shadow: 0 3px 10px black;
+}
+
+footer {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+
+}
+
+.hide {
+    display: none !important;
+}
+
+.show {
+    display: block !important;
+}
+
+
+@media screen and (max-width: 954px) and (min-width: 530px) {
+    header h1{
+        display: flex;
+        flex-direction: center;
+        text-align: center;
+        margin-top: 3vh;
+        min-width: 400px;
+        width: calc((90vw));
+        max-width: 700px;
+        font-size: 60px;
+    }
+    .homeDiv{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .homeBtns{
+        font-size: 40px;
+        padding: 30px;
+        margin: 20px;
+    }
+    .modal-dialog{
+        position: relative;
+        top:30%;
+        transform: translateY(-70%);
+    }
+    #login button{
+        float: right;
+    }
+    #signup button{
+        float: right;
+    }
+    .nav{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .games{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        margin-top: 2vh;
+    }
+    .gameBtns{
+        margin-top: 5vh;
+        font-size: 30px;
+        padding: 30px 70px;
+    }
+    .friends{
+        margin-top: 10vh;
+    }
+    .friends-title{
+        font-size: 30px;
+    }
+    .friends ul{
+        font-size: 20px;
+    }
+    .profile{
+        width: 90%;
+    }
+    .editProfile{
+        width: 90%;
+    }
+    .editProfile input{
+        width: 80%;
+    }
+    .editProfile h5{
+        margin-top: 1vh;
+        font-size: 15px;
+    }
+}
+

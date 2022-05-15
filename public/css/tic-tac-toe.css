@@ -1,0 +1,47 @@
+#gamesContainer {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+#ticTacToeGame {
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("../assets/tree-stump1.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgb(141, 135, 65, .9);
+    border-radius: 10px;
+}
+
+#t3board {
+    width: 90vw;
+    max-width: 90vh;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+#t3board .t3-tile,
+#t3board .clickedTile {
+    width: 33.33%;
+    width: calc(100% / 3);
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+#t3board .clickedTileImage {
+    width: 90%;
+    height: 90%;
+}
+
+#t3board .t3-tile:hover {
+    background-color: rgba(0, 0, 0, 0.17);
+    cursor: pointer;
+}
