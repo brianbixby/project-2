@@ -57,11 +57,9 @@ if (socket) {
         clickedTileEl.setAttribute("data-player", currentState.game.currentPlayer)
         imgEl.setAttribute("class", "clickedTileImage");
         if (currentState.game.currentPlayer == currentState.game.player1) {
-            // image source: https://github.com/ryneschillinger/tic-tac-toe/blob/master/img/egg-o.png
-            imgEl.setAttribute("src", "/assets/egg-o.png");
+            imgEl.setAttribute("src", "/assets/acorn.png");
         } else {
-            // image source: https://github.com/ryneschillinger/tic-tac-toe/blob/master/img/bacon-x.png
-            imgEl.setAttribute("src", "/assets/bacon-x.png");
+            imgEl.setAttribute("src", "/assets/squirrel.png");
         }
         clickedTileEl.appendChild(imgEl);
         currentState.game.moveNumber++;

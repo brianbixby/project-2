@@ -108,9 +108,9 @@ if (socket) {
         clickedTileEl.setAttribute("data-player", currentState.game.currentPlayer);
         imgEl.setAttribute("class", "c4-clickedTileImage");
         if (currentState.game.currentPlayer == currentState.game.player1) {
-            imgEl.setAttribute("src", "https://placedog.net/200/200");
+            imgEl.setAttribute("src", "/assets/crown.png");
         } else {
-            imgEl.setAttribute("src", "https://placedog.net/300/300");
+            imgEl.setAttribute("src", "/assets/dragon.png");
         }
         clickedTileEl.appendChild(imgEl);
         currentState.game.moveNumber++;

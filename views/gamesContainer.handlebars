@@ -3,7 +3,7 @@
         {{#each games as |game|}}
         <p>{{game.id}}</p>
         <p>{{game.name}}</p>
-        <button class="playButton" data-gameID={{game.id}} data-userID={{game.userid}}>PLAY</button>
+        <button class="playButton gameBtns" data-gameID={{game.id}} data-userID={{game.userid}}>PLAY</button>
         {{/each}}
     </div>
     <div id="c4Game" class="hide">
@@ -45,3 +45,5 @@
         }
     });
 </script>
+<script src="/js/logout.js"></script>
+<script src="/js/profile.js"></script>
