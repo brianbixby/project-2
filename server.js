@@ -77,9 +77,6 @@ const inUseC4 = [];
 io.on("connection", (socket) => {
   socket.on("disconnect", () => {
   });
-  socket.on("chat message", (msg) => {
-    io.emit("chat message", msg);
-  });
   socket.on("joinGame", (data) => {
     console.log("server join game: ", data);
     let game;
@@ -144,6 +141,7 @@ io.on("connection", (socket) => {
         openGamesC4.splice(index, 1);
       }
     }
+    socket.leave(data.instanceID);
     deleteGameInstance(data);
   });
 
@@ -180,6 +178,34 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("c4AbortServer", data => {
+    console.log("c4AbortServer: ", data);
+    const idx = inUseC4.map(e => e.instanceID).indexOf(data.instanceID);
+    if (idx !== -1) {
+      inUseC4.splice(idx, 1);
+    }
+    data.winner = data.loser == data.player2 ? data.player1 : data.player2
+    io.to(data.instanceID).emit("c4-abort", data);
+    socket.leave(data.instanceID);
+    Promise.all([
+      updateGameInstance({ instanceID: data.instanceID, winner_id: data.winner, loser_id: data.loser, complete: true }),
+      Ranking.increment({ rank: 10 }, { where: { user_id: data.winner, game_id: data.id } }),
+      Ranking.increment({ rank: -10 }, { where: { user_id: data.loser, game_id: data.id } })
+    ])
+      .then(() => {
+        socket.leave(data.instanceID);
+        console.log("success");
+      })
+      .catch(err => {
+        socket.leave(data.instanceID)
+        console.log("err: ", err);
+      });
+  })
+
+  socket.on("c4-abortServer", data => {
+    socket.leave(data.instanceID);
+  });
+
   // TIC TAC TOE
   socket.on("t3-startGameServer", data => {
     console.log("t3-startGameServer: ", data);
@@ -211,6 +237,33 @@ io.on("connection", (socket) => {
         .then(() => console.log("success"))
         .catch(err => console.log("err: ", err));
     }
+  });
+
+  socket.on("t3AbortServer", data => {
+    console.log("t3AbortServer: ", data);
+    const idx = inUseTTC.map(e => e.instanceID).indexOf(data.instanceID);
+    if (idx !== -1) {
+      inUseTTC.splice(idx, 1);
+    }
+    data.winner = data.loser == data.player2 ? data.player1 : data.player2
+    io.to(data.instanceID).emit("t3-abort", data);
+    Promise.all([
+      updateGameInstance({ instanceID: data.instanceID, winner_id: data.winner, loser_id: data.loser, complete: true }),
+      Ranking.increment({ rank: 10 }, { where: { user_id: data.winner, game_id: data.id } }),
+      Ranking.increment({ rank: -10 }, { where: { user_id: data.loser, game_id: data.id } })
+    ])
+      .then(() => {
+        socket.leave(data.instanceID);
+        console.log("success");
+      })
+      .catch(err => {
+        socket.leave(data.instanceID)
+        console.log("err: ", err);
+      });
+  })
+
+  socket.on("t3-abortServer", data => {
+    socket.leave(data.instanceID);
   });
 });
 
