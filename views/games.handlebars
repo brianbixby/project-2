@@ -1,7 +1,43 @@
+<style>
+    .gameBtns {
+        margin: 0 20px 20px 20px;
+    }
+
+    .games {
+        width: 100vw;
+    }
+
+    @media (max-width: 529px) {
+
+        .gameBtnRow {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .gameBtns {
+            margin: 15px;
+            padding: 30px;
+            width: 80vw;
+        }
+
+        .friends {
+            margin-top: 0;
+        }
+    }
+
+    @media (max-width: 440px) {
+        .gamesPageBtns {
+            width: 100px;
+        }
+
+    }
+</style>
 <div id="gamesOuterContainer">
     <header class="header" id="gamesTitle">
         <a href='/games'>
-            <h1 class="title" id="gamesTitleH1">Landing Page Title</h1>
+            <h1 class="title" id="gamesTitleH1">Fantasy Land</h1>
         </a>
     </header>
     <div class="nav">
@@ -12,10 +48,10 @@
     <div class="games">
         <div class="gameBtnRow">
             <button class="gameBtns" data-gameID=1 data-userID={{id}}>Tic Tac Toe</a>
-            <button class="gameBtns" data-gameID=2 data-userID={{id}}>Connect Four</a>
+                <button class="gameBtns" data-gameID=2 data-userID={{id}}>Connect Four</a>
         </div>
         <aside class="friends">
-            <h3 class="friends-title">Friends list</h3>
+            <h3 class="friends-title">Friends:</h3>
             <ul>
                 {{#each Friend as |friend|}}
                 <li>
