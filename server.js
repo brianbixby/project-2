@@ -42,6 +42,24 @@ app.set("view engine", "handlebars");
 
 app.use("/", allRoutes);
 
+function createGameInstance(data) {
+  return GameInstance.create(data)
+    .then(gameData => gameData)
+    .catch(err => {
+      console.log("err: ", err);
+      return null;
+    });
+}
+
+function updateGameInstance(data) {
+  return GameInstance.update(data, { where: { id: data.instanceID } })
+    .then(gameData => gameData)
+    .catch(err => {
+      console.log("err: ", err);
+      return null;
+    });
+}
+
 const openGamesTTC = [];
 const inUseTTC = [];
 const openGamesC4 = [];
@@ -66,10 +84,20 @@ io.on("connection", (socket) => {
         game.player2 = data.userID;
         game.currentPlayer = Math.floor(Math.random() * 2) ? game.player1 : data.userID;
         inUseTTC.push(game);
+        socket.join(game.instanceID);
+        io.to(game.instanceID).emit("joinedGame", game);
+        updateGameInstance({ instanceID: game.instanceID, player2_id: data.userID })
+          .then(() => console.log("success"))
+          .catch(err => console.log("err: ", err));
       } else {
-        game = { id: data.gameID, instanceID: uuidv4(), players: 1, player1: data.userID, player2: null };
-        console.log(game.player1);
-        openGamesTTC.push(game);
+        createGameInstance({ game_id: data.gameID, player1_id: data.userID })
+          .then(gameInstanceData => {
+            game = { id: data.gameID, instanceID: gameInstanceData.id, players: 1, player1: data.userID, player2: null };
+            openGamesTTC.push(game);
+            socket.join(game.instanceID);
+            io.to(game.instanceID).emit("joinedGame", game);
+          })
+          .catch(err => console.log("err: ", err));
       }
     } else if (data.gameID == 2) {
       if (openGamesC4.length) {
@@ -78,15 +106,22 @@ io.on("connection", (socket) => {
         game.player2 = data.userID;
         game.currentPlayer = Math.floor(Math.random() * 2) ? game.player1 : data.userID;
         inUseC4.push(game);
+        socket.join(game.instanceID);
+        io.to(game.instanceID).emit("joinedGame", game);
+        updateGameInstance({ instanceID: game.instanceID, player2_id: data.userID })
+          .then(() => console.log("success"))
+          .catch(err => console.log("err: ", err));
       } else {
-        game = { id: data.gameID, instanceID: uuidv4(), players: 1, player1: data.userID, player2: null };
-        console.log(game.player1);
-        openGamesC4.push(game);
+        createGameInstance({ game_id: data.gameID, player1_id: data.userID })
+          .then(gameInstanceData => {
+            game = { id: data.gameID, instanceID: gameInstanceData.id, players: 1, player1: data.userID, player2: null };
+            openGamesC4.push(game);
+            socket.join(game.instanceID);
+            io.to(game.instanceID).emit("joinedGame", game);
+          })
+          .catch(err => console.log("err: ", err));
       }
     }
-    console.log("game server: ", game);
-    socket.join(game.instanceID);
-    io.to(game.instanceID).emit("joinedGame", game);
     // to do: on game end : give them a option for rematch if no close the socket!!! 
   });
 
@@ -103,8 +138,21 @@ io.on("connection", (socket) => {
 
   socket.on("c4-endGameServer", data => {
     console.log("c4-endGameServer: ", data);
-    // to do: put game on db
-    io.to(data.instanceID).emit("c4-endGame", data);
+    if (data.winner == "tie") {
+      io.to(data.instanceID).emit("c4-endGame", data);
+      updateGameInstance({ instanceID: data.instanceID, complete: true, tie: true })
+        .then(() => console.log("success"))
+        .catch(err => console.log("err: ", err));
+    } else {
+      io.to(data.instanceID).emit("c4-endGame", data);
+      Promise.all([
+        updateGameInstance({ instanceID: data.instanceID, winner_id: data.winner, loser_id: data.loser, complete: true }),
+        Ranking.increment({ rank: 10 }, { where: { user_id: data.winner, game_id: data.id } }),
+        Ranking.increment({ rank: -10 }, { where: { user_id: data.loser, game_id: data.id } })
+      ])
+        .then(() => console.log("success"))
+        .catch(err => console.log("err: ", err));
+    }
   });
 
   // TIC TAC TOE
@@ -120,8 +168,21 @@ io.on("connection", (socket) => {
 
   socket.on("t3-endGameServer", data => {
     console.log("t3-endGameServer: ", data);
-    // to do: put game on db
-    io.to(data.instanceID).emit("t3-endGame", data);
+    if (data.winner == "tie") {
+      io.to(data.instanceID).emit("t3-endGame", data);
+      updateGameInstance({ instanceID: data.instanceID, complete: true, tie: true })
+        .then(() => console.log("success"))
+        .catch(err => console.log("err: ", err));
+    } else {
+      io.to(data.instanceID).emit("t3-endGame", data);
+      Promise.all([
+        updateGameInstance({ instanceID: data.instanceID, winner_id: data.winner, loser_id: data.loser, complete: true }),
+        Ranking.increment({ rank: 10 }, { where: { user_id: data.winner, game_id: data.id } }),
+        Ranking.increment({ rank: -10 }, { where: { user_id: data.loser, game_id: data.id } })
+      ])
+        .then(() => console.log("success"))
+        .catch(err => console.log("err: ", err));
+    }
   });
 });
 
