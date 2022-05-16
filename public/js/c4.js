@@ -48,8 +48,8 @@ function c4CheckForWin() {
         for (let c = 0; c < 7; c++) {
             if (c4ChkLine(board2D[r][c], board2D[r + 1][c], board2D[r + 2][c], board2D[r + 3][c])) {
                 currentState.game.winner = currentState.game.currentPlayer;
-                socket.emit("c4-endGameServer", currentState.game);
-                return;
+                currentState.game.loser = currentState.game.winner === currentState.game.player1 ? currentState.game.player2 : currentState.game.player1;
+                return true;
             }
         }
     }
@@ -58,9 +58,9 @@ function c4CheckForWin() {
     for (let r = 0; r < 6; r++) {
         for (let c = 0; c < 4; c++) {
             if (c4ChkLine(board2D[r][c], board2D[r][c + 1], board2D[r][c + 2], board2D[r][c + 3])) {
-                currentState.game.winner = currentState.game.currentPlayer
-                socket.emit("c4-endGameServer", currentState.game);
-                return;
+                currentState.game.winner = currentState.game.currentPlayer;
+                currentState.game.loser = currentState.game.winner === currentState.game.player1 ? currentState.game.player2 : currentState.game.player1;
+                return true;
             }
         }
     }
@@ -69,9 +69,9 @@ function c4CheckForWin() {
     for (let r = 0; r < 3; r++) {
         for (let c = 0; c < 4; c++) {
             if (c4ChkLine(board2D[r][c], board2D[r + 1][c + 1], board2D[r + 2][c + 2], board2D[r + 3][c + 3])) {
-                currentState.game.winner = currentState.game.currentPlayer
-                socket.emit("c4-endGameServer", currentState.game);
-                return;
+                currentState.game.winner = currentState.game.currentPlayer;
+                currentState.game.loser = currentState.game.winner === currentState.game.player1 ? currentState.game.player2 : currentState.game.player1;
+                return true;
             }
         }
     }
@@ -80,9 +80,9 @@ function c4CheckForWin() {
     for (let r = 3; r < 6; r++) {
         for (let c = 0; c < 4; c++) {
             if (c4ChkLine(board2D[r][c], board2D[r - 1][c + 1], board2D[r - 2][c + 2], board2D[r - 3][c + 3])) {
-                currentState.game.winner = currentState.game.currentPlayer
-                socket.emit("c4-endGameServer", currentState.game);
-                return;
+                currentState.game.winner = currentState.game.currentPlayer;
+                currentState.game.loser = currentState.game.winner === currentState.game.player1 ? currentState.game.player2 : currentState.game.player1;
+                return true;
             }
         }
     }
@@ -90,9 +90,10 @@ function c4CheckForWin() {
     if (currentState.game.moveNumber == 42) {
         if (!currentState.game.winner) {
             currentState.game.winner = "tie";
+            return true;
         }
-        socket.emit("c4-endGameServer", currentState.game);
     }
+    return false;
 }
 
 if (socket) {
@@ -103,6 +104,7 @@ if (socket) {
 
     socket.on("c4-playerMadeMove", data => {
         currentState.game = data;
+        let gameOver;
         let clickedTileEl = document.querySelector(`#${currentState.game.clickedTile}`);
         let imgEl = document.createElement("img");
         clickedTileEl.setAttribute("class", "c4-clickedTile c4-boardTile");
@@ -116,9 +118,15 @@ if (socket) {
         clickedTileEl.appendChild(imgEl);
         currentState.game.moveNumber++;
         if (currentState.game.moveNumber >= 7) {
-            c4CheckForWin();
+            gameOver = c4CheckForWin();
         }
-        currentState.game.currentPlayer = currentState.game.currentPlayer == currentState.game.player1 ? currentState.game.player2 : currentState.game.player1;
+        if (gameOver) {
+            if (currentState.game.currentPlayer === currentState.user.userID) {
+                socket.emit("c4-endGameServer", currentState.game);
+            }
+        } else {
+            currentState.game.currentPlayer = currentState.game.currentPlayer == currentState.game.player1 ? currentState.game.player2 : currentState.game.player1;
+        }
     });
 
     socket.on("c4-endGame", data => {
