@@ -42,6 +42,15 @@ app.set("view engine", "handlebars");
 
 app.use("/", allRoutes);
 
+function deleteGameInstance(data) {
+  return GameInstance.destroy({ where: { id: data.instanceID } })
+    .then(() => console.log("success"))
+    .catch(err => {
+      console.log("err: ", err);
+      return null;
+    });
+}
+
 function createGameInstance(data) {
   return GameInstance.create(data)
     .then(gameData => gameData)
@@ -66,9 +75,7 @@ const openGamesC4 = [];
 const inUseC4 = [];
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
   socket.on("disconnect", () => {
-    console.log("user disconnected");
   });
   socket.on("chat message", (msg) => {
     io.emit("chat message", msg);
@@ -125,6 +132,21 @@ io.on("connection", (socket) => {
     // to do: on game end : give them a option for rematch if no close the socket!!! 
   });
 
+  socket.on("exitWaitingRoom", data => {
+    if (data.id == 1) {
+      const idx = openGamesTTC.map(e => e.instanceID).indexOf(data.instanceID);
+      if (idx !== -1) {
+        openGamesTTC.splice(idx, 1);
+      }
+    } else {
+      const index = openGamesC4.map(e => e.instanceID).indexOf(data.instanceID);
+      if (index !== -1) {
+        openGamesC4.splice(index, 1);
+      }
+    }
+    deleteGameInstance(data);
+  });
+
   // CONNECT 4
   socket.on("c4-startGameServer", data => {
     console.log("c4-startGameServer: ", data);
@@ -137,7 +159,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("c4-endGameServer", data => {
-    console.log("c4-endGameServer: ", data);
+    const idx = inUseC4.map(e => e.instanceID).indexOf(data.instanceID);
+    if (idx !== -1) {
+      inUseC4.splice(idx, 1);
+    }
     if (data.winner == "tie") {
       io.to(data.instanceID).emit("c4-endGame", data);
       updateGameInstance({ instanceID: data.instanceID, complete: true, tie: true })
@@ -167,7 +192,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("t3-endGameServer", data => {
-    console.log("t3-endGameServer: ", data);
+    const idx = inUseTTC.map(e => e.instanceID).indexOf(data.instanceID);
+    if (idx !== -1) {
+      inUseTTC.splice(idx, 1);
+    }
     if (data.winner == "tie") {
       io.to(data.instanceID).emit("t3-endGame", data);
       updateGameInstance({ instanceID: data.instanceID, complete: true, tie: true })

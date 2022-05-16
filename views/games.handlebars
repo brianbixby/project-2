@@ -7,6 +7,19 @@
         width: 100vw;
     }
 
+    #waitingForPlayerModal {
+        background-color: rgb(141, 135, 65, .9);
+        text-align: center;
+    }
+
+    #waitingForPlayerModal p {
+        font-size: 30px;
+    }
+
+    #waitingForPlayerModal .modal-body {
+        padding: 50px;
+    }
+
     @media (max-width: 529px) {
 
         .gameBtnRow {
@@ -72,16 +85,42 @@
         {{>tic-tac-toe}}
     </div>
 </div>
+
+<div class="modal fade" id="waitingForPlayerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" id="modal-content">
+            <div class="modal-header">
+                <button id="waitingForPlayerModalButton" type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Looking for an opponent...</p>
+                <img src="/assets/loadingIcon.gif" alt="loading icon">
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     function joinGame(e) {
         const data = { gameID: e.target.getAttribute('data-gameID'), userID: e.target.getAttribute('data-userID') };
         currentState.user.userID = data.userID;
         socket.emit('joinGame', data);
     }
+
     const gamesOuterContainerEl = document.querySelector("#gamesOuterContainer");
     const c4GameEl = document.querySelector("#c4Game");
     const ticTacToeGameEl = document.querySelector("#ticTacToeGame");
     const gameBtnsEl = document.querySelectorAll(".gameBtns");
+    const modalEl = document.querySelector("#waitingForPlayerModal");
+    const waitingForPlayerModalButtonEl = document.querySelector("#waitingForPlayerModalButton");
+
+    function exitWaitingRoom() {
+        waitingForPlayerModalButtonEl.removeEventListener("click", exitWaitingRoom);
+        modalEl.classList.remove("show");
+        socket.emit("exitWaitingRoom", currentState.game);
+    }
 
     for (let i = 0; i < gameBtnsEl.length; i++) {
         gameBtnsEl[i].addEventListener("click", joinGame);
@@ -90,6 +129,8 @@
         currentState.game = data;
         console.log("joinedGame: ", data);
         if (data.players == 2) {
+            waitingForPlayerModalButtonEl.removeEventListener("click", exitWaitingRoom);
+            modalEl.classList.remove("show");
             if (data.id == 2) {
                 gamesOuterContainerEl.classList.add("hide");
                 c4GameEl.classList.remove("hide");
@@ -100,7 +141,8 @@
                 socket.emit('t3-startGameServer', data);
             }
         } else {
-            alert("waiting for another player");
+            modalEl.classList.add("show");
+            waitingForPlayerModalButtonEl.addEventListener("click", exitWaitingRoom);
         }
     });
 </script>

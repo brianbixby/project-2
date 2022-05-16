@@ -16,10 +16,13 @@ main {
     display: flex;
     flex-direction: row;
 }
+
 header {
-    margin-top: 3vh;;
+    margin-top: 3vh;
+    ;
 }
-header a{
+
+header a {
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -90,11 +93,11 @@ button:hover {
     border-color: #6c757d;
 }
 
-.modal button:hover{
+.modal button:hover {
     opacity: 0.7;
 }
 
-.modal .btn-close:hover{
+.modal .btn-close:hover {
     opacity: 0.3;
 }
 
@@ -195,15 +198,15 @@ button:hover {
     font-size: 30px;
 }
 
-aside{
+aside {
     height: fit-content;
 }
 
-.gamesContainer{
+.gamesContainer {
     margin-top: 5vh;
 }
 
-.rankBoard{
+.rankBoard {
     font-size: 50px;
     text-align: center;
     background-color: rgb(141, 135, 65, .7);
@@ -215,7 +218,7 @@ aside{
     margin: 5px 0px;
 }
 
-.profile{
+.profile {
     font-size: 25px;
     color: #FBEEC1;
     text-shadow: 0 3px 10px black;
@@ -224,7 +227,7 @@ aside{
     margin: 5px 0px;
 }
 
-.editProfile{
+.editProfile {
     font-size: 30px;
     color: #FBEEC1;
     text-shadow: 0 3px 10px black;
@@ -239,7 +242,7 @@ aside{
 
 #user_name {
     text-align: center;
-    border-radius:10px;
+    border-radius: 10px;
     background-color: rgba(251, 238, 193, .7);
     border: 1px solid #eee;
     transition: .3s #eee;
@@ -250,7 +253,7 @@ aside{
     border: 1px solid #aaa
 }
 
-.editProfile button{
+.editProfile button {
     color: #fff;
     background-color: #6c757d;
     border-color: #6c757d;
@@ -258,7 +261,7 @@ aside{
 }
 
 
-.editProfile button:hover{
+.editProfile button:hover {
     background-color: rgba(101, 157, 189, 0.577);
     box-shadow: none;
     cursor: pointer;
@@ -268,7 +271,7 @@ img[src=""] {
     display: none;
 }
 
-img{
+img {
     margin: 2vh;
 }
 
@@ -311,10 +314,14 @@ footer {
     display: block !important;
 }
 
+.modal-body {
+    padding: 2rem 1rem;
+}
+
 
 /* @media screen and (max-width: 954px) and (min-width: 530px) { */
 @media screen and (max-width: 954px) {
-    header h1{
+    header h1 {
         display: flex;
         flex-direction: center;
         text-align: center;
@@ -324,34 +331,35 @@ footer {
         max-width: 700px;
         font-size: 60px;
     }
-    .homeDiv{
+
+    .homeDiv {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
     }
-    .homeBtns{
+
+    .homeBtns {
         font-size: 40px;
         padding: 30px;
         margin: 20px;
     }
-    .modal-dialog{
-        position: relative;
-        top:30%;
-        transform: translateY(-70%);
-    }
-    #login button{
+
+    #login button {
         float: right;
     }
-    #signup button{
+
+    #signup button {
         float: right;
     }
-    .nav{
+
+    .nav {
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    .games{
+
+    .games {
         display: flex;
         justify-content: center;
         flex-direction: column;
@@ -359,32 +367,39 @@ footer {
         margin: 0;
         margin-top: 2vh;
     }
-    .gameBtns{
+
+    .gameBtns {
         margin-top: 5vh;
         font-size: 30px;
         padding: 30px 70px;
     }
-    .friends{
+
+    .friends {
         margin-top: 10vh;
     }
-    .friends-title{
+
+    .friends-title {
         font-size: 30px;
     }
-    .friends ul{
+
+    .friends ul {
         font-size: 20px;
     }
-    .profile{
+
+    .profile {
         width: 90%;
     }
-    .editProfile{
+
+    .editProfile {
         width: 90%;
     }
-    .editProfile input{
+
+    .editProfile input {
         width: 80%;
     }
-    .editProfile h5{
+
+    .editProfile h5 {
         margin-top: 1vh;
         font-size: 15px;
     }
 }
-
