@@ -318,6 +318,53 @@ footer {
     padding: 2rem 1rem;
 }
 
+/* controls */
+#t3Controls,
+#c4Controls {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+}
+
+#t3Turn-indicator,
+#c4Turn-indicator {
+    padding: 20px;
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0px 6px 4px rgba(0, 0, 0, .25);
+    background-color: #0e0c0f;
+    box-shadow: 0px 6px 4px rgba(0, 0, 0, .25);
+}
+
+#c4Turn-indicator {
+    background-color: #948F54;
+    border: 5px solid #FFF;
+}
+
+#t3Turn-indicator {
+    background-color: #0e0c0f;
+    border: 5px solid #484443;
+}
+
+#t3Turn-indicator img,
+#c4Turn-indicator img {
+    max-height: 30px;
+    margin-top: 5px;
+}
+
+#t3Turn-indicator i,
+#c4Turn-indicator i {
+    display: block;
+    margin: 10px;
+    font-size: 20px;
+}
+
+#t3Controls .inactive,
+#c4Controls .inactive {
+    color: #3b3836;
+}
+
 
 /* @media screen and (max-width: 954px) and (min-width: 530px) { */
 @media screen and (max-width: 954px) {
