@@ -2,7 +2,7 @@
 
 ## Badge
 
-![license](https://img.shields.io/badge/None-brightgreen)
+![license](https://img.shields.io/badge/license-MIT-brightgreen)
 
 ## Title
 
@@ -21,7 +21,7 @@ Project-2
   - [Tech](#tech)
   - [Credits](#credits)
   - [License](#license)
-  - [Testing](#testing)
+  - [Test](#test)
   - [Link](#link)
 
 ## User Story
@@ -119,9 +119,9 @@ Contact us with the link above if you have any questions!
 
 ## License
 
-None
+[MIT License ](LICENSE.txt)
 
-## Testing
+##  Test 
 
 [Main-Function]<img src="./public/assets/project2-mainfunction.gif">
 
