@@ -1,5 +1,23 @@
 "use strict";
 
+function t3setTurnDisplay() {
+    const acornTurnEl = document.querySelector("#acornTurn");
+    const squirrelTurnEl = document.querySelector("#squirrelTurn");
+    const c4upArrowEl = document.querySelector("#t3upArrow");
+    const c4downArrowEl = document.querySelector("#t3downArrow");
+    if (currentState.game.currentPlayer == currentState.game.player1) {
+        acornTurnEl.setAttribute("src", "/assets/acorn.png");
+        squirrelTurnEl.setAttribute("src", "/assets/squirrel-bw.png");
+        c4upArrowEl.setAttribute("class", "fa fa-caret-up inactive");
+        c4downArrowEl.setAttribute("class", "fa fa-caret-down");
+    } else {
+        acornTurnEl.setAttribute("src", "/assets/acorn-bw.png");
+        squirrelTurnEl.setAttribute("src", "/assets/squirrel.png");
+        c4upArrowEl.setAttribute("class", "fa fa-caret-up");
+        c4downArrowEl.setAttribute("class", "fa fa-caret-down inactive");
+    }
+}
+
 function t3HandleTileClick(e) {
     if (currentState.game.currentPlayer === currentState.user.userID) {
         if (e.target.classList.contains("t3-tile")) {
@@ -14,6 +32,7 @@ function newT3Game() {
     const tilesArray = Array.from(tiles);
     tilesArray.forEach(tile => tile.addEventListener("click", t3HandleTileClick));
     currentState.game.moveNumber = 0;
+    t3setTurnDisplay();
 }
 
 function t3CheckForWin() {
@@ -94,6 +113,7 @@ if (socket) {
             }
         } else {
             currentState.game.currentPlayer = currentState.game.currentPlayer == currentState.game.player1 ? currentState.game.player2 : currentState.game.player1;
+            t3setTurnDisplay()
         }
     });
 

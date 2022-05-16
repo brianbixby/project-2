@@ -1,5 +1,23 @@
 "use strict";
 
+function c4setTurnDisplay() {
+    const crownTurnEl = document.querySelector("#crownTurn");
+    const dragonTurnEl = document.querySelector("#dragonTurn");
+    const c4upArrowEl = document.querySelector("#c4upArrow");
+    const c4downArrowEl = document.querySelector("#c4downArrow");
+    if (currentState.game.currentPlayer == currentState.game.player1) {
+        crownTurnEl.setAttribute("src", "/assets/crown.png");
+        dragonTurnEl.setAttribute("src", "/assets/dragon-bw.png");
+        c4upArrowEl.setAttribute("class", "fa fa-caret-up");
+        c4downArrowEl.setAttribute("class", "fa fa-caret-down inactive");
+    } else {
+        crownTurnEl.setAttribute("src", "/assets/crown-bw.png");
+        dragonTurnEl.setAttribute("src", "/assets/dragon.png");
+        c4upArrowEl.setAttribute("class", "fa fa-caret-up inactive");
+        c4downArrowEl.setAttribute("class", "fa fa-caret-down");
+    }
+}
+
 function c4handleTileClick(e) {
     if (currentState.game.currentPlayer === currentState.user.userID) {
         let mod = Number(this.getAttribute("data-cellnumber")) % 7;
@@ -21,6 +39,7 @@ function newC4Game() {
     const tilesArray = Array.from(tiles);
     tilesArray.forEach(tile => tile.addEventListener("click", c4handleTileClick));
     currentState.game.moveNumber = 0;
+    c4setTurnDisplay();
 }
 
 function c4ChkLine(a, b, c, d) {
@@ -145,6 +164,7 @@ if (socket) {
             }
         } else {
             currentState.game.currentPlayer = currentState.game.currentPlayer == currentState.game.player1 ? currentState.game.player2 : currentState.game.player1;
+            c4setTurnDisplay();
         }
     });
 
