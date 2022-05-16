@@ -6,7 +6,7 @@
 
 ## Title
 
-Project-2
+Fantasy Land
 
 ## Table of Contents
 
@@ -47,11 +47,15 @@ I am prompted for my email and password.
 
 Then I am given a webpage that displays the games available, page navigation buttons and my friends list.
 
+(Our games require 2 players, please send website link to invite your friends to join.)
+
 When I click 'Tic Tac Toe', 
 Then I am taken to the game play page for Tic Tac Toe.
+[How to play](https://www.wikihow.com/Play-Tic-Tac-Toe)
 
 When I click 'Connect Four', 
 Then I am taken to the game play page for Connect Four.
+[How to play](https://www.wikihow.com/Win-at-Connect-4)
 
 When I play the game, 
 Then my score is saved to my ranks page.
