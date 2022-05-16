@@ -68,13 +68,10 @@ if (socket) {
             gameOver = t3CheckForWin();
         }
         if (gameOver) {
-            console.log("gameOver fir st if");
             if (currentState.game.currentPlayer === currentState.user.userID) {
-                console.log("gameOver 2nd if");
                 socket.emit("t3-endGameServer", currentState.game);
             }
         } else {
-            console.log("else");
             currentState.game.currentPlayer = currentState.game.currentPlayer == currentState.game.player1 ? currentState.game.player2 : currentState.game.player1;
         }
     });

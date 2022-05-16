@@ -123,7 +123,6 @@
             </div>
             <div class="modal-body">
                 <p>Your opponent exited. Congratulations you are the winner!</p>
-                {{!-- <img src="/assets/loadingIcon.gif" alt="loading icon"> --}}
             </div>
         </div>
     </div>
@@ -161,6 +160,15 @@
         currentState.game.loser = currentState.user.userID;
         socket.emit("t3AbortServer", currentState.game);
         currentState.game = {};
+        const tiles = document.querySelectorAll(".clickedTile");
+        const tilesArray = Array.from(tiles);
+        tilesArray.forEach(clickedTileEl => {
+            clickedTileEl.setAttribute("class", "t3-tile boardTile");
+            clickedTileEl.removeAttribute("data-player");
+            clickedTileEl.removeChild(clickedTileEl.children[0]);
+        });
+        const listeningTiles = document.querySelectorAll(".boardTile");
+        listeningTiles.forEach(tile => tile.removeEventListener("click", t3HandleTileClick));
     }
 
     function c4Back() {
@@ -170,6 +178,13 @@
         currentState.game.loser = currentState.user.userID;
         socket.emit("c4AbortServer", currentState.game);
         currentState.game = {};
+        const tiles = document.querySelectorAll(".c4-clickedTile");
+        const tilesArray = Array.from(tiles);
+        tilesArray.forEach(clickedTileEl => {
+            clickedTileEl.setAttribute("class", "c4-tile boardTile");
+            clickedTileEl.removeAttribute("data-player");
+            clickedTileEl.removeChild(clickedTileEl.children[0]);
+        });
     }
 
     function t3closeEndGameModal() {
@@ -177,6 +192,15 @@
         endGameModalEl.classList.remove("show");
         gamesOuterContainerEl.classList.remove("hide");
         ticTacToeGameEl.classList.add("hide");
+        const tiles = document.querySelectorAll(".clickedTile");
+        const tilesArray = Array.from(tiles);
+        tilesArray.forEach(clickedTileEl => {
+            clickedTileEl.setAttribute("class", "t3-tile boardTile");
+            clickedTileEl.removeAttribute("data-player");
+            clickedTileEl.removeChild(clickedTileEl.children[0]);
+        });
+        const listeningTiles = document.querySelectorAll(".boardTile");
+        listeningTiles.forEach(tile => tile.removeEventListener("click", t3HandleTileClick));
     }
 
     function c4closeEndGameModal() {
@@ -184,6 +208,13 @@
         endGameModalEl.classList.remove("show");
         gamesOuterContainerEl.classList.remove("hide");
         c4GameEl.classList.add("hide");
+        const tiles = document.querySelectorAll(".c4-clickedTile");
+        const tilesArray = Array.from(tiles);
+        tilesArray.forEach(clickedTileEl => {
+            clickedTileEl.setAttribute("class", "c4-tile boardTile");
+            clickedTileEl.removeAttribute("data-player");
+            clickedTileEl.removeChild(clickedTileEl.children[0]);
+        });
     }
 
     for (let i = 0; i < gameBtnsEl.length; i++) {

@@ -138,7 +138,7 @@ if (socket) {
         } else {
             alert("sorry you lost, would you like the # to a good therapist?");
         }
-        const tiles = document.querySelectorAll(".clickedTile");
+        const tiles = document.querySelectorAll(".c4-clickedTile");
         const tilesArray = Array.from(tiles);
         tilesArray.forEach(clickedTileEl => {
             clickedTileEl.setAttribute("class", "c4-tile boardTile");

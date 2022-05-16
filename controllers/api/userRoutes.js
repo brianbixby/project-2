@@ -31,7 +31,6 @@ router.get('/:id', async (req, res) => {
 
 // TOUCH NOTHING PLEASE!!//
 router.post('/', async (req, res) => {
-  console.log(req.body)
   try {
     if (!req.body.user_name) {
       req.body.user_name = req.body.email;
@@ -63,7 +62,6 @@ router.post("/login", async (req, res) => {
     }
     const validPassword = await data.checkPassword(req.body.password);
     if (validPassword) {
-      console.log(data)
       req.session.user = { user_id: data.id, logged_in: true };
       await User.update({ is_online: true }, { where: { id: data.id } });
       req.session.save(() => {
@@ -95,7 +93,6 @@ router.post('/logout', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-  console.log(req.body)
   try {
     const data = await User.update(req.body, { where: { id: req.params.id } });
     data[0] === 0 ? res.status(404).json({ message: 'No user with this id!' }) : res.status(200).json(data);
