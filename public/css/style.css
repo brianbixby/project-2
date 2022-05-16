@@ -10,14 +10,15 @@ main {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin-top: 3vh;
 }
 
 .homeDiv {
     display: flex;
     flex-direction: row;
 }
-
+header {
+    margin-top: 3vh;;
+}
 header a{
     text-decoration: none;
     display: flex;
@@ -38,6 +39,7 @@ header h1 {
     border-radius: 10px;
     box-shadow: inset 0 0 100px #659DBD, 0 0 25px #659DBD;
     text-shadow: 0 2px 7px #8D8741;
+    cursor: auto;
 }
 
 header:hover {
@@ -215,18 +217,15 @@ aside{
 
 .profile{
     font-size: 25px;
-    background-color: rgb(141, 135, 65, .7);
     color: #FBEEC1;
     text-shadow: 0 3px 10px black;
     padding: 15px 30px;
     border-radius: 5px;
-    width: 50%;
     margin: 5px 0px;
 }
 
 .editProfile{
     font-size: 30px;
-    background-color: rgb(141, 135, 65, .7);
     color: #FBEEC1;
     text-shadow: 0 3px 10px black;
     text-align: center;
@@ -244,6 +243,7 @@ aside{
     background-color: rgba(251, 238, 193, .7);
     border: 1px solid #eee;
     transition: .3s #eee;
+    margin-bottom: 10px;
 }
 
 #user_name:hover {
@@ -312,7 +312,8 @@ footer {
 }
 
 
-@media screen and (max-width: 954px) and (min-width: 530px) {
+/* @media screen and (max-width: 954px) and (min-width: 530px) { */
+@media screen and (max-width: 954px) {
     header h1{
         display: flex;
         flex-direction: center;
