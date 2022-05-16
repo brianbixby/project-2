@@ -8,7 +8,8 @@
     }
 
     #waitingForPlayerModal,
-    #endGameModal {
+    #endGameModal,
+    #gameFinishedModal {
         background-color: rgb(141, 135, 65, .9);
         text-align: center;
     }
@@ -27,6 +28,12 @@
         position: absolute;
         top: 30px;
         left: 15px;
+        color: white;
+    }
+
+    #c4BackButton:hover,
+    #t3BackButton:hover {
+        color: gray;
     }
 
     @media (max-width: 529px) {
@@ -53,9 +60,22 @@
         .gamesPageBtns {
             width: 100px;
         }
-
     }
 </style>
+<div class="modal fade" id="gameFinishedModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" id="modal-content">
+            <div class="modal-header">
+                <button id="gameFinishedModalButton" type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="gameFinishedModalText">Your opponent exited. Congratulations you are the winner!</p>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="gamesOuterContainer">
     <header class="header" id="gamesTitle">
         <a href='/games'>
@@ -122,8 +142,7 @@
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Your opponent exited. Congratulations you are the winner!</p>
-                {{!-- <img src="/assets/loadingIcon.gif" alt="loading icon"> --}}
+                <p id="endGameModalText">Your opponent exited. Congratulations you are the winner!</p>
             </div>
         </div>
     </div>
@@ -161,6 +180,15 @@
         currentState.game.loser = currentState.user.userID;
         socket.emit("t3AbortServer", currentState.game);
         currentState.game = {};
+        const tiles = document.querySelectorAll(".clickedTile");
+        const tilesArray = Array.from(tiles);
+        tilesArray.forEach(clickedTileEl => {
+            clickedTileEl.setAttribute("class", "t3-tile boardTile");
+            clickedTileEl.removeAttribute("data-player");
+            clickedTileEl.removeChild(clickedTileEl.children[0]);
+        });
+        const listeningTiles = document.querySelectorAll(".boardTile");
+        listeningTiles.forEach(tile => tile.removeEventListener("click", t3HandleTileClick));
     }
 
     function c4Back() {
@@ -170,6 +198,13 @@
         currentState.game.loser = currentState.user.userID;
         socket.emit("c4AbortServer", currentState.game);
         currentState.game = {};
+        const tiles = document.querySelectorAll(".c4-clickedTile");
+        const tilesArray = Array.from(tiles);
+        tilesArray.forEach(clickedTileEl => {
+            clickedTileEl.setAttribute("class", "c4-tile boardTile");
+            clickedTileEl.removeAttribute("data-player");
+            clickedTileEl.removeChild(clickedTileEl.children[0]);
+        });
     }
 
     function t3closeEndGameModal() {
@@ -177,6 +212,15 @@
         endGameModalEl.classList.remove("show");
         gamesOuterContainerEl.classList.remove("hide");
         ticTacToeGameEl.classList.add("hide");
+        const tiles = document.querySelectorAll(".clickedTile");
+        const tilesArray = Array.from(tiles);
+        tilesArray.forEach(clickedTileEl => {
+            clickedTileEl.setAttribute("class", "t3-tile boardTile");
+            clickedTileEl.removeAttribute("data-player");
+            clickedTileEl.removeChild(clickedTileEl.children[0]);
+        });
+        const listeningTiles = document.querySelectorAll(".boardTile");
+        listeningTiles.forEach(tile => tile.removeEventListener("click", t3HandleTileClick));
     }
 
     function c4closeEndGameModal() {
@@ -184,6 +228,13 @@
         endGameModalEl.classList.remove("show");
         gamesOuterContainerEl.classList.remove("hide");
         c4GameEl.classList.add("hide");
+        const tiles = document.querySelectorAll(".c4-clickedTile");
+        const tilesArray = Array.from(tiles);
+        tilesArray.forEach(clickedTileEl => {
+            clickedTileEl.setAttribute("class", "c4-tile boardTile");
+            clickedTileEl.removeAttribute("data-player");
+            clickedTileEl.removeChild(clickedTileEl.children[0]);
+        });
     }
 
     for (let i = 0; i < gameBtnsEl.length; i++) {

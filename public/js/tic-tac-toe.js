@@ -42,6 +42,27 @@ function t3CheckForWin() {
     return false;
 }
 
+function t3CloseGameFinishedModal() {
+    currentState.game = {};
+    const gameFinishedModalButtonEl = document.querySelector("#gameFinishedModalButton");
+    const gameFinishedModalEl = document.querySelector("#gameFinishedModal");
+    const ticTacToeGameEl = document.querySelector("#ticTacToeGame");
+    const gamesOuterContainerEl = document.querySelector("#gamesOuterContainer");
+    gameFinishedModalButtonEl.removeEventListener("click", t3CloseGameFinishedModal);
+    gameFinishedModalEl.classList.remove("show");
+    ticTacToeGameEl.classList.add("hide");
+    gamesOuterContainerEl.classList.remove("hide");
+    const tiles = document.querySelectorAll(".clickedTile");
+    const tilesArray = Array.from(tiles);
+    tilesArray.forEach(clickedTileEl => {
+        clickedTileEl.setAttribute("class", "t3-tile boardTile");
+        clickedTileEl.removeAttribute("data-player");
+        clickedTileEl.removeChild(clickedTileEl.children[0]);
+    });
+    const listeningTiles = document.querySelectorAll(".boardTile");
+    listeningTiles.forEach(tile => tile.removeEventListener("click", t3HandleTileClick));
+}
+
 
 if (socket) {
     socket.on("t3-startGame", data => {
@@ -68,35 +89,28 @@ if (socket) {
             gameOver = t3CheckForWin();
         }
         if (gameOver) {
-            console.log("gameOver fir st if");
             if (currentState.game.currentPlayer === currentState.user.userID) {
-                console.log("gameOver 2nd if");
                 socket.emit("t3-endGameServer", currentState.game);
             }
         } else {
-            console.log("else");
             currentState.game.currentPlayer = currentState.game.currentPlayer == currentState.game.player1 ? currentState.game.player2 : currentState.game.player1;
         }
     });
 
     socket.on("t3-endGame", data => {
         currentState.game = data;
-        if (data.winner == "tie") {
-            alert("congrats on the tie!");
+        const gameFinishedModalEl = document.querySelector("#gameFinishedModal");
+        const gameFinishedModalButtonEl = document.querySelector("#gameFinishedModalButton");
+        const gameFinishedModalTextEl = document.querySelector("#gameFinishedModalText");
+        gameFinishedModalButtonEl.addEventListener("click", t3CloseGameFinishedModal);
+        if (data.winner === "tie") {
+            gameFinishedModalTextEl.textContent = "Congrats on the tie!";
         } else if (data.winner == currentState.user.userID) {
-            alert("congrats you won at tic tac toe, you must be really good at life");
+            gameFinishedModalTextEl.textContent = "Congrats you won at Tic Tac Toe, you must be really good at life!";
         } else {
-            alert("sorry you lost, would you like the # to a good therapist?");
+            gameFinishedModalTextEl.textContent = "Sorry you lost, would you like the phone number to a good therapist?";
         }
-        const tiles = document.querySelectorAll(".clickedTile");
-        const tilesArray = Array.from(tiles);
-        tilesArray.forEach(clickedTileEl => {
-            clickedTileEl.setAttribute("class", "t3-tile boardTile");
-            clickedTileEl.removeAttribute("data-player");
-            clickedTileEl.removeChild(clickedTileEl.children[0]);
-        });
-        const listeningTiles = document.querySelectorAll(".boardTile");
-        listeningTiles.forEach(tile => tile.removeEventListener("click", t3HandleTileClick));
+        gameFinishedModalEl.classList.add("show");
         // to do end the game ask for rematch, posts to db
     });
 }

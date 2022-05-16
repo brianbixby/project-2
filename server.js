@@ -78,9 +78,7 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
   });
   socket.on("joinGame", (data) => {
-    console.log("server join game: ", data);
     let game;
-    console.log(data);
     if (data.gameID == 1) {
       if (openGamesTTC.length) {
         game = openGamesTTC.pop();
@@ -147,12 +145,10 @@ io.on("connection", (socket) => {
 
   // CONNECT 4
   socket.on("c4-startGameServer", data => {
-    console.log("c4-startGameServer: ", data);
     io.to(data.instanceID).emit("c4-startGame", data);
   });
 
   socket.on("c4-playerMadeMoveServer", data => {
-    console.log("c4-playerMadeMoveServer: ", data);
     io.to(data.instanceID).emit("c4-playerMadeMove", data);
   });
 
@@ -179,7 +175,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("c4AbortServer", data => {
-    console.log("c4AbortServer: ", data);
     const idx = inUseC4.map(e => e.instanceID).indexOf(data.instanceID);
     if (idx !== -1) {
       inUseC4.splice(idx, 1);
@@ -208,12 +203,10 @@ io.on("connection", (socket) => {
 
   // TIC TAC TOE
   socket.on("t3-startGameServer", data => {
-    console.log("t3-startGameServer: ", data);
     io.to(data.instanceID).emit("t3-startGame", data);
   });
 
   socket.on("t3-playerMadeMoveServer", data => {
-    console.log("t3-playerMadeMoveServer: ", data);
     io.to(data.instanceID).emit("t3-playerMadeMove", data);
   });
 
@@ -240,7 +233,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("t3AbortServer", data => {
-    console.log("t3AbortServer: ", data);
     const idx = inUseTTC.map(e => e.instanceID).indexOf(data.instanceID);
     if (idx !== -1) {
       inUseTTC.splice(idx, 1);
