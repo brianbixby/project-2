@@ -58,7 +58,7 @@ router.get("/ranks/:id", (req, res) => {
         User.findByPk(req.params.id, { include: { all: true } })
             .then(userData => {
                 const hbsData = userData.get({ plain: true })
-                console.log(hbsData);
+                console.log("rankings: ", hbsData);
                 hbsData.loggedIn = true;
                 res.render("ranks", hbsData);
             })
