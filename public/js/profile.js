@@ -1,6 +1,4 @@
-
 const newProfileEl = document.querySelector("#newProfile");
-
 if (newProfileEl) {
     newProfileEl.addEventListener("submit", e => {
         e.preventDefault();
@@ -14,6 +12,8 @@ if (newProfileEl) {
             .then(res => res.json())
             .then((data) => {
                 const updatedUserObj = { "image_url": data.secure_url, "user_name": document.querySelector("#user_name").value };
+                console.log("updatedUserObj: ", updatedUserObj);
+                console.log("user id: ", e.target.getAttribute("data-userID"));
                 return fetch(`/api/users/${e.target.getAttribute("data-userID")}`, { method: "PUT", body: JSON.stringify(updatedUserObj), headers: { "Content-Type": "application/json" } })
             })
             .then(res => {
