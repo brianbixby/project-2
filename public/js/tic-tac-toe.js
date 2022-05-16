@@ -29,15 +29,17 @@ function t3CheckForWin() {
     for (let [a, b, c] of combos) {
         if (tilesData[a] && tilesData[a] === tilesData[b] && tilesData[a] === tilesData[c]) {
             currentState.game.winner = tilesData[a];
-            break;
+            currentState.game.loser = currentState.game.winner === currentState.game.player1 ? currentState.game.player2 : currentState.game.player1;
+            return true;
         }
     }
-    if (currentState.game.winner) {
-        socket.emit("t3-endGameServer", currentState.game);
-    } else if (currentState.game.moveNumber == 9) {
-        currentState.game.winner = null;
-        socket.emit("t3-endGameServer", currentState.game);
+    if (currentState.game.moveNumber == 9) {
+        if (!currentState.game.winner) {
+            currentState.game.winner = "tie";
+            return true;
+        }
     }
+    return false;
 }
 
 
@@ -49,6 +51,7 @@ if (socket) {
 
     socket.on("t3-playerMadeMove", data => {
         currentState.game = data;
+        let gameOver;
         let clickedTileEl = document.querySelector(`#${currentState.game.clickedTile}`);
         let imgEl = document.createElement("img");
         clickedTileEl.setAttribute("class", "clickedTile boardTile");
@@ -62,14 +65,23 @@ if (socket) {
         clickedTileEl.appendChild(imgEl);
         currentState.game.moveNumber++;
         if (currentState.game.moveNumber >= 5) {
-            t3CheckForWin();
+            gameOver = t3CheckForWin();
         }
-        currentState.game.currentPlayer = currentState.game.currentPlayer == currentState.game.player1 ? currentState.game.player2 : currentState.game.player1
+        if (gameOver) {
+            console.log("gameOver fir st if");
+            if (currentState.game.currentPlayer === currentState.user.userID) {
+                console.log("gameOver 2nd if");
+                socket.emit("t3-endGameServer", currentState.game);
+            }
+        } else {
+            console.log("else");
+            currentState.game.currentPlayer = currentState.game.currentPlayer == currentState.game.player1 ? currentState.game.player2 : currentState.game.player1;
+        }
     });
 
     socket.on("t3-endGame", data => {
         currentState.game = data;
-        if (!data.winner) {
+        if (data.winner == "tie") {
             alert("congrats on the tie!");
         } else if (data.winner == currentState.user.userID) {
             alert("congrats you won at tic tac toe, you must be really good at life");
