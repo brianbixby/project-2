@@ -1,4 +1,4 @@
-# project-2
+# Project-2
 
 ## Badge
 
@@ -10,7 +10,7 @@ Project-2
 
 ## Table of Contents
 
-- [project-2](#project-2)
+- [Project-2](#project-2)
   - [Badge](#badge)
   - [Title](#title)
   - [Table of Contents](#table-of-contents)
@@ -36,38 +36,43 @@ scores.
 
 ## Desscription
 
-When I open the webpage I am prompted to
-log in or sign up
+When I open the webpage, 
+I am prompted to log in or sign up.
 
-When I hit sign up I am asked to create an
-account with my name, email, and chosen
-password
+When I click 'sign up', 
+I am asked to create an account with my name, email, and chosen password.
 
-When I hit log in I am prompted for my email
-and password
+When I click 'log in', 
+I am prompted for my email and password.
 
-Then I am given a webpage that displays the
-games available and my friends list
+Then I am given a webpage that displays the games available, page navigation buttons and my friends list.
 
-When I click 'Game 1'
+When I click 'Tic Tac Toe', 
+Then I am taken to the game play page for Tic Tac Toe.
 
-Then I am taken to the game play page game 1
+When I click 'Connect Four', 
+Then I am taken to the game play page for Connect Four.
 
-When I click 'Game 2'
+When I play the game, 
+Then my score is saved to my ranks page.
 
-Then I am taken to the game play page for
-game 2
+When I click 'Rank', 
+Then I am shown a list of my past highscores.
 
-When I play the game
+When I click 'Profile', 
+Then I am taken to the profile page.
 
-Then my score is saved to my high schores list
+When I click 'Upload', 
+Then I can choose an image file in my computer to replace the avatar.
 
-When I click HighScores
+When i input in 'NEW USERNAME' and click submit, 
+Then I will update the selected new user name and avatar.
 
-Then I am shown a list of my past highscores
+When I click 'Home', 
+Then I am taken back to the main page.
 
-When I click log out I am logged out of the
-session
+When I click 'log out', 
+I am logged out of the session.
 
 ## Usage
 
@@ -77,34 +82,40 @@ run npm i
 
 Signup, login, logout.
 
-Play games with friends.
+View profile infomation, friend list and rank/highscores.
 
-Save high scores.
+Change username and avatar.
 
-Chat with friends.
+Play Tic Tac Toe and Connect Four game with friends.
+
 
 ## Tech
 
+CSS,
+Javascript,
 Express.js,
 Node.js,
 Sequelize,
+MySQL2,
 Socket.io,
 Handlebars,
 Auth Sess+ Cookies,
 Env Var,
-Heroku
+Cloudinary,
+Heroku.
+
 
 ## Credits
 
 [Brian Bixby - Git Admin](https://github.com/brianbixby)
 
+[Hannah Callison - Project Manager](https://github.com/hannahcallison)
+
 [James Harding](https://github.com/JaHa675)
 
 [MinhKhoi Nguyen](https://github.com/minhkhoinguy)
 
-[Hannah Callison - Project Manager](https://github.com/hannahcallison)
-
-Contact us with the link below if you have any questions!
+Contact us with the link above if you have any questions!
 
 ## License
 
@@ -112,10 +123,14 @@ None
 
 ## Testing
 
-<img src="./">
+[Main-Function]<img src="./public/assets/project2-mainfunction.gif">
+
+[Tic-Tac-Toe-Game]<img src="./public/assets/project2-tictactoe-function.gif">
+
+[Connect-Four-Game]<img src="./public/assets/project2-connect4-function.gif">
 
 ## Link
 
 [Github: Project 2](https://github.com/brianbixby/project-2)
 
-[Heroku: Project 2](https://)
+[Heroku: Project 2](https://calm-fjord-53373.herokuapp.com/)
