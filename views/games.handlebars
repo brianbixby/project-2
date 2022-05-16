@@ -7,7 +7,8 @@
         width: 100vw;
     }
 
-    #waitingForPlayerModal {
+    #waitingForPlayerModal,
+    #endGameModal {
         background-color: rgb(141, 135, 65, .9);
         text-align: center;
     }
@@ -18,6 +19,14 @@
 
     #waitingForPlayerModal .modal-body {
         padding: 50px;
+    }
+
+    #c4BackButton,
+    #t3BackButton {
+        cursor: pointer;
+        position: absolute;
+        top: 30px;
+        left: 15px;
     }
 
     @media (max-width: 529px) {
@@ -79,11 +88,11 @@
 </div>
 <div>
     <div id="c4Game" class="hide">
-        <i id="c4BackButton" class="fa fa-arrow-left gameBackButton" aria-hidden="true"></i>
+        <i id="c4BackButton" class="fa fa-arrow-left fa-2xl gameBackButton" aria-hidden="true"></i>
         {{>cfour}}
     </div>
     <div id="ticTacToeGame" class="hide">
-        <i id="t3BackButton" class="fa fa-arrow-left gameBackButton" aria-hidden="true"></i>
+        <i id="t3BackButton" class="fa fa-arrow-left fa-2xl gameBackButton" aria-hidden="true"></i>
         {{>tic-tac-toe}}
     </div>
 </div>
