@@ -96,6 +96,25 @@ function c4CheckForWin() {
     return false;
 }
 
+function c4CloseGameFinishedModal() {
+    currentState.game = {};
+    const gameFinishedModalButtonEl = document.querySelector("#gameFinishedModalButton");
+    const gameFinishedModalEl = document.querySelector("#gameFinishedModal");
+    const gamesOuterContainerEl = document.querySelector("#gamesOuterContainer");
+    const c4GameEl = document.querySelector("#c4Game");
+    gameFinishedModalButtonEl.removeEventListener("click", c4CloseGameFinishedModal);
+    gameFinishedModalEl.classList.remove("show");
+    c4GameEl.classList.add("hide");
+    gamesOuterContainerEl.classList.remove("hide");
+    const tiles = document.querySelectorAll(".c4-clickedTile");
+    const tilesArray = Array.from(tiles);
+    tilesArray.forEach(clickedTileEl => {
+        clickedTileEl.setAttribute("class", "c4-tile boardTile");
+        clickedTileEl.removeAttribute("data-player");
+        clickedTileEl.removeChild(clickedTileEl.children[0]);
+    });
+}
+
 if (socket) {
     socket.on("c4-startGame", data => {
         currentState.game = data;
@@ -131,20 +150,18 @@ if (socket) {
 
     socket.on("c4-endGame", data => {
         currentState.game = data;
+        const gameFinishedModalEl = document.querySelector("#gameFinishedModal");
+        const gameFinishedModalButtonEl = document.querySelector("#gameFinishedModalButton");
+        const gameFinishedModalTextEl = document.querySelector("#gameFinishedModalText");
+        gameFinishedModalButtonEl.addEventListener("click", c4CloseGameFinishedModal);
         if (data.winner === "tie") {
-            alert("congrats on the tie!");
+            gameFinishedModalTextEl.textContent = "Congrats on the tie!";
         } else if (data.winner == currentState.user.userID) {
-            alert("congrats you won at connect 4, you must be really good at life");
+            gameFinishedModalTextEl.textContent = "Congrats you won at Connect 4, you must be really good at life!";
         } else {
-            alert("sorry you lost, would you like the # to a good therapist?");
+            gameFinishedModalTextEl.textContent = "Sorry you lost, would you like the phone number to a good therapist?";
         }
-        const tiles = document.querySelectorAll(".c4-clickedTile");
-        const tilesArray = Array.from(tiles);
-        tilesArray.forEach(clickedTileEl => {
-            clickedTileEl.setAttribute("class", "c4-tile boardTile");
-            clickedTileEl.removeAttribute("data-player");
-            clickedTileEl.removeChild(clickedTileEl.children[0]);
-        });
+        gameFinishedModalEl.classList.add("show");
         // to do end the game ask for rematch, posts to db
     });
 }

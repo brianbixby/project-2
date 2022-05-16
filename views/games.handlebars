@@ -8,7 +8,8 @@
     }
 
     #waitingForPlayerModal,
-    #endGameModal {
+    #endGameModal,
+    #gameFinishedModal {
         background-color: rgb(141, 135, 65, .9);
         text-align: center;
     }
@@ -27,6 +28,12 @@
         position: absolute;
         top: 30px;
         left: 15px;
+        color: white;
+    }
+
+    #c4BackButton:hover,
+    #t3BackButton:hover {
+        color: gray;
     }
 
     @media (max-width: 529px) {
@@ -53,9 +60,22 @@
         .gamesPageBtns {
             width: 100px;
         }
-
     }
 </style>
+<div class="modal fade" id="gameFinishedModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" id="modal-content">
+            <div class="modal-header">
+                <button id="gameFinishedModalButton" type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="gameFinishedModalText">Your opponent exited. Congratulations you are the winner!</p>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="gamesOuterContainer">
     <header class="header" id="gamesTitle">
         <a href='/games'>
@@ -122,7 +142,7 @@
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Your opponent exited. Congratulations you are the winner!</p>
+                <p id="endGameModalText">Your opponent exited. Congratulations you are the winner!</p>
             </div>
         </div>
     </div>
